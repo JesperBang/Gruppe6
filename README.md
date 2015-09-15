@@ -1,2 +1,3 @@
 # Gruppe6
-lolololololol
+Not needed
+this is a readme :0
