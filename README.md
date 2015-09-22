@@ -1,3 +1,2 @@
 # Gruppe6
-Not needed
-fgndsfgpæ
+Ineteractive Periodic
