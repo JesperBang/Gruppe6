@@ -1,6 +1,6 @@
 ﻿namespace Model
 {
-    public interface IAtom
-    {
+    public interface IAtom{
+        
     }
 }
