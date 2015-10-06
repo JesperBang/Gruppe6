@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PeriodicSystem"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="720" Width="1280">
     <Grid>
-        
+        <Canvas HorizontalAlignment="Left" Height="636" Margin="583,10,0,0" VerticalAlignment="Top" Width="644"/>
+        <ScrollBar x:Name="scrollBar" HorizontalAlignment="Left" Margin="1232,10,0,0" VerticalAlignment="Top" Height="636" Width="32"/>
+        <ScrollBar x:Name="scrollBar1" HorizontalAlignment="Left" Margin="583,651,0,0" VerticalAlignment="Top" Width="644" Height="38"/>
+
     </Grid>
 </Window>
