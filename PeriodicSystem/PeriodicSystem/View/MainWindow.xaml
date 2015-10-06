@@ -10,6 +10,7 @@
         <Canvas HorizontalAlignment="Left" Height="636" Margin="583,10,0,0" VerticalAlignment="Top" Width="644"/>
         <ScrollBar x:Name="scrollBar" HorizontalAlignment="Left" Margin="1232,10,0,0" VerticalAlignment="Top" Height="636" Width="32"/>
         <ScrollBar x:Name="scrollBar1" HorizontalAlignment="Left" Margin="583,651,0,0" VerticalAlignment="Top" Width="644" Height="38"/>
+        <StackPanel HorizontalAlignment="Left" Height="670" Margin="10,10,0,0" VerticalAlignment="Top" Width="573"/>
 
     </Grid>
 </Window>
