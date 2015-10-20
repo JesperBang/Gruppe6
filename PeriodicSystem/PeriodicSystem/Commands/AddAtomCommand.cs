@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,18 +9,25 @@ using System.Windows.Input;
 
 namespace PeriodicSystem.Commands
 {
-    class AddAtomCommand : ICommand
+    class AddAtomCommand : IUndoRedoCommand
     {
-        public event EventHandler CanExecuteChanged;
+        private ObservableCollection<Atom> atoms;
+        private Atom atom;
 
-        public bool CanExecute(object parameter)
+        public AddAtomCommand(ObservableCollection<Atom> atoms, Atom atom)
         {
-            throw new NotImplementedException();
+            this.atoms = atoms;
+            this.atom = atom;
         }
 
-        public void Execute(object parameter)
+        public void execute()
         {
-            throw new NotImplementedException();
+            atoms.Add(atom);
+        }
+
+        public void unexecute()
+        {
+            atoms.Remove(atom);
         }
     }
 }

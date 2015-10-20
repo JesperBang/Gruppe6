@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight.CommandWpf;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 using Model;
 using PeriodicSystem.Commands;
 using System;
@@ -6,12 +7,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace PeriodicSystem.ViewModel
 {
-    class ViewModel
+    class ViewModel : ViewModelBase
     {
         public ObservableCollection<Atom> Atoms{ get; set; }
         public ObservableCollection<Binding> Bindings { get; set; }
@@ -31,30 +33,34 @@ namespace PeriodicSystem.ViewModel
         public ICommand addMoleculeCommand { get; }
         public ICommand newDrawingCommand { get; }
         
+        private UndoRedoController undoRedoController;
 
         public ViewModel()
         {
             Atoms = new ObservableCollection<Atom>();
             Bindings = new ObservableCollection<Binding>();
 
-
-            Atoms.Add(new Atom());
-            Atoms.Add(new Atom());
-            Atoms.Add(new Atom());
-
+            undoRedoController = new UndoRedoController();
+            
             addAtomCommand = new RelayCommand(addAtom);
-            addAtomsCommand = new RelayCommand(addAtom);
-            removeAtomCommand = new RelayCommand(addAtom);
-            addBindingCommand = new RelayCommand(addAtom);
-            removeBindingCommand = new RelayCommand(addAtom);
-            moveAtomCommand = new RelayCommand(addAtom);
-            moveMoleculeCommand = new RelayCommand(addAtom);
-
+            addAtomsCommand = new RelayCommand(addAtoms);
+            removeAtomCommand = new RelayCommand(removeAtom);
+            addBindingCommand = new RelayCommand(addBinding);
+            removeBindingCommand = new RelayCommand(removeBinding);
+            moveAtomCommand = new RelayCommand(moveAtom);
+            moveMoleculeCommand = new RelayCommand(moveMolecule);
+            undoCommand = new RelayCommand(undo);
+            redoCommand = new RelayCommand(redo);
+            saveDrawingCommand = new RelayCommand(saveDrawing);
+            loadDrawingCommand = new RelayCommand(loadDrawing);
+            exportBitmapCommand = new RelayCommand(exportBitmap);
+            addMoleculeCommand = new RelayCommand(addMolecule);
+            newDrawingCommand = new RelayCommand(newDrawing);
         }
 
         private void addAtom()
         {
-
+            undoRedoController.addAndExecute(new AddAtomCommand(Atoms, new Atom()));
         }
 
         private void addAtoms()
