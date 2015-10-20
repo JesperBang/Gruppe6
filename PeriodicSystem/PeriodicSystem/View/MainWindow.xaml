@@ -11,9 +11,11 @@
     <Window.DataContext>
         <ViewModel:ViewModel />
     </Window.DataContext>
-        
+    
+    
 
     <Grid>
+        
         <ItemsControl ItemsSource="{Binding Atoms}" />
 
         <!--

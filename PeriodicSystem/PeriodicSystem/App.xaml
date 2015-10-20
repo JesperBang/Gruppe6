@@ -1,14 +1,13 @@
-﻿<Application x:Class="PeriodicSystem.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:PeriodicSystem"
-             xmlns:Model="clr-namespace:Model;assembly=Model"
-             StartupUri="View/MainWindow.xaml">
-    <Application.Resources>
-        <DataTemplate DataType="{x:Type Model:Atom}" >
-            <Canvas>
-                <Ellipse Fill="Red" Width="100" Height="100"></Ellipse>
-            </Canvas>
-        </DataTemplate>
-    </Application.Resources>
+<Application x:Class="PeriodicSystem.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:PeriodicSystem" xmlns:Model="clr-namespace:Model;assembly=Model" StartupUri="View/MainWindow.xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" d1p1:Ignorable="d" xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006">
+  <Application.Resources>
+    <DataTemplate DataType="{x:Type Model:Atom}">
+      <Canvas>
+        <Ellipse Fill="Red" Width="100" Height="100">
+        </Ellipse>
+      </Canvas>
+    </DataTemplate>
+    <!--<ResourceDictionary>
+      <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:PeriodicSystem.ViewModel" />
+    </ResourceDictionary>-->
+  </Application.Resources>
 </Application>

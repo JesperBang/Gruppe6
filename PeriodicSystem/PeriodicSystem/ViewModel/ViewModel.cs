@@ -1,4 +1,6 @@
-﻿using Model;
+﻿using GalaSoft.MvvmLight.CommandWpf;
+using Model;
+using PeriodicSystem.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,7 +21,7 @@ namespace PeriodicSystem.ViewModel
         public ICommand removeAtomCommand { get; }
         public ICommand addBindingCommand { get; }
         public ICommand removeBindingCommand { get; }
-        public ICommand moveAtomsCommand { get; }
+        public ICommand moveAtomCommand { get; }
         public ICommand moveMoleculeCommand { get; }
         public ICommand undoCommand { get; }
         public ICommand redoCommand { get; }
@@ -28,6 +30,7 @@ namespace PeriodicSystem.ViewModel
         public ICommand exportBitmapCommand { get; }
         public ICommand addMoleculeCommand { get; }
         public ICommand newDrawingCommand { get; }
+        
 
         public ViewModel()
         {
@@ -36,6 +39,17 @@ namespace PeriodicSystem.ViewModel
 
 
             Atoms.Add(new Atom());
+            Atoms.Add(new Atom());
+            Atoms.Add(new Atom());
+
+            addAtomCommand = new RelayCommand(addAtom);
+            addAtomsCommand = new RelayCommand(addAtom);
+            removeAtomCommand = new RelayCommand(addAtom);
+            addBindingCommand = new RelayCommand(addAtom);
+            removeBindingCommand = new RelayCommand(addAtom);
+            moveAtomCommand = new RelayCommand(addAtom);
+            moveMoleculeCommand = new RelayCommand(addAtom);
+
         }
 
         private void addAtom()
