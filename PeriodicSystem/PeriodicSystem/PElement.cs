@@ -10,10 +10,10 @@ namespace PeriodicSystem
 {
     class PElement : UserControl{
         Label[] labels;
-        String symbol { get { return symbol; } set { symbol = value; } }
-        int number { get { return number; } set { number = value; } }
-        double weight { get { return weight; } set { weight = value; } }
-        int[] shells { get { return shells; } set { shells = value; } }
+        String symbol { set { symbol = value; } }
+        int number { set { number = value; } }
+        double weight { set { weight = value; } }
+        int[] shells { set { shells = value; } }
 
         public PElement(String symbol, int number, double weight, int[] shells){
 
@@ -21,6 +21,8 @@ namespace PeriodicSystem
             this.number = number;
             this.weight = weight;
             this.shells = shells;
+
+            
 
         }
 
