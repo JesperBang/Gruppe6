@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Controls;
 
-namespace PeriodicSystem
+namespace Model
 {
-    class PElement : UserControl{
+    class PElement : Panel{
         Label[] labels;
         String symbol { set { symbol = value; } }
+        String name { set { name = value; } }
         int number { set { number = value; } }
         double weight { set { weight = value; } }
         int[] shells { set { shells = value; } }
@@ -22,7 +23,7 @@ namespace PeriodicSystem
             this.weight = weight;
             this.shells = shells;
 
-            
+
 
         }
 
