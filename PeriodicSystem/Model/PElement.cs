@@ -8,24 +8,26 @@ using System.Windows.Controls;
 
 namespace Model
 {
-    class PElement : Panel{
+    class PElement : Panel{ //skal måske bruge System.windows.forms.panel i stedet.
         Label[] labels;
-        String symbol { set { symbol = value; } }
         String name { set { name = value; } }
+        String symbol { set { symbol = value; } }
         int number { set { number = value; } }
         double weight { set { weight = value; } }
         int[] shells { set { shells = value; } }
 
-        public PElement(String symbol, int number, double weight, int[] shells){
+        public PElement(String name, String symbol, int number, double weight, int[] shells){
 
             this.symbol = symbol;
             this.number = number;
             this.weight = weight;
             this.shells = shells;
 
-
+            labels[0] = new Label();
+            labels[0].Content = name;
+            this.AddVisualChild(labels[0]);
 
         }
-
+        
     }
 }
