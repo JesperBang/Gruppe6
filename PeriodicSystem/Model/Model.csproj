@@ -49,16 +49,7 @@
     <Compile Include="IAtom.cs" />
     <Compile Include="PElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Bindings.xaml.cs">
-      <DependentUpon>Bindings.xaml</DependentUpon>
-    </Compile>
     <Compile Include="PSystem.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Bindings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
