@@ -7,16 +7,14 @@ using System.Windows.Input;
 
 namespace PeriodicSystem.Commands
 {
-    class SaveDrawingCommand : ICommand
+    class SaveDrawingCommand : IUndoRedoCommand
     {
-        public event EventHandler CanExecuteChanged;
-
-        public bool CanExecute(object parameter)
+        public void execute()
         {
             throw new NotImplementedException();
         }
 
-        public void Execute(object parameter)
+        public void unexecute()
         {
             throw new NotImplementedException();
         }

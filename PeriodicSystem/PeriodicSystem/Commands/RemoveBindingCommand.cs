@@ -7,18 +7,16 @@ using System.Windows.Input;
 
 namespace PeriodicSystem.Commands
 {
-    class RemoveBindingCommand : ICommand
-    {
-        public event EventHandler CanExecuteChanged;
-
-        public bool CanExecute(object parameter)
+    class RemoveBindingCommand : IUndoRedoCommand
         {
-            throw new NotImplementedException();
-        }
+            public void execute()
+            {
+                throw new NotImplementedException();
+            }
 
-        public void Execute(object parameter)
-        {
-            throw new NotImplementedException();
-        }
+            public void unexecute()
+            {
+                throw new NotImplementedException();
+            }
     }
 }

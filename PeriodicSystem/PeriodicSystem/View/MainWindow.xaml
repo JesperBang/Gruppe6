@@ -5,20 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PeriodicSystem"
         xmlns:ViewModel="clr-namespace:PeriodicSystem.ViewModel"
+        xmlns:View="clr-namespace:PeriodicSystem.View"
         mc:Ignorable="d"
         Title="pTable" Height="720" Width="1280">
 
     <Window.DataContext>
         <ViewModel:ViewModel />
     </Window.DataContext>
-    
-    
 
-    <Grid>
-        
-        <ItemsControl ItemsSource="{Binding Atoms}" />
 
-        <!--
+    <StackPanel Orientation="Horizontal">
+        <View:SidePanelUserControl/>
+
+        <Grid>
+            <ItemsControl ItemsSource="{Binding Atoms}" />
+
+            <!--
         <Canvas HorizontalAlignment="Left" Height="652" Margin="569,10,0,0" VerticalAlignment="Top" Width="644"  />
         <ScrollBar x:Name="scrollBar" HorizontalAlignment="Left" Margin="1265,8,0,0" VerticalAlignment="Top" Height="636" Width="15" RenderTransformOrigin="0.5,0.5">
             <ScrollBar.RenderTransform>
@@ -31,5 +33,7 @@
             </ScrollBar.RenderTransform>
         </ScrollBar>
         -->
-    </Grid>
+        </Grid>
+    </StackPanel>
+    
 </Window>

@@ -18,20 +18,20 @@ namespace PeriodicSystem.ViewModel
         public ObservableCollection<Atom> Atoms{ get; set; }
         public ObservableCollection<Binding> Bindings { get; set; }
         
-        public ICommand addAtomCommand { get; }
-        public ICommand addAtomsCommand{ get; }
-        public ICommand removeAtomCommand { get; }
-        public ICommand addBindingCommand { get; }
-        public ICommand removeBindingCommand { get; }
-        public ICommand moveAtomCommand { get; }
-        public ICommand moveMoleculeCommand { get; }
-        public ICommand undoCommand { get; }
-        public ICommand redoCommand { get; }
-        public ICommand saveDrawingCommand { get; }
-        public ICommand loadDrawingCommand { get; }
-        public ICommand exportBitmapCommand { get; }
-        public ICommand addMoleculeCommand { get; }
-        public ICommand newDrawingCommand { get; }
+        public ICommand AddAtomCommand { get; }
+        public ICommand AddAtomsCommand{ get; }
+        public ICommand RemoveAtomCommand { get; }
+        public ICommand AddBindingCommand { get; }
+        public ICommand RemoveBindingCommand { get; }
+        public ICommand MoveAtomCommand { get; }
+        public ICommand MoveMoleculeCommand { get; }
+        public ICommand UndoCommand { get; }
+        public ICommand RedoCommand { get; }
+        public ICommand SaveDrawingCommand { get; }
+        public ICommand LoadDrawingCommand { get; }
+        public ICommand ExportBitmapCommand { get; }
+        public ICommand AddMoleculeCommand { get; }
+        public ICommand NewDrawingCommand { get; }
         
         private UndoRedoController undoRedoController;
 
@@ -42,35 +42,37 @@ namespace PeriodicSystem.ViewModel
 
             undoRedoController = new UndoRedoController();
             
-            addAtomCommand = new RelayCommand(addAtom);
-            addAtomsCommand = new RelayCommand(addAtoms);
-            removeAtomCommand = new RelayCommand(removeAtom);
-            addBindingCommand = new RelayCommand(addBinding);
-            removeBindingCommand = new RelayCommand(removeBinding);
-            moveAtomCommand = new RelayCommand(moveAtom);
-            moveMoleculeCommand = new RelayCommand(moveMolecule);
-            undoCommand = new RelayCommand(undo);
-            redoCommand = new RelayCommand(redo);
-            saveDrawingCommand = new RelayCommand(saveDrawing);
-            loadDrawingCommand = new RelayCommand(loadDrawing);
-            exportBitmapCommand = new RelayCommand(exportBitmap);
-            addMoleculeCommand = new RelayCommand(addMolecule);
-            newDrawingCommand = new RelayCommand(newDrawing);
+            AddAtomCommand = new RelayCommand<int>(addAtom);
+            AddAtomsCommand = new RelayCommand(addAtoms);
+            RemoveAtomCommand = new RelayCommand<Atom>(removeAtom);
+            AddBindingCommand = new RelayCommand(addBinding);
+            RemoveBindingCommand = new RelayCommand(removeBinding);
+            MoveAtomCommand = new RelayCommand(moveAtom);
+            MoveMoleculeCommand = new RelayCommand(moveMolecule);
+            UndoCommand = new RelayCommand(undo);
+            RedoCommand = new RelayCommand(redo);
+            SaveDrawingCommand = new RelayCommand(saveDrawing);
+            LoadDrawingCommand = new RelayCommand(loadDrawing);
+            ExportBitmapCommand = new RelayCommand(exportBitmap);
+            AddMoleculeCommand = new RelayCommand(addMolecule);
+            NewDrawingCommand = new RelayCommand(newDrawing);
+
+            //test
         }
 
-        private void addAtom()
+        private void addAtom(int protons)
         {
-            undoRedoController.addAndExecute(new AddAtomCommand(Atoms, new Atom()));
+            undoRedoController.addAndExecute(new AddAtomCommand(Atoms, new Atom(protons)));
         }
 
         private void addAtoms()
         {
-
+            Console.WriteLine("test");
         }
 
-        private void removeAtom()
+        private void removeAtom(Atom atom)
         {
-
+            undoRedoController.addAndExecute(new RemoveAtomCommand(atom, Atoms, Bindings));
         }
 
         private void addBinding()

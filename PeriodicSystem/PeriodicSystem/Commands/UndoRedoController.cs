@@ -32,5 +32,11 @@ namespace PeriodicSystem.Commands
         {
 
         }
+
+        public void clearStacks()
+        {
+            undoStack.Clear();
+            redoStack.Clear();
+        }
     }
 }
