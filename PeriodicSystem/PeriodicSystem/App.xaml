@@ -14,7 +14,12 @@
                 <View:AtomUserControl/>
             </Canvas>
         </DataTemplate>
-    <!--<ResourceDictionary>
+        <DataTemplate DataType="{x:Type Model:Binding}">
+            <Canvas>
+                <View:BindingUserControl/>
+            </Canvas>
+        </DataTemplate>
+        <!--<ResourceDictionary>
       <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:PeriodicSystem.ViewModel" />
     </ResourceDictionary>-->
   </Application.Resources>

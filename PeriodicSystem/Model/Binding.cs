@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Binding
+    public class Binding : NotifyBase
     {
         public enum TypeOfBinding
         {
             Single, Double, Triple
         };
 
-        public Atom BindingPoint1 { get; set; }
-        public Atom BindingPoint2 { get; set; }
+        private Atom bindingPoint1 = new Atom(1);
+        public Atom BindingPoint1 { get { return bindingPoint1; } set { bindingPoint1 = value; NotifyPropertyChanged(); }}
+
+        private Atom bindingPoint2 = new Atom(1);
+        public Atom BindingPoint2 { get { return bindingPoint2; } set { bindingPoint2 = value; NotifyPropertyChanged(); } }
 
         public double X1 { get { return BindingPoint1.X; } }
         public double Y1 { get { return BindingPoint1.Y; } }
@@ -28,6 +31,7 @@ namespace Model
         {
             BindingPoint1 = atom1;
             BindingPoint2 = atom2;
+            BindingState = TypeOfBinding.Single;
         }
 
         public Binding(Atom atom1, Atom atom2, TypeOfBinding state)

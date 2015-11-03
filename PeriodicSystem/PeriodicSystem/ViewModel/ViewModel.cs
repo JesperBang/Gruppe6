@@ -24,6 +24,10 @@ namespace PeriodicSystem.ViewModel
         private Point initialMousePosition;
         private Point initialAtomPosition;
 
+        private bool isAddingBindings;
+        private Atom bindingFrom;
+        private Atom bindingTo;
+
         public ICommand AddAtomCommand { get; }
         public ICommand AddAtomsCommand{ get; }
         public ICommand RemoveAtomCommand { get; }
@@ -44,6 +48,7 @@ namespace PeriodicSystem.ViewModel
         public ICommand MouseUpAtomCommand { get; }
         
         private UndoRedoController undoRedoController;
+        
 
         public ViewModel()
         {
@@ -72,8 +77,6 @@ namespace PeriodicSystem.ViewModel
             MouseUpAtomCommand = new RelayCommand<MouseButtonEventArgs>(MouseUpAtom);
 
             //test
-            addAtom(1);
-            undoRedoController.addAndExecute(new MoveAtomCommand(Atoms.First<Atom>(), 500, 500));
         }
         
         private Atom TargetAtom(MouseEventArgs e)
@@ -102,21 +105,22 @@ namespace PeriodicSystem.ViewModel
 
         private void mouseDownAtom(MouseEventArgs e)
         {
-            Console.WriteLine("hejsa");
-            //moving atom
-            var atom = TargetAtom(e);
-            var mousePosition = RelativeMousePosition(e);
+            if (!isAddingBindings) { 
+                //moving atom
+                var atom = TargetAtom(e);
+                var mousePosition = RelativeMousePosition(e);
 
-            initialMousePosition = mousePosition;
-            initialAtomPosition = new Point(atom.X, atom.Y);
+                initialMousePosition = mousePosition;
+                initialAtomPosition = new Point(atom.X, atom.Y);
 
-            e.MouseDevice.Target.CaptureMouse();
+                e.MouseDevice.Target.CaptureMouse();
+            }
 
         }
 
         private void MouseMoveAtom(MouseEventArgs e)
         {
-            if (Mouse.Captured != null)// && !isAddingLine)
+            if (Mouse.Captured != null && !isAddingBindings)
             {
                 Console.WriteLine("rykker");
 
@@ -130,20 +134,40 @@ namespace PeriodicSystem.ViewModel
 
         private void MouseUpAtom(MouseButtonEventArgs e)
         {
-            Console.WriteLine("slap mus");
+            if (isAddingBindings)
+            {
+                var atom = TargetAtom(e);
 
-            //moving atom
-            var atom = TargetAtom(e);
-            var mousePosition = RelativeMousePosition(e);
+                if (bindingFrom == null)
+                {
+                    bindingFrom = atom;
+                }
+                else
+                {
+                    bindingTo = atom;
 
-            atom.X = initialAtomPosition.X;
-            atom.Y = initialAtomPosition.Y;
+                    if (bindingTo != bindingFrom)
+                    {
+                        undoRedoController.addAndExecute(new AddBindingCommand(Bindings, new Binding(bindingFrom, atom)));
+                        bindingFrom = null;
+                        bindingTo = null;
+                        isAddingBindings = false;
+                    }
+                }
+            }
+            else {
+                //moving atom
+                var atom = TargetAtom(e);
+                var mousePosition = RelativeMousePosition(e);
 
-            undoRedoController.addAndExecute(new MoveAtomCommand(atom, mousePosition.X - initialMousePosition.X, mousePosition.Y - initialMousePosition.Y));
-            
-            e.MouseDevice.Target.ReleaseMouseCapture();
-            
-            
+                atom.X = initialAtomPosition.X;
+                atom.Y = initialAtomPosition.Y;
+
+                undoRedoController.addAndExecute(new MoveAtomCommand(atom, mousePosition.X - initialMousePosition.X, mousePosition.Y - initialMousePosition.Y));
+
+                e.MouseDevice.Target.ReleaseMouseCapture();
+
+            }
         }
 
         private void addAtom(int protons)
@@ -163,7 +187,8 @@ namespace PeriodicSystem.ViewModel
 
         private void addBinding()
         {
-
+            isAddingBindings = true;
+            
         }
 
         private void removeBinding()
@@ -183,12 +208,12 @@ namespace PeriodicSystem.ViewModel
         
         private void undo()
         {
-
+            undoRedoController.undo();
         }
 
         private void redo()
         {
-
+            undoRedoController.redo();
         }
 
         private void saveDrawing()

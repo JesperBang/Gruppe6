@@ -25,12 +25,21 @@ namespace PeriodicSystem.Commands
 
         public void undo()
         {
-
+            if(undoStack.Count > 0)
+            {
+                IUndoRedoCommand command = undoStack.Pop();
+                redoStack.Push(command);
+                command.unexecute();
+            }
         }
 
         public void redo()
         {
-
+            if (redoStack.Count > 0) {
+                IUndoRedoCommand command = redoStack.Pop();
+                undoStack.Push(command);
+                command.execute();
+            }
         }
 
         public void clearStacks()

@@ -11,7 +11,19 @@
             <SolidColorBrush Color="DarkOrange" />
         </StackPanel.Background>
 
+        <GroupBox Header="Undo / Redo">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Content="Undo" Command="{Binding UndoCommand}"/>
+                <Button Grid.Column="1" Content="Redo" Command="{Binding RedoCommand}"/>
+            </Grid>
+        </GroupBox>
+
         <Button Content="Add Atom" Command="{Binding AddAtomCommand}" CommandParameter="1"/>
         <Button Content="Add Atoms" Command="{Binding AddAtomsCommand}" />
+        <Button Content="Add Binding" Command="{Binding AddBindingCommand}" />
     </StackPanel>
 </UserControl>
