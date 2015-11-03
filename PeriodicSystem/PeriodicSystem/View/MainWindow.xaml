@@ -6,21 +6,18 @@
         xmlns:local="clr-namespace:PeriodicSystem"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280">
-    
+
     <Grid>
         <DockPanel>
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
-                    <MenuItem Header="_New" />
-                    <MenuItem Header="_Open" />
-                    <MenuItem Header="_Save" />
-                    <Separator />
-                    <MenuItem Header="_Exit" />
+                    <MenuItem Header="_New" Command="ApplicationCommands.New"/>
+                    <MenuItem Header="_Open" Command="ApplicationCommands.Open"/>
+                    <MenuItem Header="_Save" Command="ApplicationCommands.Save"/>
                 </MenuItem>
                 <MenuItem Header="_Tools">
-                    <MenuItem Header="_Undo"/>
-                    <MenuItem Header="Redo"/>
-                    <MenuItem Header="Reset"/>
+                    <MenuItem Header="_Undo" Command="ApplicationCommands.Undo"/>
+                    <MenuItem Header="Redo" Command="ApplicationCommands.Redo"/>
                 </MenuItem>
             </Menu>
             <TextBox AcceptsReturn="True" />
