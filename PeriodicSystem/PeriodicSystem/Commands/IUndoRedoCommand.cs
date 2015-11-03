@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace PeriodicSystem.Commands
 {
-    class UndoRedoCommand
-    {
-    // Custom interface for implementing Undo/Redo commands.
-    public interface UndoRedoCommand
+    // Custom interface e command.
+    public interface IUndoRedoCommand
         {
             // Regions can be used to make code foldable (minus/plus sign to the left).
             #region Methods (that has to be implemented)
@@ -22,4 +18,3 @@ namespace PeriodicSystem.Commands
             #endregion
         }
     }
-}

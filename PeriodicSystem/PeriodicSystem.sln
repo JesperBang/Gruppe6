@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeriodicSystem", "PeriodicS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{AE39082C-4D2B-4B77-A5CB-85949677CDF4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Figures", "Shapes\Figures.csproj", "{137B68B7-062C-4C22-ABBB-09E450D6D8DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{AE39082C-4D2B-4B77-A5CB-85949677CDF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE39082C-4D2B-4B77-A5CB-85949677CDF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE39082C-4D2B-4B77-A5CB-85949677CDF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{137B68B7-062C-4C22-ABBB-09E450D6D8DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{137B68B7-062C-4C22-ABBB-09E450D6D8DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{137B68B7-062C-4C22-ABBB-09E450D6D8DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{137B68B7-062C-4C22-ABBB-09E450D6D8DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

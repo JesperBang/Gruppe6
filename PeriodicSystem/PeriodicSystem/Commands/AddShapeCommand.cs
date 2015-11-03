@@ -4,13 +4,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Shapes;
 
 namespace PeriodicSystem.Commands
 {
     class AddShapeCommand
     {
         // Undo/Redo command for adding a Shape.
-        public class AddShapeCommand : IUndoRedoCommand
+        public class IAddShapeCommand : IUndoRedoCommand
         {
             // Regions can be used to make code foldable (minus/plus sign to the left).
             #region Fields

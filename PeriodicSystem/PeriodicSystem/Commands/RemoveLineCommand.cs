@@ -11,7 +11,7 @@ namespace PeriodicSystem.Commands
     class RemoveLineCommand
     {
         // Undo/Redo command for removing Lines.
-        public class RemoveLinesCommand : UndoRedoCommand
+        public class RemoveLinesCommand : IUndoRedoCommand
         {
             // Regions can be used to make code foldable (minus/plus sign to the left).
             #region Fields

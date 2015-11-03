@@ -12,7 +12,7 @@ namespace PeriodicSystem.Commands
     {
         // Undo/Redo command for removing Shapes.
         // It also removes the Lines connected to the Shapes.
-        public class RemoveShapesCommand : UndoRedoCommand
+        public class RemoveShapesCommand : IUndoRedoCommand
         {
             // Regions can be used to make code foldable (minus/plus sign to the left).
             #region Fields

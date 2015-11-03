@@ -66,10 +66,10 @@
     </Compile>
     <Compile Include="Commands\AddNewLineCommand.cs" />
     <Compile Include="Commands\AddShapeCommand.cs" />
+    <Compile Include="Commands\IUndoRedoCommand.cs" />
     <Compile Include="Commands\MoveShapeCommand.cs" />
     <Compile Include="Commands\RemoveLineCommand.cs" />
     <Compile Include="Commands\RemoveShapeCommand.cs" />
-    <Compile Include="Commands\UndoRedoCommand.cs" />
     <Compile Include="Commands\UndoRedoController.cs" />
     <Compile Include="ModelView\ModelView.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
@@ -108,6 +108,10 @@
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{ae39082c-4d2b-4b77-a5cb-85949677cdf4}</Project>
       <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shapes\Figures.csproj">
+      <Project>{137b68b7-062c-4c22-abbb-09e450d6d8db}</Project>
+      <Name>Figures</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

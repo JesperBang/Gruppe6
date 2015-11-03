@@ -10,7 +10,7 @@ namespace PeriodicSystem.Commands
     class MoveShapeCommand
     {
         // Undo/Redo command for moving a Shape.
-        public class MoveShapeCommand : UndoRedoCommand
+        public class MoveShapeCommand : IUndoRedoCommand
         {
             // Regions can be used to make code foldable (minus/plus sign to the left).
             #region Fields

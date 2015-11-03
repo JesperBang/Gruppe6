@@ -11,7 +11,7 @@ namespace PeriodicSystem.Commands
     class AddNewLineCommand
     {
         // Undo/Redo command for adding a Line.
-        public class AddLineCommand : UndoRedoCommand
+        public class AddLineCommand : IUndoRedoCommand
         {
             // Regions can be used to make code foldable (minus/plus sign to the left).
             #region Fields

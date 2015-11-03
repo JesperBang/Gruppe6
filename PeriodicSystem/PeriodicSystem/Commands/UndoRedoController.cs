@@ -8,6 +8,8 @@ namespace PeriodicSystem.Commands
 {
     class UndoRedoController
     {
+        public static Commands.UndoRedoController Instance { get; internal set; }
+
         // Keeps track of the Undo/Redo commands.
         // This is a Singleton, which ensures there will only ever be one instance of the class.
         // There should never be more than one, otherwise problems could arise.
