@@ -19,6 +19,7 @@
 
         <Grid>
             <ItemsControl ItemsSource="{Binding Atoms}" />
+            <ItemsControl ItemsSource="{Binding Binding}" />
 
             <!--
         <Canvas HorizontalAlignment="Left" Height="652" Margin="569,10,0,0" VerticalAlignment="Top" Width="644"  />
