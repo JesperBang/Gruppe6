@@ -6,26 +6,23 @@
         xmlns:local="clr-namespace:PeriodicSystem"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280">
+
     <Grid>
-        <Grid>
-            <DockPanel>
-                <Menu DockPanel.Dock="Top">
-                    <MenuItem Header="_File">
-                        <MenuItem Header="_New" />
-                        <MenuItem Header="_Open" />
-                        <MenuItem Header="_Save" />
-                        <Separator />
-                        <MenuItem Header="_Exit" />
-                    </MenuItem>
-                    <MenuItem Header="_Tools">
-                        <MenuItem Header="_Undo"/>
-                        <MenuItem Header="Redo"/>
-                        <MenuItem Header="Reset"/>
-                    </MenuItem>
-                </Menu>
-                <TextBox AcceptsReturn="True" />
-            </DockPanel>
-            <Canvas HorizontalAlignment="Left" Height="636" Margin="583,10,0,0" VerticalAlignment="Top" Width="644"/>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_File">
+                    <MenuItem Header="_New" Command="ApplicationCommands.New"/>
+                    <MenuItem Header="_Open" Command="ApplicationCommands.Open"/>
+                    <MenuItem Header="_Save" Command="ApplicationCommands.Save"/>
+                </MenuItem>
+                <MenuItem Header="_Tools">
+                    <MenuItem Header="_Undo" Command="ApplicationCommands.Undo"/>
+                    <MenuItem Header="Redo" Command="ApplicationCommands.Redo"/>
+                </MenuItem>
+            </Menu>
+            <TextBox AcceptsReturn="True" />
+        </DockPanel>
+        <Canvas HorizontalAlignment="Left" Height="636" Margin="583,10,0,0" VerticalAlignment="Top" Width="644"/>
         <ScrollBar x:Name="scrollBar" HorizontalAlignment="Left" Margin="1232,10,0,0" VerticalAlignment="Top" Height="636" Width="32"/>
         <ScrollBar x:Name="scrollBar1" HorizontalAlignment="Left" Margin="583,651,0,0" VerticalAlignment="Top" Width="644" Height="38"/>
         <StackPanel HorizontalAlignment="Left" Height="670" Margin="10,10,0,0" VerticalAlignment="Top" Width="573"/>
