@@ -16,11 +16,11 @@ namespace Model
         public Atom BindingPoint1 { get; set; }
         public Atom BindingPoint2 { get; set; }
 
-        public int X1 { get { return BindingPoint1.X; } }
-        public int Y1 { get { return BindingPoint1.Y; } }
+        public double X1 { get { return BindingPoint1.X; } }
+        public double Y1 { get { return BindingPoint1.Y; } }
 
-        public int X2 { get { return BindingPoint2.X; } }
-        public int Y2 { get { return BindingPoint2.Y; } }
+        public double X2 { get { return BindingPoint2.X; } }
+        public double Y2 { get { return BindingPoint2.Y; } }
 
         public TypeOfBinding BindingState { get; set; }
 

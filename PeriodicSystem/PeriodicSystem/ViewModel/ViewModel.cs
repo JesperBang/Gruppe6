@@ -9,7 +9,10 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace PeriodicSystem.ViewModel
 {
@@ -17,7 +20,10 @@ namespace PeriodicSystem.ViewModel
     {
         public ObservableCollection<Atom> Atoms{ get; set; }
         public ObservableCollection<Binding> Bindings { get; set; }
-        
+
+        private Point initialMousePosition;
+        private Point initialAtomPosition;
+
         public ICommand AddAtomCommand { get; }
         public ICommand AddAtomsCommand{ get; }
         public ICommand RemoveAtomCommand { get; }
@@ -32,6 +38,10 @@ namespace PeriodicSystem.ViewModel
         public ICommand ExportBitmapCommand { get; }
         public ICommand AddMoleculeCommand { get; }
         public ICommand NewDrawingCommand { get; }
+
+        public ICommand MouseDownAtomCommand { get; }
+        public ICommand MouseMoveAtomCommand { get; }
+        public ICommand MouseUpAtomCommand { get; }
         
         private UndoRedoController undoRedoController;
 
@@ -57,7 +67,83 @@ namespace PeriodicSystem.ViewModel
             AddMoleculeCommand = new RelayCommand(addMolecule);
             NewDrawingCommand = new RelayCommand(newDrawing);
 
+            MouseDownAtomCommand = new RelayCommand<MouseEventArgs>(mouseDownAtom);
+            MouseMoveAtomCommand = new RelayCommand<MouseEventArgs>(MouseMoveAtom);
+            MouseUpAtomCommand = new RelayCommand<MouseButtonEventArgs>(MouseUpAtom);
+
             //test
+            addAtom(1);
+            undoRedoController.addAndExecute(new MoveAtomCommand(Atoms.First<Atom>(), 500, 500));
+        }
+        
+        private Atom TargetAtom(MouseEventArgs e)
+        {
+            // Here the visual element that the mouse is captured by is retrieved.
+            var shapeVisualElement = (FrameworkElement)e.MouseDevice.Target;
+            // From the shapes visual element, the Shape object which is the DataContext is retrieved.
+            return (Atom)shapeVisualElement.DataContext;
+        }
+
+        private Point RelativeMousePosition(MouseEventArgs e)
+        {
+            // Here the visual element that the mouse is captured by is retrieved.
+            var shapeVisualElement = (FrameworkElement)e.MouseDevice.Target;
+            // The canvas holding the shapes visual element, is found by searching up the tree of visual elements.
+            var canvas = FindParentOfType<Canvas>(shapeVisualElement);
+            // The mouse position relative to the canvas is gotten here.
+            return Mouse.GetPosition(canvas);
+        }
+
+        private static T FindParentOfType<T>(DependencyObject o)
+        {
+            dynamic parent = VisualTreeHelper.GetParent(o);
+            return parent.GetType().IsAssignableFrom(typeof(T)) ? parent : FindParentOfType<T>(parent);
+        }
+
+        private void mouseDownAtom(MouseEventArgs e)
+        {
+            Console.WriteLine("hejsa");
+            //moving atom
+            var atom = TargetAtom(e);
+            var mousePosition = RelativeMousePosition(e);
+
+            initialMousePosition = mousePosition;
+            initialAtomPosition = new Point(atom.X, atom.Y);
+
+            e.MouseDevice.Target.CaptureMouse();
+
+        }
+
+        private void MouseMoveAtom(MouseEventArgs e)
+        {
+            if (Mouse.Captured != null)// && !isAddingLine)
+            {
+                Console.WriteLine("rykker");
+
+                var shape = TargetAtom(e);
+                var mousePosition = RelativeMousePosition(e);
+                
+                shape.X = initialAtomPosition.X + (mousePosition.X - initialMousePosition.X);
+                shape.Y = initialAtomPosition.Y + (mousePosition.Y - initialMousePosition.Y);
+            }
+        }
+
+        private void MouseUpAtom(MouseButtonEventArgs e)
+        {
+            Console.WriteLine("slap mus");
+
+            //moving atom
+            var atom = TargetAtom(e);
+            var mousePosition = RelativeMousePosition(e);
+
+            atom.X = initialAtomPosition.X;
+            atom.Y = initialAtomPosition.Y;
+
+            undoRedoController.addAndExecute(new MoveAtomCommand(atom, mousePosition.X - initialMousePosition.X, mousePosition.Y - initialMousePosition.Y));
+            
+            e.MouseDevice.Target.ReleaseMouseCapture();
+            
+            
         }
 
         private void addAtom(int protons)

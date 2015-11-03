@@ -10,8 +10,10 @@
     xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006">
   <Application.Resources>
     <DataTemplate DataType="{x:Type Model:Atom}">
-      <View:AtomUserControl/>
-    </DataTemplate>
+            <Canvas>
+                <View:AtomUserControl/>
+            </Canvas>
+        </DataTemplate>
     <!--<ResourceDictionary>
       <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:PeriodicSystem.ViewModel" />
     </ResourceDictionary>-->
