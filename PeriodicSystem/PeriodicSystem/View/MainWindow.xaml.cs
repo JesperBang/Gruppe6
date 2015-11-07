@@ -24,5 +24,10 @@ namespace PeriodicSystem
         {
             InitializeComponent();
         }
+
+        private void SidePanelUserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

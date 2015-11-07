@@ -13,6 +13,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Xml.Linq;
 
 namespace PeriodicSystem.ViewModel
 {
@@ -28,6 +29,9 @@ namespace PeriodicSystem.ViewModel
         private Atom bindingFrom;
         private Atom bindingTo;
 
+
+        public ICommand LoadFromXMLCommand { get; }
+        public ICommand SaveToXMLCommand { get; }
         public ICommand AddAtomCommand { get; }
         public ICommand AddAtomsCommand{ get; }
         public ICommand RemoveAtomCommand { get; }
@@ -56,7 +60,9 @@ namespace PeriodicSystem.ViewModel
             Bindings = new ObservableCollection<Binding>();
 
             undoRedoController = new UndoRedoController();
-            
+
+            LoadFromXMLCommand = new RelayCommand(loadFromXML);
+            SaveToXMLCommand = new RelayCommand(saveToXML); 
             AddAtomCommand = new RelayCommand<int>(addAtom);
             AddAtomsCommand = new RelayCommand(addAtoms);
             RemoveAtomCommand = new RelayCommand<Atom>(removeAtom);
@@ -85,6 +91,7 @@ namespace PeriodicSystem.ViewModel
             var shapeVisualElement = (FrameworkElement)e.MouseDevice.Target;
             // From the shapes visual element, the Shape object which is the DataContext is retrieved.
             return (Atom)shapeVisualElement.DataContext;
+
         }
 
         private Point RelativeMousePosition(MouseEventArgs e)
@@ -183,6 +190,41 @@ namespace PeriodicSystem.ViewModel
         private void removeAtom(Atom atom)
         {
             undoRedoController.addAndExecute(new RemoveAtomCommand(atom, Atoms, Bindings));
+        }
+
+        private void saveToXML()
+        {
+            try
+            {
+                var xEle = new XElement("Atoms",
+                            from Atom in Atoms
+                            select new XElement("Atom",
+                                         new XElement("X", Atom.X),
+                                           new XElement("Y", Atom.Y),
+                                           new XElement("Protons", Atom.Protons)
+                                       ));
+                xEle.Save("C:\\Test\\Atoms.xml");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.WriteLine("Save To XML");
+        }
+
+        private void loadFromXML()
+        {
+            Console.WriteLine("Loading Atoms from XML");
+
+            XDocument xmlDoc = XDocument.Load("C:\\Test\\Atoms.xml");
+            Atoms = new ObservableCollection<Atom>(xmlDoc.Descendants("Atom")
+                                       .Select(x => new Atom
+                                       {
+                                           Protons = Int32.Parse(x.Element("Protons").Value),
+                                           X = Double.Parse(x.Element("X").Value),
+                                           Y = Double.Parse(x.Element("Y").Value)
+                                       })
+                                       .ToList());
         }
 
         private void addBinding()
