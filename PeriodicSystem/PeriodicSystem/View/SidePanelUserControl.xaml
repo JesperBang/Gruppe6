@@ -26,7 +26,7 @@
         <Button Content="Add Atoms" Command="{Binding AddAtomsCommand}" />
         <Button Content="Add Binding" Command="{Binding AddBindingCommand}" />
         <Button Content="Remove Binding" Command="{Binding RemoveBindingCommand}" />
-        <Button Content="Remove Atom" Command="{Binding RemoveBindingCommand}" />
+        <Button Content="Remove Model" Command="{Binding RemoveModelCommand}" />
         <Button Content="Save Drawing" Command="{Binding SaveDrawingCommand}" />
         <Button Content="Load Drawing" Command="{Binding LoadDrawingCommand}" />
         <Button Content="Save to XML" Command="{Binding SaveToXMLCommand}" />

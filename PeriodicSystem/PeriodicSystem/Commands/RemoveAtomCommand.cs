@@ -24,12 +24,12 @@ namespace PeriodicSystem.Commands
 
         public void execute()
         {
-            throw new NotImplementedException();
+            atoms.Remove(atom);
         }
 
         public void unexecute()
         {
-            throw new NotImplementedException();
+            atoms.Add(atom);
         }
     }
 }
