@@ -38,9 +38,5 @@
        <!-- <Button Content="Save to XML" Command="{Binding SaveToXMLCommand}" />
         <Button Content="Load from XML" Command="{Binding LoadFromXMLCommand}" /> -->
         <Button Content="Remove Model" Command="{Binding RemoveModelCommand}" />
-        <Button Content="Save Drawing" Command="{Binding SaveDrawingCommand}" />
-        <Button Content="Load Drawing" Command="{Binding LoadDrawingCommand}" />
-        <Button Content="Save to XML" Command="{Binding SaveToXMLCommand}" />
-        <Button Content="Load from XML" Command="{Binding LoadFromXMLCommand}" />
     </StackPanel>
 </UserControl>
