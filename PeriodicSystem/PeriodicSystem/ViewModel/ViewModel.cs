@@ -15,6 +15,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace PeriodicSystem.ViewModel
 {
@@ -32,7 +33,7 @@ namespace PeriodicSystem.ViewModel
 
         private Object selectedModel;
 
-
+        public ICommand RemoveModelCommand { get; }
         public ICommand LoadFromXMLCommand { get; }
         public ICommand SaveToXMLCommand { get; }
         public ICommand AddAtomCommand { get; }
@@ -65,7 +66,8 @@ namespace PeriodicSystem.ViewModel
             Bindings = new ObservableCollection<Binding>();
 
             undoRedoController = new UndoRedoController();
-            
+
+            RemoveModelCommand = new RelayCommand(removeModel);
             LoadFromXMLCommand = new RelayCommand(loadFromXML);
             SaveToXMLCommand = new RelayCommand(saveToXML); 
             AddAtomCommand = new RelayCommand<int>(addAtom);
@@ -80,6 +82,7 @@ namespace PeriodicSystem.ViewModel
             ExportBitmapCommand = new RelayCommand(exportBitmap);
             AddMoleculeCommand = new RelayCommand(addMolecule);
             NewDrawingCommand = new RelayCommand(newDrawing);
+
 
             MouseDownAtomCommand = new RelayCommand<MouseEventArgs>(mouseDownAtom);
             MouseMoveAtomCommand = new RelayCommand<MouseEventArgs>(MouseMoveAtom);
@@ -124,6 +127,8 @@ namespace PeriodicSystem.ViewModel
 
                 initialMousePosition = mousePosition;
                 initialAtomPosition = new Point(atom.X, atom.Y);
+
+                selectedModel = atom;
 
                 e.MouseDevice.Target.CaptureMouse();
             }
@@ -172,13 +177,16 @@ namespace PeriodicSystem.ViewModel
                 var atom = TargetAtom(e);
                 var mousePosition = RelativeMousePosition(e);
 
-                atom.X = initialAtomPosition.X;
-                atom.Y = initialAtomPosition.Y;
+                //only move if chage is significant
+                if (atom.X != initialAtomPosition.X && atom.Y != initialAtomPosition.Y) {
 
-                undoRedoController.addAndExecute(new MoveAtomCommand(atom, mousePosition.X - initialMousePosition.X, mousePosition.Y - initialMousePosition.Y));
+                    atom.X = initialAtomPosition.X;
+                    atom.Y = initialAtomPosition.Y;
 
+                    undoRedoController.addAndExecute(new MoveAtomCommand(atom, mousePosition.X - initialMousePosition.X, mousePosition.Y - initialMousePosition.Y));
+
+                }
                 e.MouseDevice.Target.ReleaseMouseCapture();
-
             }
         }
 
@@ -207,9 +215,29 @@ namespace PeriodicSystem.ViewModel
             Console.WriteLine("test");
         }
 
+        private void removeModel()
+        {
+            if (selectedModel == null)
+            {
+                return;
+            }
+
+            if (selectedModel.GetType() == typeof(Atom))
+            {
+                undoRedoController.addAndExecute(new RemoveAtomCommand((Atom) selectedModel, Atoms, Bindings));
+            }
+            else if (selectedModel.GetType() == typeof(Binding))
+            {
+                undoRedoController.addAndExecute(new RemoveBindingCommand((Binding) selectedModel, Bindings));
+            }
+
+            selectedModel = null;
+        }
+
         private void removeAtom(Atom atom)
         {
-            undoRedoController.addAndExecute(new RemoveAtomCommand(atom, Atoms, Bindings));
+            
+            
         }
 
         private void saveToXML()
@@ -263,8 +291,9 @@ namespace PeriodicSystem.ViewModel
 
         private void removeBinding()
         {
-            if (selectedModel != null) {
-                undoRedoController.addAndExecute(new RemoveBindingCommand((Binding)selectedModel));
+            if (selectedModel.GetType() == typeof(Binding)) {
+                undoRedoController.addAndExecute(new RemoveBindingCommand((Binding)selectedModel, Bindings));
+                selectedModel = null;
             }
         }
 

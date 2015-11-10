@@ -14,22 +14,41 @@ namespace PeriodicSystem.Commands
         private ObservableCollection<Atom> atoms;
         private ObservableCollection<Binding> bindings;
         private Atom atom;
+        private List<Binding> bindingsToRemove;
 
         public RemoveAtomCommand(Atom atom, ObservableCollection<Atom> atoms, ObservableCollection<Binding> bindings)
         {
             this.atom = atom;
             this.atoms = atoms;
+
             this.bindings = bindings;
+
+            bindingsToRemove = new List<Binding>();
+            foreach(Binding b in bindings)
+            {
+                if(b.BindingPoint1 == atom || b.BindingPoint2 == atom)
+                {
+                    bindingsToRemove.Add(b);
+                }
+            }
         }
 
         public void execute()
         {
-            throw new NotImplementedException();
+            atoms.Remove(atom);
+            foreach (Binding b in bindingsToRemove)
+            {
+                bindings.Remove(b);
+            }
         }
 
         public void unexecute()
         {
-            throw new NotImplementedException();
+            atoms.Add(atom);
+            foreach (Binding b in bindingsToRemove)
+            {
+                bindings.Add(b);
+            }
         }
     }
 }
