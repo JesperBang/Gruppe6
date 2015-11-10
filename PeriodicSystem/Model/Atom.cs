@@ -23,6 +23,10 @@ namespace Model
 
         public int Protons { get; set; }
 
+        public Atom()
+        {
+        }
+
         public Atom(int protons)
         {
             X = 220;
