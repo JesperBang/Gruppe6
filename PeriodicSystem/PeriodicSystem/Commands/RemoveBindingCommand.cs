@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,15 +9,22 @@ using System.Windows.Input;
 namespace PeriodicSystem.Commands
 {
     class RemoveBindingCommand : IUndoRedoCommand
-        {
-            public void execute()
-            {
-                throw new NotImplementedException();
-            }
+    {
+        private Binding binding;
 
-            public void unexecute()
-            {
-                throw new NotImplementedException();
-            }
+        public RemoveBindingCommand(Binding binding)
+        {
+            this.binding = binding;
+        }
+
+        public void execute()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void unexecute()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

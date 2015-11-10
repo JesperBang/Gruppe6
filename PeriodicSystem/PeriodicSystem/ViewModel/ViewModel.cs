@@ -28,6 +28,8 @@ namespace PeriodicSystem.ViewModel
         private Atom bindingFrom;
         private Atom bindingTo;
 
+        private Object selectedModel;
+
         public ICommand AddAtomCommand { get; }
         public ICommand AddAtomsCommand{ get; }
         public ICommand RemoveAtomCommand { get; }
@@ -46,7 +48,9 @@ namespace PeriodicSystem.ViewModel
         public ICommand MouseDownAtomCommand { get; }
         public ICommand MouseMoveAtomCommand { get; }
         public ICommand MouseUpAtomCommand { get; }
-        
+
+        public ICommand MouseDownBindingCommand {get;}
+
         private UndoRedoController undoRedoController;
         
 
@@ -75,6 +79,8 @@ namespace PeriodicSystem.ViewModel
             MouseDownAtomCommand = new RelayCommand<MouseEventArgs>(mouseDownAtom);
             MouseMoveAtomCommand = new RelayCommand<MouseEventArgs>(MouseMoveAtom);
             MouseUpAtomCommand = new RelayCommand<MouseButtonEventArgs>(MouseUpAtom);
+
+            MouseDownBindingCommand = new RelayCommand<MouseEventArgs>(mouseDownBinding);
 
             //test
         }
@@ -170,6 +176,21 @@ namespace PeriodicSystem.ViewModel
             }
         }
 
+        private Binding TargetBinding(MouseEventArgs e)
+        {
+            // Here the visual element that the mouse is captured by is retrieved.
+            var shapeVisualElement = (FrameworkElement)e.MouseDevice.Target;
+            // From the shapes visual element, the Shape object which is the DataContext is retrieved.
+            return (Binding)shapeVisualElement.DataContext;
+        }
+
+        private void mouseDownBinding(MouseEventArgs e)
+        {
+            Binding binding = TargetBinding(e);
+
+            selectedModel = binding;
+        }
+
         private void addAtom(int protons)
         {
             undoRedoController.addAndExecute(new AddAtomCommand(Atoms, new Atom(protons)));
@@ -193,7 +214,9 @@ namespace PeriodicSystem.ViewModel
 
         private void removeBinding()
         {
-
+            if (selectedModel != null) {
+                undoRedoController.addAndExecute(new RemoveBindingCommand((Binding)selectedModel));
+            }
         }
 
         private void moveAtom()

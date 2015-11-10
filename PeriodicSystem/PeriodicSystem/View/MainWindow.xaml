@@ -13,27 +13,12 @@
         <ViewModel:ViewModel />
     </Window.DataContext>
 
-
     <StackPanel Orientation="Horizontal">
         <View:SidePanelUserControl/>
 
         <Grid>
+            <ItemsControl ItemsSource="{Binding Bindings}" />
             <ItemsControl ItemsSource="{Binding Atoms}" />
-            <ItemsControl ItemsSource="{Binding Binding}" />
-
-            <!--
-        <Canvas HorizontalAlignment="Left" Height="652" Margin="569,10,0,0" VerticalAlignment="Top" Width="644"  />
-        <ScrollBar x:Name="scrollBar" HorizontalAlignment="Left" Margin="1265,8,0,0" VerticalAlignment="Top" Height="636" Width="15" RenderTransformOrigin="0.5,0.5">
-            <ScrollBar.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </ScrollBar.RenderTransform>
-        </ScrollBar>
-        -->
         </Grid>
     </StackPanel>
     

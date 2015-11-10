@@ -19,11 +19,12 @@ namespace Model
         private Atom bindingPoint2 = new Atom(1);
         public Atom BindingPoint2 { get { return bindingPoint2; } set { bindingPoint2 = value; NotifyPropertyChanged(); } }
 
-        public double X1 { get { return BindingPoint1.X; } }
-        public double Y1 { get { return BindingPoint1.Y; } }
+        //does not notify UI of changes in atoms...
+        //public double X1 { get { return BindingPoint1.CenterX; } }
+        //public double Y1 { get { return BindingPoint1.CenterY; } }
 
-        public double X2 { get { return BindingPoint2.X; } }
-        public double Y2 { get { return BindingPoint2.Y; } }
+        //public double X2 { get { return BindingPoint2.CenterX; } }
+        //public double Y2 { get { return BindingPoint2.CenterY; } }
 
         public TypeOfBinding BindingState { get; set; }
 
