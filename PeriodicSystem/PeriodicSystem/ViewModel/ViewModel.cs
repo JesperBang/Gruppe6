@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -76,8 +77,6 @@ namespace PeriodicSystem.ViewModel
             MoveMoleculeCommand = new RelayCommand(moveMolecule);
             UndoCommand = new RelayCommand(undo);
             RedoCommand = new RelayCommand(redo);
-            SaveDrawingCommand = new RelayCommand(saveDrawing);
-            LoadDrawingCommand = new RelayCommand(loadDrawing);
             ExportBitmapCommand = new RelayCommand(exportBitmap);
             AddMoleculeCommand = new RelayCommand(addMolecule);
             NewDrawingCommand = new RelayCommand(newDrawing);
@@ -224,7 +223,15 @@ namespace PeriodicSystem.ViewModel
                                            new XElement("Y", Atom.Y),
                                            new XElement("Protons", Atom.Protons)
                                        ));
-                xEle.Save("C:\\Test\\Atoms.xml");
+
+                System.Windows.Forms.SaveFileDialog saveXMLDialog = new System.Windows.Forms.SaveFileDialog();
+                saveXMLDialog.Filter = "XML-File | *.xml";
+                saveXMLDialog.InitialDirectory = Convert.ToString(Environment.SpecialFolder.MyDocuments);
+                if (saveXMLDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    xEle.Save(saveXMLDialog.FileName);
+                }
+
             }
             catch (Exception ex)
             {
@@ -279,16 +286,6 @@ namespace PeriodicSystem.ViewModel
         private void redo()
         {
             undoRedoController.redo();
-        }
-
-        private void saveDrawing()
-        {
-
-        }
-
-        private void loadDrawing()
-        {
-
         }
 
         private void exportBitmap()

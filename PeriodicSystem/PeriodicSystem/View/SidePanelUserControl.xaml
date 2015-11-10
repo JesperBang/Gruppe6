@@ -27,9 +27,15 @@
         <Button Content="Add Binding" Command="{Binding AddBindingCommand}" />
         <Button Content="Remove Binding" Command="{Binding RemoveBindingCommand}" />
         <Button Content="Remove Atom" Command="{Binding RemoveBindingCommand}" />
-        <Button Content="Save Drawing" Command="{Binding SaveDrawingCommand}" />
-        <Button Content="Load Drawing" Command="{Binding LoadDrawingCommand}" />
-        <Button Content="Save to XML" Command="{Binding SaveToXMLCommand}" />
-        <Button Content="Load from XML" Command="{Binding LoadFromXMLCommand}" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Save XML" Command="{Binding SaveToXMLCommand}"/>
+            <Button Grid.Column="1" Content="Load XML" Command="{Binding LoadFromXMLCommand}"/>
+        </Grid>
+       <!-- <Button Content="Save to XML" Command="{Binding SaveToXMLCommand}" />
+        <Button Content="Load from XML" Command="{Binding LoadFromXMLCommand}" /> -->
     </StackPanel>
 </UserControl>
