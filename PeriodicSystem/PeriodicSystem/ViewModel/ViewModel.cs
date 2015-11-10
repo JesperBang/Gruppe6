@@ -14,6 +14,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace PeriodicSystem.ViewModel
 {
@@ -187,7 +188,6 @@ namespace PeriodicSystem.ViewModel
 
                 }
                 e.MouseDevice.Target.ReleaseMouseCapture();
-
             }
         }
 
