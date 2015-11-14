@@ -13,6 +13,14 @@
         <ViewModel:ViewModel />
     </Window.DataContext>
 
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding NewDrawingCommand}" Gesture="CTRL+N"/>
+        <KeyBinding Command="{Binding SaveToXMLCommand}" Gesture="CTRL+S"/>
+        <KeyBinding Command="{Binding LoadFromXMLCommand}" Gesture="CTRL+O"/>
+        <KeyBinding Command="{Binding UndoCommand}" Gesture="CTRL+Z"/>
+        <KeyBinding Command="{Binding RemoveModelCommand}" Gesture="DEL"/>
+    </Window.InputBindings>
+
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">

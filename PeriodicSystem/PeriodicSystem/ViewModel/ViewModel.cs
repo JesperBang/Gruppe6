@@ -67,7 +67,7 @@ namespace PeriodicSystem.ViewModel
 
             undoRedoController = new UndoRedoController();
 
-            RemoveModelCommand = new RelayCommand(removeModel);
+            RemoveModelCommand = new RelayCommand(removeModel, canRemoveModel);
             LoadFromXMLCommand = new RelayCommand(loadFromXML);
             SaveToXMLCommand = new RelayCommand(saveToXML); 
             AddAtomCommand = new RelayCommand<int>(addAtom);
@@ -77,8 +77,8 @@ namespace PeriodicSystem.ViewModel
             RemoveBindingCommand = new RelayCommand(removeBinding);
             MoveAtomCommand = new RelayCommand(moveAtom);
             MoveMoleculeCommand = new RelayCommand(moveMolecule);
-            UndoCommand = new RelayCommand(undo);
-            RedoCommand = new RelayCommand(redo);
+            UndoCommand = new RelayCommand(undo, undoRedoController.canUndo);
+            RedoCommand = new RelayCommand(redo, undoRedoController.canRedo);
             ExportBitmapCommand = new RelayCommand(exportBitmap);
             AddMoleculeCommand = new RelayCommand(addMolecule);
             NewDrawingCommand = new RelayCommand(newDrawing);
@@ -213,6 +213,11 @@ namespace PeriodicSystem.ViewModel
         private void addAtoms()
         {
             Console.WriteLine("test");
+        }
+
+        public bool canRemoveModel()
+        {
+            return selectedModel != null;
         }
 
         private void removeModel()

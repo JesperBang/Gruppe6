@@ -47,5 +47,15 @@ namespace PeriodicSystem.Commands
             undoStack.Clear();
             redoStack.Clear();
         }
+
+        public bool canUndo()
+        {
+            return undoStack.Count > 0;
+        }
+
+        public bool canRedo()
+        {
+            return redoStack.Count > 0;
+        }
     }
 }
