@@ -8,9 +8,9 @@
              xmlns:local="clr-namespace:PeriodicSystem.View"
              mc:Ignorable="d" 
              Canvas.Left="{Binding X}" Canvas.Top="{Binding Y}" 
-             d:DesignHeight="100" d:DesignWidth="100">
+             d:DesignHeight="{Binding Height}" d:DesignWidth="{Binding Width}">
     <Grid>
-        <Ellipse Fill="Red" Width="100" Height="100"/>
+        <Ellipse Fill="Red" Width="{Binding Width}" Height="{Binding Height}"/>
     </Grid>
 
     <i:Interaction.Triggers>

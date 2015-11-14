@@ -13,13 +13,40 @@
         <ViewModel:ViewModel />
     </Window.DataContext>
 
-    <StackPanel Orientation="Horizontal">
-        <View:SidePanelUserControl/>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New" Command="{Binding NewDrawingCommand}"/>
+                <MenuItem Header="_Open" Command="{Binding LoadFromXMLCommand}"/>
+                <MenuItem Header="Save as" Command="{Binding SaveToXMLCommand}">
+                    <!--
+                    <MenuItem.Icon>
+                        <Image Source="" />
+                    </MenuItem.Icon>
+                    -->
+                </MenuItem>
+                <MenuItem Header="_Save" Command="{Binding SaveToXMLCommand}"/>
+                <MenuItem Header="Export Image" Command="{Binding SaveDrawingCommand}"/>
+                <Separator/>
+                <MenuItem Header="Exit"/>
+            </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Header="_Undo" Command="{Binding UndoCommand}"/>
+                <MenuItem Header="_Redo" Command="{Binding RedoCommand}"/>
+                <Separator/>
+                <MenuItem Header="Copy"/>
+                <MenuItem Header="Cut"/>
+                <MenuItem Header="Paste"/>
+            </MenuItem>
+        </Menu>
+        
+        <StackPanel Orientation="Horizontal" >
+            <View:SidePanelUserControl/>
 
-        <Grid>
-            <ItemsControl ItemsSource="{Binding Bindings}" />
-            <ItemsControl ItemsSource="{Binding Atoms}" />
-        </Grid>
-    </StackPanel>
-    
+            <Grid>
+                <ItemsControl ItemsSource="{Binding Bindings}" />
+                <ItemsControl ItemsSource="{Binding Atoms}" />
+            </Grid>
+        </StackPanel>
+    </DockPanel>
 </Window>
