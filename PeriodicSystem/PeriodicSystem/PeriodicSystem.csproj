@@ -108,7 +108,6 @@
     <Compile Include="Commands\LoadDrawingCommand.cs" />
     <Compile Include="Commands\MoveAtomCommand.cs" />
     <Compile Include="Commands\MoveMoleculeCommand.cs" />
-    <Compile Include="Commands\NewDrawingCommand.cs" />
     <Compile Include="Commands\RemoveAtomCommand.cs" />
     <Compile Include="Commands\RemoveBindingCommand.cs" />
     <Compile Include="Commands\SaveDrawingCommand.cs" />

@@ -90,7 +90,15 @@ namespace PeriodicSystem.ViewModel
 
             MouseDownBindingCommand = new RelayCommand<MouseEventArgs>(mouseDownBinding);
 
-            //test
+            initStateVariables();
+        }
+
+        private void initStateVariables()
+        {
+            isAddingBindings = false;
+            bindingFrom = null;
+            bindingTo = null;
+            selectedModel = null;
         }
         
         private Atom TargetAtom(MouseEventArgs e)
@@ -334,7 +342,21 @@ namespace PeriodicSystem.ViewModel
 
         private void newDrawing()
         {
+            MessageBoxResult result = (Atoms.Count == 0) ? MessageBoxResult.No : MessageBox.Show("Would you like to save changes before proceeding?", "New Drawing", MessageBoxButton.YesNoCancel);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    //TODO add file saved confirmation
+                    saveToXML();
+                    break;
+                case MessageBoxResult.Cancel:
+                    return;
+            }
 
+            Atoms.Clear();
+            Bindings.Clear();
+            undoRedoController.clearStacks();
+            initStateVariables();
         }
     }
 }
