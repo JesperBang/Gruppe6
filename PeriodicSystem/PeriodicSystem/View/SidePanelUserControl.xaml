@@ -5,14 +5,25 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PeriodicSystem.View"
              mc:Ignorable="d" 
-             d:DesignHeight="720" d:DesignWidth="320">
+             d:DesignHeight="720" d:DesignWidth="400">
     <StackPanel Width="320" Orientation="Vertical">
         <StackPanel.Background>
             <SolidColorBrush Color="DarkOrange" />
         </StackPanel.Background>
+        <Grid Margin="10">
+            <Border BorderThickness="1" BorderBrush="Black">
+                <StackPanel Margin="10">
+                    <DockPanel VerticalAlignment="Center">
+                        <TextBox Name="protonTextBox" Text="{Binding ElementName=protonSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40"/>
+                        <Slider Maximum="118" TickFrequency="1" IsSnapToTickEnabled="True" Name="protonSlider"/>                        
+                    </DockPanel>
+                    <Button Content="Add Atom" Command="{Binding AddAtomCommand}" CommandParameter="{Binding ElementName=protonSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+            </Border>
 
-        
-        
+            
+        </Grid>
+
         <!--
         <GroupBox Header="Undo / Redo">
             <Grid>
