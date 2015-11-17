@@ -11,6 +11,9 @@
             <SolidColorBrush Color="DarkOrange" />
         </StackPanel.Background>
 
+        
+        
+        <!--
         <GroupBox Header="Undo / Redo">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -35,8 +38,9 @@
             <Button Content="Save XML" Command="{Binding SaveToXMLCommand}"/>
             <Button Grid.Column="1" Content="Load XML" Command="{Binding LoadFromXMLCommand}"/>
         </Grid>
-       <!-- <Button Content="Save to XML" Command="{Binding SaveToXMLCommand}" />
-        <Button Content="Load from XML" Command="{Binding LoadFromXMLCommand}" /> -->
+        <Button Content="Save to XML" Command="{Binding SaveToXMLCommand}" />
+        <Button Content="Load from XML" Command="{Binding LoadFromXMLCommand}" /> 
         <Button Content="Remove Model" Command="{Binding RemoveModelCommand}" />
+        -->
     </StackPanel>
 </UserControl>
