@@ -20,9 +20,9 @@
                     <Button Content="Add Atom" Command="{Binding AddAtomCommand}" CommandParameter="{Binding ElementName=protonSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
             </Border>
-
-            
         </Grid>
+
+        <Button Content="Add Binding" Command="{Binding AddBindingCommand}" />
 
         <!--
         <GroupBox Header="Undo / Redo">

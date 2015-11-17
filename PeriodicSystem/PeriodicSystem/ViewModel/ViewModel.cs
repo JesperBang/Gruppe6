@@ -206,6 +206,7 @@ namespace PeriodicSystem.ViewModel
             return (Binding)shapeVisualElement.DataContext;
         }
 
+
         private void mouseDownBinding(MouseEventArgs e)
         {
             Binding binding = TargetBinding(e);
