@@ -13,6 +13,39 @@ namespace Model
             Single, Double, Triple
         };
 
+        //styrer tykkelsen på bindingen, så der kan repræsenteres enkelt dobelt og tripel
+        private int enbinding = 10;
+        public int Enbinding { get { return enbinding; } set { enbinding = value; NotifyPropertyChanged(); } }
+        private int tobinding = 0;
+        public int Tobinding { get { return tobinding; } set { tobinding = value; NotifyPropertyChanged(); } }
+        private int trebinding = 0;
+        public int Trebinding { get { return trebinding; } set { trebinding = value; NotifyPropertyChanged(); } }
+
+
+        /// <summary>
+        /// if (TypeOfBinding==Triple)
+        /// {
+        /// Enbinding = 10;
+        /// Tobinding = 0;
+        /// Trebinding = 0;
+        /// TypeOfBinding = Single;
+        /// }
+        /// else if (TypeOfBinding==Single)
+        /// {
+        /// Enbinding = 0;
+        /// Tobinding = 10;
+        /// Trebinding = 30;
+        /// TypeOfBinding=Double;
+        /// }
+        /// else
+        /// {
+        /// Enbinding = 10;
+        /// Tobinding = 30;
+        /// Trebinding = 50;
+        /// TypeOfBinding=Triple;
+        /// }
+        /// </summary>
+
         private Atom bindingPoint1 = new Atom(1);
         public Atom BindingPoint1 { get { return bindingPoint1; } set { bindingPoint1 = value; NotifyPropertyChanged(); }}
 
