@@ -56,6 +56,7 @@ namespace PeriodicSystem.ViewModel
         public ICommand MouseUpAtomCommand { get; }
         
         public ICommand MouseDownBindingCommand {get;}
+        public ICommand ChangeBindingCommand { get; }
 
         private UndoRedoController undoRedoController;
         
@@ -89,6 +90,7 @@ namespace PeriodicSystem.ViewModel
             MouseUpAtomCommand = new RelayCommand<MouseButtonEventArgs>(MouseUpAtom);
 
             MouseDownBindingCommand = new RelayCommand<MouseEventArgs>(mouseDownBinding);
+            ChangeBindingCommand = new RelayCommand<int>(changeBinding);
 
             initStateVariables();
         }
@@ -99,6 +101,12 @@ namespace PeriodicSystem.ViewModel
             bindingFrom = null;
             bindingTo = null;
             selectedModel = null;
+        }
+
+        public void changeBinding(int id)
+        {
+            Bindings.Where(x => x.Id == id).First().changeBinding();
+            System.Console.Write(id);
         }
         
         private Atom TargetAtom(MouseEventArgs e)
@@ -205,8 +213,7 @@ namespace PeriodicSystem.ViewModel
             // From the shapes visual element, the Shape object which is the DataContext is retrieved.
             return (Binding)shapeVisualElement.DataContext;
         }
-
-
+        
         private void mouseDownBinding(MouseEventArgs e)
         {
             Binding binding = TargetBinding(e);
