@@ -7,8 +7,12 @@
              xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
              xmlns:local="clr-namespace:PeriodicSystem.View"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
-             >
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.InputBindings>
+        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding  DataContext.ChangeBindingCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" CommandParameter="{Binding Id}"/>
+    </UserControl.InputBindings>
+    
     <Grid>
         <Line Stroke="Blue" X1="{Binding BindingPoint1.CenterX}" Y1="{Binding BindingPoint1.CenterY}" X2="{Binding BindingPoint2.CenterX}" Y2="{Binding BindingPoint2.CenterY}" StrokeThickness="{Binding Trebinding}"/>
         <Line Stroke="White" X1="{Binding BindingPoint1.CenterX}" Y1="{Binding BindingPoint1.CenterY}" X2="{Binding BindingPoint2.CenterX}" Y2="{Binding BindingPoint2.CenterY}" StrokeThickness="{Binding Tobinding}"/>

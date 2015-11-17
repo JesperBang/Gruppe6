@@ -8,6 +8,9 @@ namespace Model
 {
     public class Binding : NotifyBase
     {
+        private static int counter = 0;
+        public int Id { get; set; } = ++counter;
+
         public enum TypeOfBinding
         {
             Single, Double, Triple
@@ -73,6 +76,24 @@ namespace Model
             BindingPoint1 = atom1;
             BindingPoint2 = atom2;
             BindingState = state;
+        }
+
+        public void changeBinding()
+        {
+            switch (BindingState)
+            {
+                case TypeOfBinding.Single:
+                    BindingState = TypeOfBinding.Double;
+                    break;
+
+                case TypeOfBinding.Double:
+                    BindingState = TypeOfBinding.Triple;
+                    break;
+
+                case TypeOfBinding.Triple:
+                    BindingState = TypeOfBinding.Single;
+                    break;
+            }
         }
     }
 }
