@@ -101,12 +101,13 @@ namespace PeriodicSystem.ViewModel
             bindingFrom = null;
             bindingTo = null;
             selectedModel = null;
+            Atom.resetIds();
+            Binding.resetIds();
         }
 
         public void changeBinding(int id)
         {
-            Bindings.Where(x => x.Id == id).First().changeBinding();
-            System.Console.Write(id);
+            undoRedoController.addAndExecute(new ChangeBindingCommand(Bindings.Where(x => x.Id == id).First()));
         }
         
         private Atom TargetAtom(MouseEventArgs e)

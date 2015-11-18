@@ -9,6 +9,9 @@ namespace Model
 {
     public class Atom : NotifyBase
     {
+        private static int counter = 0;
+        public int Id { get; set; } = ++counter;
+
         public double Width { get; set; }
         public double Height { get; set; }
 
@@ -35,8 +38,8 @@ namespace Model
             }
         }
 
-        private double centerX = 0;
-        private double centerY = 0;
+        private double centerX;
+        private double centerY;
 
         public double CenterX { get { return centerX; } private set { centerX = value; NotifyPropertyChanged(); } }
         public double CenterY { get { return centerY; } private set { centerY = value; NotifyPropertyChanged(); } }
@@ -49,8 +52,8 @@ namespace Model
 
         public Atom(int protons)
         {
-            X = 220;
-            Y = 220;
+            X = (Id*50) % 800;
+            Y = (Id*25) % 550;
             Protons = protons;
             Width = 100;
             Height = 100;
@@ -188,5 +191,10 @@ namespace Model
             "Uus",
             "Uuo"
         };
+
+        public static void resetIds()
+        {
+            counter = 0;
+        }
     }
 }

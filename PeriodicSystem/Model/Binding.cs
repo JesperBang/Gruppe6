@@ -23,32 +23,7 @@ namespace Model
         public int Tobinding { get { return tobinding; } set { tobinding = value; NotifyPropertyChanged(); } }
         private int trebinding = 0;
         public int Trebinding { get { return trebinding; } set { trebinding = value; NotifyPropertyChanged(); } }
-
-
-        /// <summary>
-        /// if (TypeOfBinding==Triple)
-        /// {
-        /// Enbinding = 10;
-        /// Tobinding = 0;
-        /// Trebinding = 0;
-        /// TypeOfBinding = Single;
-        /// }
-        /// else if (TypeOfBinding==Single)
-        /// {
-        /// Enbinding = 0;
-        /// Tobinding = 10;
-        /// Trebinding = 30;
-        /// TypeOfBinding=Double;
-        /// }
-        /// else
-        /// {
-        /// Enbinding = 10;
-        /// Tobinding = 30;
-        /// Trebinding = 50;
-        /// TypeOfBinding=Triple;
-        /// }
-        /// </summary>
-
+        
         private Atom bindingPoint1 = new Atom(1);
         public Atom BindingPoint1 { get { return bindingPoint1; } set { bindingPoint1 = value; NotifyPropertyChanged(); }}
 
@@ -78,22 +53,9 @@ namespace Model
             BindingState = state;
         }
 
-        public void changeBinding()
+        public static void resetIds()
         {
-            switch (BindingState)
-            {
-                case TypeOfBinding.Single:
-                    BindingState = TypeOfBinding.Double;
-                    break;
-
-                case TypeOfBinding.Double:
-                    BindingState = TypeOfBinding.Triple;
-                    break;
-
-                case TypeOfBinding.Triple:
-                    BindingState = TypeOfBinding.Single;
-                    break;
-            }
+            counter = 0;
         }
     }
 }
