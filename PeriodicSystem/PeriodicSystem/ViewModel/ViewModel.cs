@@ -31,8 +31,10 @@ namespace PeriodicSystem.ViewModel
         private Atom bindingFrom;
         private Atom bindingTo;
 
-        private Object selectedModel;
+        private List<Atom> selectedAtoms;
+        private List<Binding> selectedBindings;
 
+        public ICommand SelectAllCommand { get; }
         public ICommand RemoveModelCommand { get; }
         public ICommand LoadFromXMLCommand { get; }
         public ICommand SaveToXMLCommand { get; }
@@ -68,14 +70,13 @@ namespace PeriodicSystem.ViewModel
 
             undoRedoController = new UndoRedoController();
 
+            SelectAllCommand = new RelayCommand(selectAll);
             RemoveModelCommand = new RelayCommand(removeModel, canRemoveModel);
             LoadFromXMLCommand = new RelayCommand(loadFromXML);
             SaveToXMLCommand = new RelayCommand(saveToXML); 
             AddAtomCommand = new RelayCommand<int>(addAtom);
             AddAtomsCommand = new RelayCommand(addAtoms);
-            RemoveAtomCommand = new RelayCommand<Atom>(removeAtom);
             AddBindingCommand = new RelayCommand(addBinding);
-            RemoveBindingCommand = new RelayCommand(removeBinding);
             MoveAtomCommand = new RelayCommand(moveAtom);
             MoveMoleculeCommand = new RelayCommand(moveMolecule);
             UndoCommand = new RelayCommand(undo, undoRedoController.canUndo);
@@ -100,9 +101,32 @@ namespace PeriodicSystem.ViewModel
             isAddingBindings = false;
             bindingFrom = null;
             bindingTo = null;
-            selectedModel = null;
+
+            clearSelections();
+
             Atom.resetIds();
             Binding.resetIds();
+        }
+
+        private void clearSelections()
+        {
+            selectedAtoms = new List<Atom>();
+            selectedBindings = new List<Binding>();
+        }
+
+        public void selectAll()
+        {
+            clearSelections();
+
+            foreach (Atom a in Atoms)
+            {
+                selectedAtoms.Add(a);
+            }
+
+            foreach (Binding b in Bindings)
+            {
+                selectedBindings.Add(b);
+            }
         }
 
         public void changeBinding(int id)
@@ -145,7 +169,12 @@ namespace PeriodicSystem.ViewModel
                 initialMousePosition = mousePosition;
                 initialAtomPosition = new Point(atom.X, atom.Y);
 
-                selectedModel = atom;
+                //clear selection unless ctrl is pressed
+                if (!(Keyboard.IsKeyDown(Key.RightCtrl) || Keyboard.IsKeyDown(Key.LeftCtrl)))
+                {
+                    clearSelections();
+                }
+                selectedAtoms.Add(atom);
 
                 e.MouseDevice.Target.CaptureMouse();
             }
@@ -156,8 +185,6 @@ namespace PeriodicSystem.ViewModel
         {
             if (Mouse.Captured != null && !isAddingBindings)
             {
-                Console.WriteLine("rykker");
-
                 var shape = TargetAtom(e);
                 var mousePosition = RelativeMousePosition(e);
                 
@@ -194,7 +221,7 @@ namespace PeriodicSystem.ViewModel
                 var atom = TargetAtom(e);
                 var mousePosition = RelativeMousePosition(e);
 
-                //only move if chage is significant
+                //only move if change is significant
                 if (atom.X != initialAtomPosition.X && atom.Y != initialAtomPosition.Y) {
 
                     atom.X = initialAtomPosition.X;
@@ -219,7 +246,12 @@ namespace PeriodicSystem.ViewModel
         {
             Binding binding = TargetBinding(e);
 
-            selectedModel = binding;
+            //clear selection unless ctrl is pressed
+            if (!(Keyboard.IsKeyDown(Key.RightCtrl) || Keyboard.IsKeyDown(Key.LeftCtrl)))
+            {
+                clearSelections();
+            }
+            selectedBindings.Add(binding);
         }
 
         private void addAtom(int protons)
@@ -229,37 +261,18 @@ namespace PeriodicSystem.ViewModel
 
         private void addAtoms()
         {
-            Console.WriteLine("test");
+            
         }
 
         public bool canRemoveModel()
         {
-            return selectedModel != null;
+            return (selectedAtoms.Count + selectedBindings.Count > 0);
         }
 
         private void removeModel()
         {
-            if (selectedModel == null)
-            {
-                return;
-            }
-
-            if (selectedModel.GetType() == typeof(Atom))
-            {
-                undoRedoController.addAndExecute(new RemoveAtomCommand((Atom) selectedModel, Atoms, Bindings));
-            }
-            else if (selectedModel.GetType() == typeof(Binding))
-            {
-                undoRedoController.addAndExecute(new RemoveBindingCommand((Binding) selectedModel, Bindings));
-            }
-
-            selectedModel = null;
-        }
-
-        private void removeAtom(Atom atom)
-        {
-            
-            
+            undoRedoController.addAndExecute(new RemoveSelectionCommand(selectedAtoms, selectedBindings, Atoms, Bindings));
+            clearSelections();
         }
 
         private void saveToXML()
@@ -308,15 +321,6 @@ namespace PeriodicSystem.ViewModel
         private void addBinding()
         {
             isAddingBindings = true;
-            
-        }
-
-        private void removeBinding()
-        {
-            if (selectedModel.GetType() == typeof(Binding)) {
-                undoRedoController.addAndExecute(new RemoveBindingCommand((Binding)selectedModel, Bindings));
-                selectedModel = null;
-            }
         }
 
         private void moveAtom()

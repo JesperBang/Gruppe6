@@ -78,6 +78,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\ChangeBindingCommand.cs" />
+    <Compile Include="Commands\RemoveSelectionCommand.cs" />
     <Compile Include="Serialize\SerializeXML.cs" />
     <Compile Include="View\AtomUserControl.xaml.cs">
       <DependentUpon>AtomUserControl.xaml</DependentUpon>

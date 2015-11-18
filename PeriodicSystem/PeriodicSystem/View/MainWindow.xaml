@@ -19,6 +19,7 @@
         <KeyBinding Command="{Binding LoadFromXMLCommand}" Gesture="CTRL+O"/>
         <KeyBinding Command="{Binding UndoCommand}" Gesture="CTRL+Z"/>
         <KeyBinding Command="{Binding RemoveModelCommand}" Gesture="DEL"/>
+        <KeyBinding Command="{Binding SelectAllCommand}" Gesture="CTRL+A"/>
     </Window.InputBindings>
 
     <DockPanel>

@@ -61,11 +61,11 @@ namespace Model
 
         public Atom(int protons, int x, int y)
         {
+            Width = 100;
+            Height = 100;
             X = x;
             Y = y;
             Protons = protons;
-            Width = 100;
-            Height = 100;
         }
 
 
