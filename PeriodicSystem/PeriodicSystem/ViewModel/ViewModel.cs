@@ -34,6 +34,7 @@ namespace PeriodicSystem.ViewModel
         private List<Atom> selectedAtoms;
         private List<Binding> selectedBindings;
 
+        public ICommand ClearBindingStateCommand { get; }
         public ICommand SelectAllCommand { get; }
         public ICommand RemoveModelCommand { get; }
         public ICommand LoadFromXMLCommand { get; }
@@ -70,6 +71,7 @@ namespace PeriodicSystem.ViewModel
 
             undoRedoController = new UndoRedoController();
 
+            ClearBindingStateCommand = new RelayCommand(clearBindingState, () => isAddingBindings);
             SelectAllCommand = new RelayCommand(selectAll);
             RemoveModelCommand = new RelayCommand(removeModel, canRemoveModel);
             LoadFromXMLCommand = new RelayCommand(loadFromXML);
@@ -77,7 +79,6 @@ namespace PeriodicSystem.ViewModel
             AddAtomCommand = new RelayCommand<int>(addAtom);
             AddAtomsCommand = new RelayCommand(addAtoms);
             AddBindingCommand = new RelayCommand(addBinding);
-            MoveAtomCommand = new RelayCommand(moveAtom);
             MoveMoleculeCommand = new RelayCommand(moveMolecule);
             UndoCommand = new RelayCommand(undo, undoRedoController.canUndo);
             RedoCommand = new RelayCommand(redo, undoRedoController.canRedo);
@@ -98,14 +99,18 @@ namespace PeriodicSystem.ViewModel
 
         private void initStateVariables()
         {
-            isAddingBindings = false;
-            bindingFrom = null;
-            bindingTo = null;
-
+            clearBindingState();
             clearSelections();
 
             Atom.resetIds();
             Binding.resetIds();
+        }
+
+        private void clearBindingState()
+        {
+            isAddingBindings = false;
+            bindingFrom = null;
+            bindingTo = null;
         }
 
         private void clearSelections()
@@ -320,12 +325,8 @@ namespace PeriodicSystem.ViewModel
 
         private void addBinding()
         {
+            clearSelections();
             isAddingBindings = true;
-        }
-
-        private void moveAtom()
-        {
-
         }
 
         private void moveMolecule()

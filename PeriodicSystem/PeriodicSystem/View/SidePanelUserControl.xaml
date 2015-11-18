@@ -15,7 +15,7 @@
                 <StackPanel Margin="10">
                     <DockPanel VerticalAlignment="Center">
                         <TextBox Name="protonTextBox" Text="{Binding ElementName=protonSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40"/>
-                        <Slider Maximum="118" TickFrequency="1" IsSnapToTickEnabled="True" Name="protonSlider"/>                        
+                        <Slider Maximum="118" Minimum="1" TickFrequency="1" IsSnapToTickEnabled="True" Name="protonSlider"/>                        
                     </DockPanel>
                     <Button Content="Add Atom" Command="{Binding AddAtomCommand}" CommandParameter="{Binding ElementName=protonSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>

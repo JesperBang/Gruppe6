@@ -20,6 +20,7 @@
         <KeyBinding Command="{Binding UndoCommand}" Gesture="CTRL+Z"/>
         <KeyBinding Command="{Binding RemoveModelCommand}" Gesture="DEL"/>
         <KeyBinding Command="{Binding SelectAllCommand}" Gesture="CTRL+A"/>
+        <KeyBinding Command="{Binding ClearBindingStateCommand}" Gesture="Esc"/>
     </Window.InputBindings>
 
     <DockPanel>
@@ -28,11 +29,6 @@
                 <MenuItem Header="_New" Command="{Binding NewDrawingCommand}"/>
                 <MenuItem Header="_Open" Command="{Binding LoadFromXMLCommand}"/>
                 <MenuItem Header="Save as" Command="{Binding SaveToXMLCommand}">
-                    <!--
-                    <MenuItem.Icon>
-                        <Image Source="" />
-                    </MenuItem.Icon>
-                    -->
                 </MenuItem>
                 <MenuItem Header="_Save" Command="{Binding SaveToXMLCommand}"/>
                 <MenuItem Header="Export Image" Command="{Binding SaveDrawingCommand}"/>
@@ -46,6 +42,9 @@
                 <MenuItem Header="Copy"/>
                 <MenuItem Header="Cut"/>
                 <MenuItem Header="Paste"/>
+                <Separator/>
+                <MenuItem Header="Delete" Command="{Binding RemoveModelCommand}"/>
+                <MenuItem Header="Select All" Command="{Binding SelectAllCommand}"/>
             </MenuItem>
         </Menu>
         
