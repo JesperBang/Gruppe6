@@ -52,11 +52,11 @@ namespace Model
 
         public Atom(int protons)
         {
+            Width = 100;
+            Height = 100;
             X = (Id*50) % 800;
             Y = (Id*25) % 550;
             Protons = protons;
-            Width = 100;
-            Height = 100;
         }
 
         public Atom(int protons, int x, int y)
