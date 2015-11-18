@@ -31,10 +31,13 @@ namespace PeriodicSystem.ViewModel
         private Atom bindingFrom;
         private Atom bindingTo;
 
+        private bool clickHandled = false;
+
         private List<Atom> selectedAtoms;
         private List<Binding> selectedBindings;
 
         public ICommand ClearBindingStateCommand { get; }
+        public ICommand ClearSelectionCommand { get; }
         public ICommand SelectAllCommand { get; }
         public ICommand RemoveModelCommand { get; }
         public ICommand LoadFromXMLCommand { get; }
@@ -72,6 +75,7 @@ namespace PeriodicSystem.ViewModel
             undoRedoController = new UndoRedoController();
 
             ClearBindingStateCommand = new RelayCommand(clearBindingState, () => isAddingBindings);
+            ClearSelectionCommand = new RelayCommand(clearSelections);
             SelectAllCommand = new RelayCommand(selectAll);
             RemoveModelCommand = new RelayCommand(removeModel, canRemoveModel);
             LoadFromXMLCommand = new RelayCommand(loadFromXML);
@@ -99,6 +103,8 @@ namespace PeriodicSystem.ViewModel
 
         private void initStateVariables()
         {
+            clickHandled = false;
+
             clearBindingState();
             clearSelections();
 
@@ -115,6 +121,27 @@ namespace PeriodicSystem.ViewModel
 
         private void clearSelections()
         {
+            //workaround for multiple leftclick bindings triggering
+            if (clickHandled)
+            {
+                clickHandled = false;
+                return;
+            }
+
+            if (selectedAtoms != null) {
+                foreach (Atom a in selectedAtoms)
+                {
+                    a.IsSelected = false;
+                }
+            }
+
+            if (selectedBindings != null) {
+                foreach (Binding b in selectedBindings)
+                {
+                    b.IsSelected = false;
+                }
+            }
+
             selectedAtoms = new List<Atom>();
             selectedBindings = new List<Binding>();
         }
@@ -126,11 +153,13 @@ namespace PeriodicSystem.ViewModel
             foreach (Atom a in Atoms)
             {
                 selectedAtoms.Add(a);
+                a.IsSelected = true;
             }
 
             foreach (Binding b in Bindings)
             {
                 selectedBindings.Add(b);
+                b.IsSelected = true;
             }
         }
 
@@ -179,7 +208,9 @@ namespace PeriodicSystem.ViewModel
                 {
                     clearSelections();
                 }
+                clickHandled = true;
                 selectedAtoms.Add(atom);
+                atom.IsSelected = true;
 
                 e.MouseDevice.Target.CaptureMouse();
             }
@@ -256,7 +287,9 @@ namespace PeriodicSystem.ViewModel
             {
                 clearSelections();
             }
+            clickHandled = true;
             selectedBindings.Add(binding);
+            binding.IsSelected = true;
         }
 
         private void addAtom(int protons)

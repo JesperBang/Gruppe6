@@ -51,10 +51,22 @@
         <StackPanel Orientation="Horizontal" >
             <View:SidePanelUserControl/>
 
-            <Grid>
-                <ItemsControl ItemsSource="{Binding Bindings}" />
-                <ItemsControl ItemsSource="{Binding Atoms}" />
-            </Grid>
+            <Canvas
+                 Height="720" Width="960"
+                >
+                <!--"Empty" content ensures that the mouseclick is always registered... -->
+                <Canvas.Background>
+                    <SolidColorBrush Color="White"/>
+                </Canvas.Background>
+                
+                <Canvas.InputBindings>
+                    <MouseBinding MouseAction="LeftClick" Command="{Binding ClearSelectionCommand}"/>
+                </Canvas.InputBindings>
+                <Grid>
+                    <ItemsControl ItemsSource="{Binding Bindings}" />
+                    <ItemsControl ItemsSource="{Binding Atoms}" />
+                </Grid>
+            </Canvas>
         </StackPanel>
     </DockPanel>
 </Window>

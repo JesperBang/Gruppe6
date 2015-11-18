@@ -16,6 +16,9 @@ namespace Model
             Single, Double, Triple
         };
 
+        private bool isSelected = false;
+        public bool IsSelected { get { return isSelected; } set { isSelected = value; NotifyPropertyChanged(); } }
+
         //styrer tykkelsen på bindingen, så der kan repræsenteres enkelt dobelt og tripel
         private int enbinding = 10;
         public int Enbinding { get { return enbinding; } set { enbinding = value; NotifyPropertyChanged(); } }
@@ -29,14 +32,7 @@ namespace Model
 
         private Atom bindingPoint2 = new Atom(1);
         public Atom BindingPoint2 { get { return bindingPoint2; } set { bindingPoint2 = value; NotifyPropertyChanged(); } }
-
-        //does not notify UI of changes in atoms...
-        //public double X1 { get { return BindingPoint1.CenterX; } }
-        //public double Y1 { get { return BindingPoint1.CenterY; } }
-
-        //public double X2 { get { return BindingPoint2.CenterX; } }
-        //public double Y2 { get { return BindingPoint2.CenterY; } }
-
+        
         public TypeOfBinding BindingState { get; set; }
 
         public Binding(Atom atom1, Atom atom2)

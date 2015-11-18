@@ -46,6 +46,9 @@ namespace Model
 
         public int Protons { get; set; }
 
+        private bool isSelected = false;
+        public bool IsSelected { get { return isSelected; } set { isSelected = value; NotifyPropertyChanged(); } }
+
         public Atom()
         {
         }
@@ -68,6 +71,10 @@ namespace Model
             Protons = protons;
         }
 
+        public static void resetIds()
+        {
+            counter = 0;
+        }
 
         static private String[] abbrevations =
         {
@@ -191,10 +198,5 @@ namespace Model
             "Uus",
             "Uuo"
         };
-
-        public static void resetIds()
-        {
-            counter = 0;
-        }
     }
 }
