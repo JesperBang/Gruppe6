@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Atom.cs" />
     <Compile Include="Binding.cs" />
+    <Compile Include="Diagram.cs" />
     <Compile Include="NotifyBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
