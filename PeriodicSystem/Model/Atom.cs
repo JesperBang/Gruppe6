@@ -50,7 +50,7 @@ namespace Model
         private bool isSelected = false;
         public bool IsSelected { get { return isSelected; } set { isSelected = value; NotifyPropertyChanged(); NotifyPropertyChanged(() => SelectedColor); } }
 
-        public Brush SelectedColor => isSelected ? Brushes.Navy : Brushes.Red;
+        public Brush SelectedColor => isSelected ? Brushes.SeaGreen : Brushes.Red;
 
         public Atom()
         {

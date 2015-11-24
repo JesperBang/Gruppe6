@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Model
 {
@@ -17,7 +18,9 @@ namespace Model
         };
 
         private bool isSelected = false;
-        public bool IsSelected { get { return isSelected; } set { isSelected = value; NotifyPropertyChanged(); } }
+        public bool IsSelected { get { return isSelected; } set { isSelected = value; NotifyPropertyChanged(); NotifyPropertyChanged(() => SelectedColor); } }
+
+        public Brush SelectedColor => isSelected ? Brushes.SeaGreen : Brushes.Blue;
 
         //styrer tykkelsen på bindingen, så der kan repræsenteres enkelt dobelt og tripel
         private int enbinding = 10;
