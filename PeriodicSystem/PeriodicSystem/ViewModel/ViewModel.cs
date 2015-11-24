@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.CommandWpf;
 using Model;
 using PeriodicSystem.Commands;
+using PeriodicSystem.Serialize;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -316,34 +317,49 @@ namespace PeriodicSystem.ViewModel
 
         private void saveToXML()
         {
-            try
-            {
-                var xEle = new XElement("Atoms",
-                            from Atom in Atoms
-                            select new XElement("Atom",
-                                         new XElement("X", Atom.X),
-                                           new XElement("Y", Atom.Y),
-                                           new XElement("Protons", Atom.Protons)
-                                       ));
+            SerializeXML serializer = SerializeXML.Instance;
+            Diagram diagram = new Diagram();
+            diagram.Atoms = Atoms.ToList();
+            diagram.Bindings = Bindings.ToList();
 
-                System.Windows.Forms.SaveFileDialog saveXMLDialog = new System.Windows.Forms.SaveFileDialog();
-                saveXMLDialog.Filter = "XML-File | *.xml";
-                saveXMLDialog.InitialDirectory = Convert.ToString(Environment.SpecialFolder.MyDocuments);
-                if (saveXMLDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    xEle.Save(saveXMLDialog.FileName);
-                }
-
-            }
-            catch (Exception ex)
+            System.Windows.Forms.SaveFileDialog saveXMLDialog = new System.Windows.Forms.SaveFileDialog();
+            saveXMLDialog.Filter = "XML-File | *.xml";
+            saveXMLDialog.InitialDirectory = Convert.ToString(Environment.SpecialFolder.MyDocuments);
+            if (saveXMLDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                Console.WriteLine(ex.Message);
+                serializer.save(diagram, saveXMLDialog.FileName);
             }
-            Console.WriteLine("Save To XML");
         }
 
         private void loadFromXML()
         {
+            SerializeXML serializer = SerializeXML.Instance;
+            System.Windows.Forms.OpenFileDialog openXMLDialog = new System.Windows.Forms.OpenFileDialog();
+            openXMLDialog.Filter = "XML-File | *.xml";
+            openXMLDialog.InitialDirectory = Convert.ToString(Environment.SpecialFolder.MyDocuments);
+            if (openXMLDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Task<Diagram> result = serializer.load(openXMLDialog.FileName);
+
+                newDrawing();
+                List<Atom> tempAtoms = result.Result.Atoms;
+                List<Binding> tempBindings = result.Result.Bindings;
+
+                foreach(Atom a in tempAtoms)
+                {
+                    Atoms.Add(new Atom(a.Id, a.Protons, a.X, a.Y));
+                }
+
+                foreach (Binding b in tempBindings)
+                {
+                    Atom bp1 = Atoms.Where(a => a.Id == b.BPID1).First();
+                    Atom bp2 = Atoms.Where(a => a.Id == b.BPID2).First();
+                    Bindings.Add(new Binding(bp1, bp2, b.BindingState));
+                }
+            }
+
+            
+            /*
             Console.WriteLine("Loading Atoms from XML");
 
             XDocument xmlDoc = XDocument.Load("C:\\Test\\Atoms.xml");
@@ -355,6 +371,7 @@ namespace PeriodicSystem.ViewModel
                                            Y = Double.Parse(x.Element("Y").Value)
                                        })
                                        .ToList());
+                                       */
         }
 
         private void addBinding()

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using System.Windows.Media;
 
 namespace Model
@@ -11,11 +12,15 @@ namespace Model
     public class Atom : NotifyBase
     {
         private static int counter = 0;
+        
         public int Id { get; set; } = ++counter;
 
+        [XmlIgnore]
         public double Width { get; set; }
+        [XmlIgnore]
         public double Height { get; set; }
 
+        [XmlIgnore]
         public String Abbrevation{ get { return (Protons > 0 && Protons < abbrevations.Length ) ? abbrevations[Protons] : "XX"; } }
 
         private double x = 0;
@@ -42,12 +47,15 @@ namespace Model
         private double centerX;
         private double centerY;
 
+        [XmlIgnore]
         public double CenterX { get { return centerX; } private set { centerX = value; NotifyPropertyChanged(); } }
+        [XmlIgnore]
         public double CenterY { get { return centerY; } private set { centerY = value; NotifyPropertyChanged(); } }
 
         public int Protons { get; set; }
 
         private bool isSelected = false;
+        [XmlIgnore]
         public bool IsSelected { get { return isSelected; } set { isSelected = value; NotifyPropertyChanged(); NotifyPropertyChanged(() => SelectedColor); } }
 
         public Brush SelectedColor => isSelected ? Brushes.SeaGreen : Brushes.Red;
@@ -65,8 +73,15 @@ namespace Model
             Protons = protons;
         }
 
-        public Atom(int protons, int x, int y)
+        public Atom(int id, int protons, double x, double y)
         {
+            this.Id = id;
+
+            if(counter < id)
+            {
+                counter = id;
+            }
+
             Width = 100;
             Height = 100;
             X = x;
