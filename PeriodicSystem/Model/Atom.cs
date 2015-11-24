@@ -73,12 +73,12 @@ namespace Model
             Protons = protons;
         }
 
-        public Atom(int id, int protons, int x, int y)
+        public Atom(int id, int protons, double x, double y)
         {
             this.Id = id;
 
             if(counter < id)
-        {
+            {
                 counter = id;
             }
 

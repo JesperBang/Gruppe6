@@ -334,8 +334,31 @@ namespace PeriodicSystem.ViewModel
         private void loadFromXML()
         {
             SerializeXML serializer = SerializeXML.Instance;
+            System.Windows.Forms.OpenFileDialog openXMLDialog = new System.Windows.Forms.OpenFileDialog();
+            openXMLDialog.Filter = "XML-File | *.xml";
+            openXMLDialog.InitialDirectory = Convert.ToString(Environment.SpecialFolder.MyDocuments);
+            if (openXMLDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Task<Diagram> result = serializer.load(openXMLDialog.FileName);
 
-            //serializer.load(path);
+                newDrawing();
+                List<Atom> tempAtoms = result.Result.Atoms;
+                List<Binding> tempBindings = result.Result.Bindings;
+
+                foreach(Atom a in tempAtoms)
+                {
+                    Atoms.Add(new Atom(a.Id, a.Protons, a.X, a.Y));
+                }
+
+                foreach (Binding b in tempBindings)
+                {
+                    Atom bp1 = Atoms.Where(a => a.Id == b.BPID1).First();
+                    Atom bp2 = Atoms.Where(a => a.Id == b.BPID2).First();
+                    Bindings.Add(new Binding(bp1, bp2, b.BindingState));
+                }
+            }
+
+            
             /*
             Console.WriteLine("Loading Atoms from XML");
 

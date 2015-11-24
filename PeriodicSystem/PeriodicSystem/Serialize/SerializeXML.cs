@@ -23,15 +23,25 @@ namespace PeriodicSystem.Serialize
         private void SerializeToFile(Diagram diagram, String path)
         {
             using (FileStream stream = File.Create(path)) {
-                var lol = typeof(Diagram);
-                XmlSerializer serializer = new XmlSerializer(lol);
+                XmlSerializer serializer = new XmlSerializer(typeof(Diagram));
                 serializer.Serialize(stream, diagram);
             }
         }
 
-        internal void load()
+        public Task<Diagram> load(String path)
         {
-            throw new NotImplementedException();
+            return Task.Run(() => DeserializeFromFile(path));
+        }
+
+        private Diagram DeserializeFromFile(String path)
+        {
+            using (FileStream stream = File.OpenRead(path))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(Diagram));
+                Diagram diagram = serializer.Deserialize(stream) as Diagram;
+
+                return diagram;
+            }
         }
     }
 }
