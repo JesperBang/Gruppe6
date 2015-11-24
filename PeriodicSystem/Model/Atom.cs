@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using System.Windows.Media;
 
 namespace Model
 {
@@ -55,7 +56,9 @@ namespace Model
 
         private bool isSelected = false;
         [XmlIgnore]
-        public bool IsSelected { get { return isSelected; } set { isSelected = value; NotifyPropertyChanged(); } }
+        public bool IsSelected { get { return isSelected; } set { isSelected = value; NotifyPropertyChanged(); NotifyPropertyChanged(() => SelectedColor); } }
+
+        public Brush SelectedColor => isSelected ? Brushes.Navy : Brushes.Red;
 
         public Atom()
         {
@@ -75,7 +78,7 @@ namespace Model
             this.Id = id;
 
             if(counter < id)
-            {
+        {
                 counter = id;
             }
 

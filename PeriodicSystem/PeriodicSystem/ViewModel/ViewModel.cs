@@ -213,6 +213,7 @@ namespace PeriodicSystem.ViewModel
                 selectedAtoms.Add(atom);
                 atom.IsSelected = true;
 
+
                 e.MouseDevice.Target.CaptureMouse();
             }
 
@@ -334,7 +335,7 @@ namespace PeriodicSystem.ViewModel
         {
             SerializeXML serializer = SerializeXML.Instance;
 
-            serializer.load(path);
+            //serializer.load(path);
             /*
             Console.WriteLine("Loading Atoms from XML");
 
