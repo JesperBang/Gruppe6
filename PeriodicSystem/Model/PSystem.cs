@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,18 +8,18 @@ using System.Windows.Controls;
 
 namespace Model
 {
-    class PSystem : Panel
+    class PSystem : UserControl
     {
+        public ObservableCollection<PElement> elements { get; set; }
         Grid grid = new Grid();
-        public PSystem(PElement[] elements)
+        public PSystem(PElement[] initElements)
         {
-            if(elements != null)
+            if(initElements != null)
             {
-                grid.Children.Add(elements[0]);
-                Grid.SetRow(elements[0], 1);
-                grid.Children.Add(elements[1]);
-                Grid.SetRow(elements[1], 2);
-                this.AddVisualChild(grid);
+            }
+            foreach(PElement e in initElements)
+            {
+                elements.Add(e);
             }
         }
 

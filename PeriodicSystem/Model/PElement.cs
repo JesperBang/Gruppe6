@@ -8,13 +8,14 @@ using System.Windows.Controls;
 
 namespace Model
 {
-    class PElement : Panel{ //skal måske bruge System.windows.forms.panel i stedet.
+    class PElement : UserControl{
         Label[] labels;
         String name { set { name = value; } }
         String symbol { set { symbol = value; } }
         int number { set { number = value; } }
         double weight { set { weight = value; } }
         int[] shells { set { shells = value; } }
+
 
         public PElement(String name, String symbol, int number, double weight, int[] shells){
 

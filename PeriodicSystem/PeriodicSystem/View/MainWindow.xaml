@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PeriodicSystem"
+        xmlns:local="clr-namespace:PeriodicSystem.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280">
+
+    <Window.DataContext>
+        <ViewModel: ViewModel/>
+    </Window.DataContext>
 
     <Grid>
         <DockPanel>

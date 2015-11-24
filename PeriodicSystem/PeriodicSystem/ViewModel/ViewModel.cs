@@ -20,12 +20,13 @@ using System.Windows.Media;
 using PeriodicSystem.Commands;
 using System.Windows.Shapes;
 using System.Windows.Data;
+using GalaSoft.MvvmLight;
 
-namespace PeriodicSystem.ModelView
+namespace PeriodicSystem.ViewModel
 {
 
-        class ViewModel
-        {
+        class ViewModel : ViewModelBase
+    {
         // A reference to the Undo/Redo controller.
         private UndoRedoController undoRedoController = UndoRedoController.Instance;
 
