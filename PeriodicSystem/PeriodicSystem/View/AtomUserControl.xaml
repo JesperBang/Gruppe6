@@ -10,7 +10,7 @@
              Canvas.Left="{Binding X}" Canvas.Top="{Binding Y}" 
              d:DesignHeight="{Binding Height}" d:DesignWidth="{Binding Width}">
     <Grid>
-        <Ellipse Fill="Red" Width="{Binding Width}" Height="{Binding Height}"/>
+        <Ellipse Fill="{Binding SelectedColor}" Width="{Binding Width}" Height="{Binding Height}"/>
         <TextBlock IsHitTestVisible="False" FontSize="20" Text="{Binding Abbrevation}" TextAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
    </Grid>
 

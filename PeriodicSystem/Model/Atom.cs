@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Model
 {
@@ -47,7 +48,9 @@ namespace Model
         public int Protons { get; set; }
 
         private bool isSelected = false;
-        public bool IsSelected { get { return isSelected; } set { isSelected = value; NotifyPropertyChanged(); } }
+        public bool IsSelected { get { return isSelected; } set { isSelected = value; NotifyPropertyChanged(); NotifyPropertyChanged(() => SelectedColor); } }
+
+        public Brush SelectedColor => isSelected ? Brushes.Navy : Brushes.Red;
 
         public Atom()
         {

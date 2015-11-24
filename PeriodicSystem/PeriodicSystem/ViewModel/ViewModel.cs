@@ -212,6 +212,7 @@ namespace PeriodicSystem.ViewModel
                 selectedAtoms.Add(atom);
                 atom.IsSelected = true;
 
+
                 e.MouseDevice.Target.CaptureMouse();
             }
 
