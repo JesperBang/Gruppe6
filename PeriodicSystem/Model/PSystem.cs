@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace Model
 {
-    class PSystem : UserControl
+    public class PSystem : UserControl
     {
         public ObservableCollection<PElement> elements { get; set; }
         Grid grid = new Grid();

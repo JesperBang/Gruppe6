@@ -52,6 +52,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -66,15 +67,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Atom.cs" />
+    <Compile Include="ElementTest.cs" />
     <Compile Include="IAtom.cs" />
     <Compile Include="PElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PSystem.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shapes\Figures.csproj">
+      <Project>{137b68b7-062c-4c22-abbb-09e450d6d8db}</Project>
+      <Name>Figures</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

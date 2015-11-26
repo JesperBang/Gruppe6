@@ -21,6 +21,7 @@ using PeriodicSystem.Commands;
 using System.Windows.Shapes;
 using System.Windows.Data;
 using GalaSoft.MvvmLight;
+using Model;
 
 namespace PeriodicSystem.ViewModel
 {
@@ -42,7 +43,11 @@ namespace PeriodicSystem.ViewModel
         // This method uses an expression-bodied member (http://www.informit.com/articles/article.aspx?p=2414582) to simplify a method that only returns a value;
         public double ModeOpacity => isAddingLine ? 0.4 : 1.0;
 
-        public ObservableCollection<Atom> Atoms { get; set; }
+        public PSystem system { get; set; }
+        PSystem ps = PSystem.createFromFile("");
+
+
+        public ObservableCollection<Element> Atoms { get; set; }
             public ObservableCollection<Binding> Bindings { get; set; }
 
             public ICommand addAtomCommand { get; }
@@ -62,11 +67,11 @@ namespace PeriodicSystem.ViewModel
 
             public ViewModel()
             {
-                Atoms = new ObservableCollection<Atom>();
+                Atoms = new ObservableCollection<Element>();
                 Bindings = new ObservableCollection<Binding>();
 
 
-                Atoms.Add(new Atom());
+                Atoms.Add(new Element());
             }
 
             private void addAtom()
