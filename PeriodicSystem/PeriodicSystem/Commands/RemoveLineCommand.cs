@@ -8,8 +8,6 @@ using System.Windows.Shapes;
 
 namespace PeriodicSystem.Commands
 {
-    class RemoveLineCommand
-    {
         // Undo/Redo command for removing Lines.
         public class RemoveLinesCommand : IUndoRedoCommand
         {
@@ -71,5 +69,5 @@ namespace PeriodicSystem.Commands
 
             #endregion
         }
-    }
+    
 }

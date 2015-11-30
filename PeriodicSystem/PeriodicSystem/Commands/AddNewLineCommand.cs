@@ -8,8 +8,6 @@ using System.Windows.Shapes;
 
 namespace PeriodicSystem.Commands
 {
-    class AddNewLineCommand
-    {
         // Undo/Redo command for adding a Line.
         public class AddLineCommand : IUndoRedoCommand
         {
@@ -55,5 +53,5 @@ namespace PeriodicSystem.Commands
 
             #endregion
         }
-    }
+    
 }

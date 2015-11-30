@@ -47,7 +47,7 @@ namespace PeriodicSystem.ViewModel
         PSystem ps = PSystem.createFromFile("");
 
 
-        public ObservableCollection<Element> Atoms { get; set; }
+        public ObservableCollection<Atom> Atoms { get; set; }
             public ObservableCollection<Binding> Bindings { get; set; }
 
             public ICommand addAtomCommand { get; }
@@ -67,11 +67,11 @@ namespace PeriodicSystem.ViewModel
 
             public ViewModel()
             {
-                Atoms = new ObservableCollection<Element>();
+                Atoms = new ObservableCollection<Atom>();
                 Bindings = new ObservableCollection<Binding>();
 
 
-                Atoms.Add(new Element());
+                Atoms.Add(new Atom());
             }
 
             private void addAtom()

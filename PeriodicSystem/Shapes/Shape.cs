@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Figures
 {
@@ -12,10 +13,10 @@ namespace Figures
         // The static integer counter field is used to set the integer Number property to a unique number for each Shape object.
         private static int counter = 0;
 
-        // The Number integer property holds a unique integer for each Shape object to identify them in the View (GUI) layer.
-        // The "{ get; }" syntax describes that a private field 
-        //  and default getter method should be generated.
-        public int Number { get; }
+		// The Number integer property holds a unique integer for each Shape object to identify them in the View (GUI) layer.
+		// The "{ get; }" syntax describes that a private field 
+		//  and default getter method should be generated.
+		public int Number { get; } = 0;
 
         private double x = 200;
         

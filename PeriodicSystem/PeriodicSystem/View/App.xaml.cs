@@ -13,5 +13,6 @@ namespace PeriodicSystem
     /// </summary>
     public partial class App : Application
     {
+
     }
 }

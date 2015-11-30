@@ -3,14 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:PeriodicSystem"
              xmlns:View="clr-namespace:PeriodicSystem.View"
-             xmlns:Model="clr-namespace:Model;assembly=Model" 
-             StartupUri="View/MainWindow.xaml" 
+             xmlns:Model="clr-namespace:Model;assembly=Model"
+             StartupUri="MainWindow.xaml" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              d1p1:Ignorable="d" 
              xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006">
     <Application.Resources>
 
-        <DataTemplate DataType="{x:Type Model:Atom}">
+        <DataTemplate DataType="{x:Type Model:PElement}">
             <Canvas>
                 <View:PElementUserControl/>
             </Canvas>

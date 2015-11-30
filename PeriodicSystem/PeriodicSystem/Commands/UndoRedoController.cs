@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace PeriodicSystem.Commands
 {
-    class UndoRedoController
+    public class UndoRedoController
     {
         public static Commands.UndoRedoController Instance { get; internal set; }
 
         // Keeps track of the Undo/Redo commands.
         // This is a Singleton, which ensures there will only ever be one instance of the class.
         // There should never be more than one, otherwise problems could arise.
-        public class UndoRedoController
-        {
+
             // Regions can be used to make code foldable (minus/plus sign to the left).
             #region Fields
 
@@ -39,7 +38,6 @@ namespace PeriodicSystem.Commands
             //  {
             //    return instance;
             //  }
-            public static UndoRedoController Instance { get; } = new UndoRedoController();
 
             #endregion
 
@@ -103,5 +101,5 @@ namespace PeriodicSystem.Commands
 
             #endregion
         }
-    }
+    
 }

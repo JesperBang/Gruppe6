@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Figures
 {
-    class Lines
-    {
+    
         // The Line class has a reference to 2 shapes, that it connects.
         public class Line : NotifyBase
         {
@@ -50,5 +49,5 @@ namespace Figures
             private Shape to;
             public Shape To { get { return to; } set { to = value; NotifyPropertyChanged(); } }
         }
-    }
+    
 }

@@ -68,7 +68,7 @@ namespace PeriodicSystem.Commands
                 //
                 //    linesToRemove.Add(line);
                 //  }
-                linesToRemove = _lines.Where(x => _shapesToRemove.Any(y => y.Number == x.From.Number || y.Number == x.To.Number)).ToList();
+                //linesToRemove = _lines.Where(x => _shapesToRemove.Any(y => y.Number == x.From.Number || y.Number == x.To.Number)).ToList(); //TODO
             }
 
             #endregion

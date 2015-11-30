@@ -7,57 +7,54 @@ using System.Windows.Shapes;
 
 namespace PeriodicSystem.Commands
 {
-    class MoveShapeCommand
-    {
-        // Undo/Redo command for moving a Shape.
-        public class MoveShapeCommand : IUndoRedoCommand
-        {
-            // Regions can be used to make code foldable (minus/plus sign to the left).
-            #region Fields
 
-            // The 'shape' field holds an existing shape, 
-            //  and the reference points to the same object, 
-            //  as one of the objects in the MainViewModels 'Shapes' ObservableCollection.
-            // This shape is moved by changing its coordinates (X and Y), 
-            //  and if undone the coordinates are changed back to the original coordinates.
-            private Shape shape;
+		// Undo/Redo command for moving a Shape.
+		public class MoveShapeCommand : IUndoRedoCommand
+		{
+        // Regions can be used to make code foldable (minus/plus sign to the left).
+        #region Fields
 
-            // The 'offsetX' field holds the offset (difference) between the original and final X coordinate.
-            private double offsetX;
-            // The 'offsetY' field holds the offset (difference) between the original and final Y coordinate.
-            private double offsetY;
+        // The 'shape' field holds an existing shape, 
+        //and the reference points to the same object, 
+			//  as one of the objects in the MainViewModels 'Shapes' ObservableCollection.
+			// This shape is moved by changing its coordinates (X and Y), 
+			//  and if undone the coordinates are changed back to the original coordinates.
+			private Shape shape;
 
-            #endregion
+			// The 'offsetX' field holds the offset (difference) between the original and final X coordinate.
+			private double offsetX;
+			// The 'offsetY' field holds the offset (difference) between the original and final Y coordinate.
+			private double offsetY;
 
-            #region Constructor
+			#endregion
 
-            // For changing the current state of the diagram.
-            public MoveShapeCommand(Shape _shape, double _offsetX, double _offsetY)
-            {
-                shape = _shape;
-                offsetX = _offsetX;
-                offsetY = _offsetY;
-            }
+			#region Constructor
 
-            #endregion
+			// For changing the current state of the diagram.
+			public MoveShapeCommand(Shape _shape, double _offsetX, double _offsetY)
+			{
+				shape = _shape;
+				offsetX = _offsetX;
+				offsetY = _offsetY;
+			}
 
-            #region Methods
+			#endregion
 
-            // For doing and redoing the command.
-            public void Execute()
-            {
-                shape.CanvasCenterX += offsetX;
-                shape.CanvasCenterY += offsetY;
-            }
+			#region Methods
 
-            // For undoing the command.
-            public void UnExecute()
-            {
-                shape.CanvasCenterX -= offsetX;
-                shape.CanvasCenterY -= offsetY;
-            }
+			// For doing and redoing the command.
+			public void Execute()
+			{
+				
+			}
 
-            #endregion
-        }
-    }
+			// For undoing the command.
+			public void UnExecute()
+			{
+				
+			}
+
+			#endregion
+		}
+	
 }
