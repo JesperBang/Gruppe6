@@ -20,7 +20,7 @@ using System.Xml.Serialization;
 
 namespace PeriodicSystem.ViewModel
 {
-    class ViewModel : ViewModelBase
+    public class ViewModel : ViewModelBase
     {
         public ObservableCollection<Atom> Atoms{ get; set; }
         public ObservableCollection<Binding> Bindings { get; set; }

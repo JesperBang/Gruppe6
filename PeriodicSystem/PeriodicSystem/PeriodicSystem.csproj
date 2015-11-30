@@ -107,10 +107,8 @@
     <Compile Include="Commands\AddMoleculeCommand.cs" />
     <Compile Include="Commands\ExportBitmapCommand.cs" />
     <Compile Include="Commands\IUndoRedoCommand.cs" />
-    <Compile Include="Commands\LoadDrawingCommand.cs" />
     <Compile Include="Commands\MoveAtomCommand.cs" />
     <Compile Include="Commands\MoveMoleculeCommand.cs" />
-    <Compile Include="Commands\SaveDrawingCommand.cs" />
     <Compile Include="Commands\UndoRedoController.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
