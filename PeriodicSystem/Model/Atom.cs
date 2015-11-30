@@ -21,9 +21,6 @@ namespace Model
         [XmlIgnore]
         public double Height { get; set; }
 
-        [XmlIgnore]
-        public String Abbrevation { get { return (Protons > 0 && Protons < abbrevations.Length) ? abbrevations[Protons] : "XX"; } }
-
         private double x = 0;
         private double y = 0;
 
