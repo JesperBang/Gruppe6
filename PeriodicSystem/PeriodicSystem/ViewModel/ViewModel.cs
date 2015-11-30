@@ -330,7 +330,7 @@ namespace PeriodicSystem.ViewModel
                 serializer.save(diagram, saveXMLDialog.FileName);
             }
         }
-
+        
         private void loadFromXML()
         {
             SerializeXML serializer = SerializeXML.Instance;
@@ -340,7 +340,6 @@ namespace PeriodicSystem.ViewModel
             if (openXMLDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 Task<Diagram> result = serializer.load(openXMLDialog.FileName);
-
                 newDrawing();
                 List<Atom> tempAtoms = result.Result.Atoms;
                 List<Binding> tempBindings = result.Result.Bindings;

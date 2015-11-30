@@ -6,16 +6,18 @@
              xmlns:local="clr-namespace:PeriodicSystem.View"
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="320">
+
     <StackPanel Width="320" Orientation="Vertical">
+
         <StackPanel.Background>
-            <SolidColorBrush Color="DarkOrange" />
+            <SolidColorBrush Color="DimGray" />
         </StackPanel.Background>
         <Grid Margin="10">
-            <Border BorderThickness="1" BorderBrush="Black">
+            <Border BorderThickness="3,5" BorderBrush="Gray">
                 <StackPanel Margin="10">
                     <DockPanel VerticalAlignment="Center">
                         <TextBox Name="protonTextBox" Text="{Binding ElementName=protonSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40"/>
-                        <Slider Maximum="118" Minimum="1" TickFrequency="1" IsSnapToTickEnabled="True" Name="protonSlider"/>                        
+                        <Slider Maximum="118" Minimum="1" TickFrequency="1" IsSnapToTickEnabled="True" Name="protonSlider"/>
                     </DockPanel>
                     <Button Content="Add Atom" Command="{Binding AddAtomCommand}" CommandParameter="{Binding ElementName=protonSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
@@ -23,6 +25,7 @@
         </Grid>
 
         <Button Content="Add Binding" Command="{Binding AddBindingCommand}" />
+
 
         <!--
         <GroupBox Header="Undo / Redo">

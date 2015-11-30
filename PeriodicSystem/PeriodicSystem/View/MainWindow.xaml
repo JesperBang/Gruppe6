@@ -7,7 +7,8 @@
         xmlns:ViewModel="clr-namespace:PeriodicSystem.ViewModel"
         xmlns:View="clr-namespace:PeriodicSystem.View"
         mc:Ignorable="d"
-        Title="pTable" Height="720" Width="1280">
+        Title="pTable 0.1.0"
+        Height="720" Width="1280">
 
     <Window.DataContext>
         <ViewModel:ViewModel />
@@ -24,7 +25,7 @@
     </Window.InputBindings>
 
     <DockPanel>
-        <Menu DockPanel.Dock="Top">
+         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
                 <MenuItem Header="_New" Command="{Binding NewDrawingCommand}"/>
                 <MenuItem Header="_Open" Command="{Binding LoadFromXMLCommand}"/>
@@ -48,15 +49,15 @@
             </MenuItem>
         </Menu>
         
-        <StackPanel Orientation="Horizontal" >
+        <StackPanel Orientation="Horizontal">
             <View:SidePanelUserControl/>
-
-            <Canvas
+            
+                <Canvas
                  Height="720" Width="960"
                 >
                 <!--"Empty" content ensures that the mouseclick is always registered... -->
                 <Canvas.Background>
-                    <SolidColorBrush Color="White"/>
+                    <SolidColorBrush Color="LightGray"/>
                 </Canvas.Background>
                 
                 <Canvas.InputBindings>
