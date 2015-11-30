@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:PeriodicSystem.View"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="400">
-    <Grid>
+	
+    <Grid Background="Lavender">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>

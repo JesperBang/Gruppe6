@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PeriodicSystem"
         xmlns:ViewModel="clr-namespace:PeriodicSystem.ViewModel"
+		xmlns:System="clr-namespace:PeriodicSystem.View"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280">
 
@@ -13,8 +14,8 @@
     </Window.DataContext>
 
     <Grid>
-        
-            <DockPanel>
+
+        <DockPanel Grid.Column="1">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
                     <MenuItem Header="_New" Command="ApplicationCommands.New"/>
@@ -27,11 +28,23 @@
                 </MenuItem>
             </Menu>
             <TextBox AcceptsReturn="True" />
+
+            <StackPanel HorizontalAlignment="Left" Height="600" Margin="10,10,0,0" VerticalAlignment="Top" Width="450">
+                <Grid>
+
+                    <System:PSystemUserControl Grid.Column="0" Width="400" Height="300" VerticalAlignment="Bottom"/>
+
+                </Grid>
+            </StackPanel>
+
+            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Width="750" Height="650">
+                <Canvas HorizontalAlignment="Left" Height="1000" VerticalAlignment="Top" Width="1000"/>
+			</ScrollViewer>
+
+				<!--<ScrollBar x:Name="scrollBar" HorizontalAlignment="Left" Margin="1232,10,0,0" VerticalAlignment="Top" Height="636" Width="32"/>
+				<ScrollBar x:Name="scrollBar1" HorizontalAlignment="Left" Margin="583,651,0,0" VerticalAlignment="Top" Width="644" Height="38"/> -->
         </DockPanel>
-        <Canvas HorizontalAlignment="Left" Height="636" Margin="583,10,0,0" VerticalAlignment="Top" Width="644"/>
-        <ScrollBar x:Name="scrollBar" HorizontalAlignment="Left" Margin="1232,10,0,0" VerticalAlignment="Top" Height="636" Width="32"/>
-        <ScrollBar x:Name="scrollBar1" HorizontalAlignment="Left" Margin="583,651,0,0" VerticalAlignment="Top" Width="644" Height="38"/>
-        <StackPanel HorizontalAlignment="Left" Height="670" Margin="10,10,0,0" VerticalAlignment="Top" Width="573"/>
+        
 
     </Grid>
 </Window>
