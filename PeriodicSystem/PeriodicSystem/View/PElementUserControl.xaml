@@ -5,8 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PeriodicSystem.View"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="100" d:DesignWidth="100">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -14,9 +19,24 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+			
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="1" x:Name="name" Content="{Binding name}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="46" Width="69"/>
-        <Label Grid.Row="2" x:Name="symbol" Content="{Binding symbol}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="46" Width="69"/>
+        <Label Grid.Row="0" Grid.ColumnSpan="3" x:Name="name" Content="{Binding name}" HorizontalAlignment="Center" VerticalAlignment="Top" Height="auto" Width="auto"/>
+        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" x:Name="number" Content="{Binding number}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="auto" Width="auto"/>
+        <Label Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2" x:Name="symbol" Content="{Binding symbol}"  FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Top" Height="auto" Width="auto"/>
+        <Label Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" x:Name="weight" Content="{Binding weight}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="auto" Width="auto"/>
+
+        <Label Grid.Row="1" x:Name="shell1" Content="{Binding shell[0]}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="auto" Width="auto"/>
+        <Label Grid.Row="2" x:Name="shell2" Content="{Binding shell[1]}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="auto" Width="auto"/>
+        <Label Grid.Row="3" x:Name="shell3" Content="{Binding shell[2]}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="auto" Width="auto"/>
+        <Label Grid.Row="4" x:Name="shell4" Content="{Binding shell[3]}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="auto" Width="auto"/>
+        <Label Grid.Row="5" x:Name="shell5" Content="{Binding shell[4]}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="auto" Width="auto"/>
+        <Label Grid.Row="6" x:Name="shell6" Content="{Binding shell[5]}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="auto" Width="auto"/>
+        <Label Grid.Row="7" x:Name="shell7" Content="{Binding shell[6]}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="auto" Width="auto"/>
+
     </Grid>
 </UserControl>

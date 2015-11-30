@@ -11,7 +11,15 @@ namespace Model
     public class PSystem : UserControl
     {
         public ObservableCollection<PElement> elements { get; set; }
-        Grid grid = new Grid();
+
+        public PSystem()
+        {
+            elements = new ObservableCollection<PElement>();
+            for(int i=1; i<104; i++)
+            {
+                elements.Add(new PElement("name", "s", i, 0.0, new int[7]));
+            }
+        }
         public PSystem(PElement[] initElements)
         {
             if(initElements != null)

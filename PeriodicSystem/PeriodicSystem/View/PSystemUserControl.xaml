@@ -5,8 +5,178 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PeriodicSystem.View"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="200" d:DesignWidth="400">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+			
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+			
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+		
+        <TextBlock x:Name="h" HorizontalAlignment="Center" Text="H" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="1" x:Name="li" HorizontalAlignment="Center" Text="Li" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="2" x:Name="na" HorizontalAlignment="Center" Text="Na" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="3" x:Name="k" HorizontalAlignment="Center" Text="K" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="4" x:Name="rb" HorizontalAlignment="Center" Text="Rb" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="5" x:Name="cs" HorizontalAlignment="Center" Text="Cs" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="6" x:Name="fr" HorizontalAlignment="Center" Text="Fr" VerticalAlignment="Center"/>
+
+
+        <TextBlock Grid.Column="1" Grid.Row="1" x:Name="be" HorizontalAlignment="Center" Text="Be" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="1" Grid.Row="2" x:Name="mg" HorizontalAlignment="Center" Text="Mg" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="1" Grid.Row="3" x:Name="ca" HorizontalAlignment="Center" Text="Ca" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="1" Grid.Row="4" x:Name="sr" HorizontalAlignment="Center" Text="Sr" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="1" Grid.Row="5" x:Name="ba" HorizontalAlignment="Center" Text="Ba" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="1" Grid.Row="6" x:Name="ra" HorizontalAlignment="Center" Text="Ra" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Column="2" Grid.Row="3" x:Name="sc" HorizontalAlignment="Center" Text="Sc" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="2" Grid.Row="4" x:Name="y" HorizontalAlignment="Center" Text="Y" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="2" Grid.Row="5" x:Name="la" HorizontalAlignment="Center" Text="La" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="2" Grid.Row="6" x:Name="ac" HorizontalAlignment="Center" Text="Ac" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="2" Grid.Row="7" x:Name="ce" HorizontalAlignment="Center" Text="Ce" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="2" Grid.Row="8" x:Name="th" HorizontalAlignment="Center" Text="Th" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Column="3" Grid.Row="3" x:Name="ti" HorizontalAlignment="Center" Text="Ti" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="3" Grid.Row="4" x:Name="zr" HorizontalAlignment="Center" Text="Zr" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="3" Grid.Row="5" x:Name="hf" HorizontalAlignment="Center" Text="Hf" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="3" Grid.Row="6" x:Name="rf" HorizontalAlignment="Center" Text="Rf" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="3" Grid.Row="7" x:Name="pr" HorizontalAlignment="Center" Text="Pr" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="3" Grid.Row="8" x:Name="pa" HorizontalAlignment="Center" Text="Pa" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Column="4" Grid.Row="3" x:Name="v" HorizontalAlignment="Center" Text="V" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="4" Grid.Row="4" x:Name="nb" HorizontalAlignment="Center" Text="Nb" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="4" Grid.Row="5" x:Name="ta" HorizontalAlignment="Center" Text="Ta" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="4" Grid.Row="6" x:Name="db" HorizontalAlignment="Center" Text="Db" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="4" Grid.Row="7" x:Name="nd" HorizontalAlignment="Center" Text="Nd" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="4" Grid.Row="8" x:Name="u" HorizontalAlignment="Center" Text="U" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Column="5" Grid.Row="3" x:Name="cr" HorizontalAlignment="Center" Text="Cr" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="5" Grid.Row="4" x:Name="mo" HorizontalAlignment="Center" Text="Mo" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="5" Grid.Row="5" x:Name="w" HorizontalAlignment="Center" Text="W" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="5" Grid.Row="6" x:Name="sg" HorizontalAlignment="Center" Text="Sg" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="5" Grid.Row="7" x:Name="pm" HorizontalAlignment="Center" Text="Pm" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="5" Grid.Row="8" x:Name="np" HorizontalAlignment="Center" Text="Np" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Column="6" Grid.Row="3" x:Name="mn" HorizontalAlignment="Center" Text="Mn" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="6" Grid.Row="4" x:Name="tc" HorizontalAlignment="Center" Text="Tc" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="6" Grid.Row="5" x:Name="re" HorizontalAlignment="Center" Text="Re" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="6" Grid.Row="6" x:Name="bh" HorizontalAlignment="Center" Text="Bh" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="6" Grid.Row="7" x:Name="sm" HorizontalAlignment="Center" Text="Sm" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="6" Grid.Row="8" x:Name="pu" HorizontalAlignment="Center" Text="Pu" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Column="7" Grid.Row="3" x:Name="fe" HorizontalAlignment="Center" Text="Fe" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="7" Grid.Row="4" x:Name="ru" HorizontalAlignment="Center" Text="Ru" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="7" Grid.Row="5" x:Name="os" HorizontalAlignment="Center" Text="Os" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="7" Grid.Row="6" x:Name="hs" HorizontalAlignment="Center" Text="Hs" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="7" Grid.Row="7" x:Name="eu" HorizontalAlignment="Center" Text="Eu" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="7" Grid.Row="8" x:Name="am" HorizontalAlignment="Center" Text="Am" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Column="8" Grid.Row="3" x:Name="co" HorizontalAlignment="Center" Text="Co" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="8" Grid.Row="4" x:Name="rh" HorizontalAlignment="Center" Text="Rh" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="8" Grid.Row="5" x:Name="ir" HorizontalAlignment="Center" Text="Ir" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="8" Grid.Row="6" x:Name="mt" HorizontalAlignment="Center" Text="Mt" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="8" Grid.Row="7" x:Name="gd" HorizontalAlignment="Center" Text="Gd" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="8" Grid.Row="8" x:Name="cm" HorizontalAlignment="Center" Text="Cm" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Column="9" Grid.Row="3" x:Name="ni" HorizontalAlignment="Center" Text="Ni" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="9" Grid.Row="4" x:Name="pd" HorizontalAlignment="Center" Text="Pd" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="9" Grid.Row="5" x:Name="pt" HorizontalAlignment="Center" Text="Pt" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="9" Grid.Row="6" x:Name="ds" HorizontalAlignment="Center" Text="Ds" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="9" Grid.Row="7" x:Name="tb" HorizontalAlignment="Center" Text="Tb" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="9" Grid.Row="8" x:Name="bk" HorizontalAlignment="Center" Text="Bk" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Column="10" Grid.Row="3" x:Name="cu" HorizontalAlignment="Center" Text="Cu" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="10" Grid.Row="4" x:Name="ag" HorizontalAlignment="Center" Text="Ag" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="10" Grid.Row="5" x:Name="au" HorizontalAlignment="Center" Text="Au" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="10" Grid.Row="6" x:Name="rg" HorizontalAlignment="Center" Text="Rg" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="10" Grid.Row="7" x:Name="dy" HorizontalAlignment="Center" Text="Dy" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="10" Grid.Row="8" x:Name="cf" HorizontalAlignment="Center" Text="Cm" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Column="11" Grid.Row="3" x:Name="zn" HorizontalAlignment="Center" Text="Zn" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="11" Grid.Row="4" x:Name="cd" HorizontalAlignment="Center" Text="Cd" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="11" Grid.Row="5" x:Name="hg" HorizontalAlignment="Center" Text="Hg" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="11" Grid.Row="6" x:Name="uub" HorizontalAlignment="Center" Text="Uub" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="11" Grid.Row="7" x:Name="ho" HorizontalAlignment="Center" Text="Ho" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="11" Grid.Row="8" x:Name="es" HorizontalAlignment="Center" Text="Es" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Column="12" Grid.Row="1" x:Name="b" HorizontalAlignment="Center" Text="B" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="12" Grid.Row="2" x:Name="al" HorizontalAlignment="Center" Text="Al" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="12" Grid.Row="3" x:Name="ga" HorizontalAlignment="Center" Text="Ga" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="12" Grid.Row="4" x:Name="in" HorizontalAlignment="Center" Text="In" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="12" Grid.Row="5" x:Name="tl" HorizontalAlignment="Center" Text="Tl" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="12" Grid.Row="7" x:Name="er" HorizontalAlignment="Center" Text="Er" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="12" Grid.Row="8" x:Name="fm" HorizontalAlignment="Center" Text="Fm" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Column="13" Grid.Row="1" x:Name="c" HorizontalAlignment="Center" Text="C" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="13" Grid.Row="2" x:Name="si" HorizontalAlignment="Center" Text="Si" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="13" Grid.Row="3" x:Name="ge" HorizontalAlignment="Center" Text="Ge" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="13" Grid.Row="4" x:Name="sn" HorizontalAlignment="Center" Text="Sn" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="13" Grid.Row="5" x:Name="pb" HorizontalAlignment="Center" Text="Pb" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="13" Grid.Row="7" x:Name="tm" HorizontalAlignment="Center" Text="Tm" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="13" Grid.Row="8" x:Name="md" HorizontalAlignment="Center" Text="Md" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Column="14" Grid.Row="1" x:Name="n" HorizontalAlignment="Center" Text="N" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="14" Grid.Row="2" x:Name="p" HorizontalAlignment="Center" Text="P" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="14" Grid.Row="3" x:Name="as" HorizontalAlignment="Center" Text="As" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="14" Grid.Row="4" x:Name="sb" HorizontalAlignment="Center" Text="Sb" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="14" Grid.Row="5" x:Name="bi" HorizontalAlignment="Center" Text="Bi" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="14" Grid.Row="7" x:Name="yb" HorizontalAlignment="Center" Text="Yb" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="14" Grid.Row="8" x:Name="no" HorizontalAlignment="Center" Text="No" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Column="15" Grid.Row="1" x:Name="o" HorizontalAlignment="Center" Text="O" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="15" Grid.Row="2" x:Name="s" HorizontalAlignment="Center" Text="S" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="15" Grid.Row="3" x:Name="se" HorizontalAlignment="Center" Text="Se" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="15" Grid.Row="4" x:Name="te" HorizontalAlignment="Center" Text="Te" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="15" Grid.Row="5" x:Name="po" HorizontalAlignment="Center" Text="Po" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="15" Grid.Row="7" x:Name="lu" HorizontalAlignment="Center" Text="Lu" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="15" Grid.Row="8" x:Name="lr" HorizontalAlignment="Center" Text="Lr" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Column="16" Grid.Row="1" x:Name="f" HorizontalAlignment="Center" Text="F" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="16" Grid.Row="2" x:Name="cl" HorizontalAlignment="Center" Text="Cl" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="16" Grid.Row="3" x:Name="br" HorizontalAlignment="Center" Text="Br" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="16" Grid.Row="4" x:Name="i" HorizontalAlignment="Center" Text="I" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="16" Grid.Row="5" x:Name="at" HorizontalAlignment="Center" Text="At" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Column="17" Grid.Row="0" x:Name="he" HorizontalAlignment="Center" Text="He" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="17" Grid.Row="1" x:Name="ne" HorizontalAlignment="Center" Text="Ne" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="17" Grid.Row="2" x:Name="ar" HorizontalAlignment="Center" Text="Ar" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="17" Grid.Row="3" x:Name="kr" HorizontalAlignment="Center" Text="Kr" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="17" Grid.Row="4" x:Name="xe" HorizontalAlignment="Center" Text="Xe" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="17" Grid.Row="5" x:Name="rn" HorizontalAlignment="Center" Text="Rn" VerticalAlignment="Center"/>
+
+
     </Grid>
+
+	
 </UserControl>

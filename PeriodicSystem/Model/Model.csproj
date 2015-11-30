@@ -69,7 +69,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Atom.cs" />
-    <Compile Include="ElementTest.cs" />
     <Compile Include="IAtom.cs" />
     <Compile Include="PElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

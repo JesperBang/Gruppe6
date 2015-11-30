@@ -13,7 +13,8 @@
     </Window.DataContext>
 
     <Grid>
-        <DockPanel>
+        
+            <DockPanel>
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
                     <MenuItem Header="_New" Command="ApplicationCommands.New"/>

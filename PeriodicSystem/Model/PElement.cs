@@ -25,7 +25,7 @@ namespace Model
             symbol = "sym";
             number = 0;
             weight = 0;
-            shells = new int[8];
+            shells = new int[7];
 
         }
 
