@@ -10,9 +10,9 @@
 
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="auto"/>
             <RowDefinition/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 

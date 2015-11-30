@@ -29,7 +29,7 @@ namespace Model
             try {
                 file = new System.IO.StreamReader(filePath);
             }
-            catch (System.IO.IOException)
+            catch (Exception e)
             {
                 return null;
             }
