@@ -20,7 +20,7 @@ using System.Xml.Serialization;
 
 namespace PeriodicSystem.ViewModel
 {
-    class ViewModel : ViewModelBase
+    public class ViewModel : ViewModelBase
     {
         public ObservableCollection<Atom> Atoms{ get; set; }
         public ObservableCollection<Binding> Bindings { get; set; }
@@ -123,11 +123,11 @@ namespace PeriodicSystem.ViewModel
         private void clearSelections()
         {
             //workaround for multiple leftclick bindings triggering
-            if (clickHandled)
-            {
-                clickHandled = false;
-                return;
-            }
+            //if (clickHandled)
+            //{
+            //    clickHandled = false;
+            //    return;
+            //}
 
             if (selectedAtoms != null) {
                 foreach (Atom a in selectedAtoms)
@@ -209,7 +209,7 @@ namespace PeriodicSystem.ViewModel
                 {
                     clearSelections();
                 }
-                clickHandled = true;
+                //clickHandled = true;
                 selectedAtoms.Add(atom);
                 atom.IsSelected = true;
 
@@ -289,7 +289,7 @@ namespace PeriodicSystem.ViewModel
             {
                 clearSelections();
             }
-            clickHandled = true;
+            //clickHandled = true;
             selectedBindings.Add(binding);
             binding.IsSelected = true;
         }
