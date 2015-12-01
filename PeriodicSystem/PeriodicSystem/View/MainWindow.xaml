@@ -26,7 +26,7 @@
     </Window.InputBindings>
 
     <DockPanel>
-         <Menu DockPanel.Dock="Top">
+        <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
                 <MenuItem Header="_New" Command="{Binding NewDrawingCommand}"/>
                 <MenuItem Header="_Open" Command="{Binding LoadFromXMLCommand}"/>
@@ -49,28 +49,32 @@
                 <MenuItem Header="Select All" Command="{Binding SelectAllCommand}"/>
             </MenuItem>
         </Menu>
-        
-        <StackPanel Orientation="Horizontal">
-            
-            <View:SidePanelUserControl/>
-            
+
+        <Canvas>
+            <StackPanel Orientation="Horizontal">
+
+                <View:SidePanelUserControl/>
+
                 <Canvas
                  Height="720" Width="960"
                 >
-                <!--"Empty" content ensures that the mouseclick is always registered... -->
-                <Canvas.Background>
-                    <SolidColorBrush Color="LightGray"/>
-                </Canvas.Background>
-                
-                <Canvas.InputBindings>
-                    <MouseBinding MouseAction="LeftClick" Command="{Binding ClearSelectionCommand}"/>
-                </Canvas.InputBindings> 
-                    
-                <Grid>
-                    <ItemsControl ItemsSource="{Binding Bindings}" />
-                    <ItemsControl ItemsSource="{Binding Atoms}" />
-                </Grid>
-            </Canvas>
-        </StackPanel>
+                    <!--"Empty" content ensures that the mouseclick is always registered... -->
+                    <Canvas.Background>
+                        <SolidColorBrush Color="LightGray"/>
+                    </Canvas.Background>
+
+                    <Canvas.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding ClearSelectionCommand}"/>
+                    </Canvas.InputBindings>
+
+                    <Grid>
+                        <ItemsControl ItemsSource="{Binding Bindings}" />
+                        <ItemsControl ItemsSource="{Binding Atoms}" />
+                    </Grid>
+                </Canvas>
+            </StackPanel>
+
+            <View:Table/>
+        </Canvas>
     </DockPanel>
 </Window>

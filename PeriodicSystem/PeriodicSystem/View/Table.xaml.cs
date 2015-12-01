@@ -17,7 +17,7 @@ namespace PeriodicSystem.View
     /// <summary>
     /// Interaction logic for Table.xaml
     /// </summary>
-    public partial class Table : Window
+    public partial class Table : UserControl
     {
         public Table()
         {
