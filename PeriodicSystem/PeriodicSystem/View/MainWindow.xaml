@@ -22,6 +22,7 @@
         <KeyBinding Command="{Binding RemoveModelCommand}" Gesture="DEL"/>
         <KeyBinding Command="{Binding SelectAllCommand}" Gesture="CTRL+A"/>
         <KeyBinding Command="{Binding ClearBindingStateCommand}" Gesture="Esc"/>
+        <KeyBinding Command="{Binding AddBindingCommand}" Gesture="CTRL+B"/>
     </Window.InputBindings>
 
     <DockPanel>
@@ -50,6 +51,7 @@
         </Menu>
         
         <StackPanel Orientation="Horizontal">
+            
             <View:SidePanelUserControl/>
             
                 <Canvas
@@ -60,10 +62,10 @@
                     <SolidColorBrush Color="LightGray"/>
                 </Canvas.Background>
                 
-                <!-- buggy click handling -->
                 <Canvas.InputBindings>
                     <MouseBinding MouseAction="LeftClick" Command="{Binding ClearSelectionCommand}"/>
                 </Canvas.InputBindings> 
+                    
                 <Grid>
                     <ItemsControl ItemsSource="{Binding Bindings}" />
                     <ItemsControl ItemsSource="{Binding Atoms}" />
