@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
@@ -10,26 +11,136 @@ namespace Model
 {
     public class PSystem : UserControl
     {
-        public ObservableCollection<PElement> elements { get; set; }
+        public ObservableCollection<PElement> elements { get; set; } = new ObservableCollection<PElement>();
+		public ObservableCollection<Label> elementSymbols { get; set; } = new ObservableCollection<Label>();
+		public ObservableCollection<Grid> elementGrid { get; set; } = new ObservableCollection<Grid>();
+
+		public ObservableCollection<PElement> currentSelection { get; set; } = new ObservableCollection<PElement>();
 
         public PSystem()
         {
-            elements = new ObservableCollection<PElement>();
-            for(int i=1; i<104; i++)
+			for (int i=1; i<104; i++)
             {
-                elements.Add(new PElement("name", "s", i, 0.0, new int[7]));
+				PElement temp = new PElement();
+                elements.Add(temp);
+				Label lab = new Label();
+				lab.Content = temp.symbol;
+				elementSymbols.Add(lab);
+
             }
+			setupGrid();
+
+            //int[] shells = { 1, 0, 0, 0, 0, 0, 0 };
+            currentSelection.Add(new PElement("Hydrogen", "H", 1, 1, new int[]{ 1, 0, 0, 0, 0, 0, 0 }));
         }
         public PSystem(PElement[] initElements)
         {
             if(initElements != null)
             {
+
+				//PElement testE = initElements[0];
+				for(int i=0; i<initElements.Length; i++)
+				{
+					elements.Add(initElements[i]);
+
+					Label lab = new Label();
+					lab.Content = initElements[i].symbol;
+					lab.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
+					lab.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Left;
+					elementSymbols.Add(lab);
+				}
+
+			setupGrid();
+			currentSelection.Add(elements[0]); //element 79 gold is on index 64
             }
-            foreach(PElement e in initElements)
-            {
-                elements.Add(e);
-            }
-        }
+			else
+			{
+				//throw new NullPointerException();
+			}
+
+		}
+
+		private void setupGrid()
+		{
+
+			Grid grid = new Grid();
+			grid.ShowGridLines = true;
+			grid.Background = System.Windows.Media.Brushes.LemonChiffon;
+			for (int i = 0; i < 9; i++)
+			{
+				grid.RowDefinitions.Add(new RowDefinition());
+			}
+			for (int i = 0; i < 18; i++)
+			{
+				grid.ColumnDefinitions.Add(new ColumnDefinition());
+			}
+			//first row 0 - 1
+			//grid.Height = 300;
+			//grid.Width = 400;
+			grid.Children.Add(elementSymbols[0]);
+			Grid.SetColumn(elementSymbols[1], 17);
+			grid.Children.Add(elementSymbols[1]);
+
+			//second row 2 -9
+			Grid.SetRow(elementSymbols[2], 1);
+			grid.Children.Add(elementSymbols[2]);
+			Grid.SetRow(elementSymbols[3], 1);
+			Grid.SetColumn(elementSymbols[3], 1);
+			grid.Children.Add(elementSymbols[3]);
+			for (int i = 0; i < 6; i++)
+			{
+				Grid.SetColumn(elementSymbols[4 + i], 12 + i);
+				Grid.SetRow(elementSymbols[4 + i], 1);
+				grid.Children.Add(elementSymbols[4 + i]);
+			}
+
+			//third row 10 - 17
+			Grid.SetRow(elementSymbols[10], 2);
+			grid.Children.Add(elementSymbols[10]);
+			Grid.SetRow(elementSymbols[11], 2);
+			Grid.SetColumn(elementSymbols[11], 1);
+			grid.Children.Add(elementSymbols[11]);
+			for (int i = 0; i < 6; i++)
+			{
+				Grid.SetColumn(elementSymbols[12 + i], 12 + i);
+				Grid.SetRow(elementSymbols[12 + i], 2);
+				grid.Children.Add(elementSymbols[12 + i]);
+			}
+
+			//fourth fifth and sixth row 18 - 71
+			for (int j = 0; j < 3; j++)
+			{
+				for (int i = 0; i < 18; i++)
+				{
+					Grid.SetRow(elementSymbols[18 * j + 18 + i], 3 + j);
+					Grid.SetColumn(elementSymbols[18 * j + 18 + i], i);
+					grid.Children.Add(elementSymbols[18 * j + 18 + i]);
+				}
+			}
+
+			//seventh row 72 - 83
+			for (int i = 0; i < 12; i++)
+			{
+				Grid.SetRow(elementSymbols[72 + i], 6);
+				Grid.SetColumn(elementSymbols[72 + i], i);
+				grid.Children.Add(elementSymbols[72 + i]);
+			}
+
+			//eight and ninth row 84 - 
+			for (int j = 0; j < 2; j++)
+			{
+				for (int i = 0; i < 14; i++)
+				{
+					Grid.SetRow(elementSymbols[14 * j + 84 + i], 7 + j);
+					Grid.SetColumn(elementSymbols[14 * j + 84 + i], i + 2);
+					grid.Children.Add(elementSymbols[14 * j + 84 + i]);
+				}
+			}
+			elementGrid.Add(grid);
+			//elementSymbols[0]
+
+
+		}
 
         public static PSystem createFromFile(String filePath)
         {
@@ -47,10 +158,17 @@ namespace Model
             String[] lines;
             if(text != null)
             {
-                lines = text.Split(Environment.NewLine.ToArray()); //splits the lines in to seperate strings in the array.
+				lines = Regex.Split(text, Environment.NewLine); //splits the lines in to seperate strings in the array.
+				//lines = text.Split('\n');
+				String testLine1 = lines[0];
+				String testLine2 = lines[1];
+				String testLine3 = lines[2];
+				String testLine4 = lines[3];
+				String testLine5 = lines[4];
+				String testLine6 = lines[5];
 
-                int numberOfEntries = lines.Length / 6 - 1;
-                PElement[] elements = new PElement[numberOfEntries];
+				int numberOfEntries = lines.Length / 6 - 1;
+                PElement[] elements = new PElement[numberOfEntries+1];
                 String name,
                        symbol;
                 int number;
@@ -59,20 +177,53 @@ namespace Model
                 String[] shellBuffer;
 
                 for (int l=6; l<lines.Length; l += 6)
-                {
-                    name = lines[l];
-                    symbol = lines[l + 1];
-                    number = Int32.Parse(lines[l + 2]);
-                    weight = Double.Parse(lines[l + 3]);
-                    shellBuffer = lines[1 + 4].Split(' ');
-                    for(int i=0;i<shellBuffer.Length;i++)
-                    {
-                        shells[i] = Int32.Parse(shellBuffer[i]);
-                    }
-                    elements[l / 6 - 1] = new PElement(name, symbol, number, weight, shells);
-                }
+				{
+					
+					//String testName = lines[l];
+					name = lines[l];
+					//String testSymbol = lines[l+1];
+					symbol = lines[l + 1];
+					//String testNumber = lines[l+2];
+					number = Int32.Parse(lines[l + 2]);
+					//String testWeight = lines[l+3];
+					System.Globalization.NumberFormatInfo nfi = new System.Globalization.CultureInfo("en-US", false).NumberFormat;
+					weight = Double.Parse(lines[l + 3], nfi);
+					//String testShell = lines[l+4];
+					//Regex reg = new Regex(@"\s");
+					if (lines[l + 4].Contains(" "))
+					{
+						shellBuffer = lines[l + 4].Split(' ');
+					}else
+					{
+						shellBuffer = new string[1];
+						shellBuffer[0] = lines[l + 4];
+					}
+					//String testShell2 = Regex.Split(lines[1 + 4], " ")[0];
+					//try { String testShell3 = Regex.Split(lines[1 + 4], " ")[1]; }catch(Exception e) { }
 
-                return new PSystem(elements);
+					//if (shellBuffer.Length < 2)
+					//{
+					//shellBuffer = new String[]{ lines[l+4] };
+					//}
+
+					for (int i = 0; i < shellBuffer.Length; i++)
+					{
+						int shellLength = shellBuffer.Length;
+						shells[i] = Int32.Parse(shellBuffer[i]);
+
+						//if (number == 79)
+						//{
+						//	String shellbufferTest = shellBuffer[i];
+						//	int shellValueTest = Int32.Parse(shellBuffer[i]);
+						//}
+					}
+					elements[l / 6 - 1] = new PElement(name, symbol, number, weight, shells);
+					
+					//String testNameElement = elements[l / 6 - 1].name;
+
+				}
+
+				return new PSystem(elements);
             }
             return null;
         }

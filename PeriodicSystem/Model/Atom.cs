@@ -62,8 +62,15 @@ namespace Model
 
         public Brush SelectedColor => isSelected ? Brushes.SeaGreen : Brushes.Red;
 
+		public String Name { get; set; }
+		public String Symbol { get; set; }
+		public int Number { get; set; }
+		public double Weight { get; set; }
+		public int[] Shells { get; set; }
+
         public Atom()
         {
+			++counter;
         }
         
     }

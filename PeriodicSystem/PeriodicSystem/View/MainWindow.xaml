@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PeriodicSystem"
         xmlns:ViewModel="clr-namespace:PeriodicSystem.ViewModel"
-		xmlns:System="clr-namespace:PeriodicSystem.View"
+		xmlns:View="clr-namespace:PeriodicSystem.View"
+		xmlns:Model="clr-namespace:PeriodicSystem.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280">
 
@@ -13,7 +14,7 @@
         <ViewModel:ViewModel/>
     </Window.DataContext>
 
-    <Grid>
+    <Grid Background="AntiqueWhite">
 
         <DockPanel Grid.Column="1">
             <Menu DockPanel.Dock="Top">
@@ -29,17 +30,23 @@
             </Menu>
             <TextBox AcceptsReturn="True" />
 
-            <StackPanel HorizontalAlignment="Left" Height="600" Margin="10,10,0,0" VerticalAlignment="Top" Width="450">
+            <!--<StackPanel HorizontalAlignment="Left" Height="600" Margin="10,10,0,0" VerticalAlignment="Top" Width="450">-->
                 <Grid>
-
-                    <System:PSystemUserControl Grid.Column="0" Width="400" Height="300" VerticalAlignment="Bottom"/>
+                    <Grid.RowDefinitions>
+						<RowDefinition/>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
+                    <ItemsControl ItemsSource="{Binding elementGrid}" Grid.Row="1" Width="auto" Height="300" VerticalAlignment="Center"/>
+					<ItemsControl ItemsSource="{Binding elements}" Grid.Row="0" Width="200" Height="200" VerticalAlignment="Bottom" />
 
                 </Grid>
-            </StackPanel>
+            <!--</StackPanel> -->
 
             <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Width="750" Height="650">
-                <Canvas HorizontalAlignment="Left" Height="1000" VerticalAlignment="Top" Width="1000"/>
-			</ScrollViewer>
+                <Canvas HorizontalAlignment="Left" Height="1000" VerticalAlignment="Top" Width="1000" Background="BurlyWood">
+					<ItemsControl ItemsSource="{Binding Atoms}"/>
+                </Canvas>
+            </ScrollViewer>
 
 				<!--<ScrollBar x:Name="scrollBar" HorizontalAlignment="Left" Margin="1232,10,0,0" VerticalAlignment="Top" Height="636" Width="32"/>
 				<ScrollBar x:Name="scrollBar1" HorizontalAlignment="Left" Margin="583,651,0,0" VerticalAlignment="Top" Width="644" Height="38"/> -->

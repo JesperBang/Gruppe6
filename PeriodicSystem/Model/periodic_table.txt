@@ -1,0 +1,677 @@
+name
+symbol
+number
+weight
+shells
+
+Hydrogen
+H
+1
+1.00794
+1
+
+Helium
+He
+2
+4.002602
+2
+
+Lithium
+Li
+3
+6.941
+2 1
+
+Beryllium
+Be
+4
+9.012182
+2 2
+
+Boron
+B
+5
+10.811
+2 3
+
+Carbon
+C
+6
+12.0107
+2 4
+
+Nitrogen
+N
+7
+14.00674
+2 5
+
+Oxygen
+O
+8
+15.9994
+2 6
+
+Flourine
+F
+9
+18.9984032
+2 7
+
+Neon
+Ne
+10
+20.1797
+2 8
+
+Sodium - Natrium
+Na
+11
+22.98977
+2 8 1
+
+Magnesium
+Mg
+12
+24.3050
+2 8 2
+
+Aluminum - Aluminium
+Al
+13
+26.981538
+2 8 3
+
+Silicon - Silicium
+Si
+14
+28.0855
+2 8 4
+
+Phosphorus - fosfor
+P
+15
+30.973761
+2 8 5
+
+Sulfur - Svovl
+S
+16
+32.066
+2 8 6
+
+Chlorine - Clor
+Cl
+17
+35.4527
+2 8 7
+
+Argon
+Ar
+18
+39.948
+2 8 8
+
+Potassium - Kalium
+K
+19
+39.0983
+2 8 8 1
+
+Calcium
+Ca
+20
+40.078
+2 8 8 2
+
+Scandium
+Sc
+21
+44.955910
+2 8 9 2
+
+Titanium
+Ti
+22
+47.867
+2 8 10 2
+
+Vanadium
+V
+23
+50.9415
+2 8 11 2
+
+Chromium
+Cr
+24
+51.9961
+2 8 13 1
+
+Manganese
+Mn
+25
+54.938049
+2 8 13 2
+
+Iron - Jern
+Fe
+26
+55.845
+2 8 14 2
+
+Cobalt
+Co
+27
+58.9332
+2 8 15 2
+
+Nickel
+Ni
+28
+58.6934
+2 8 16 2
+
+Copper - Kopper
+Cu
+29
+63.546
+2 8 18 1
+
+Zinc
+Zn
+30
+65.39
+2 8 18 2
+
+Gallium
+Ga
+31
+69.723
+2 8 18 3
+
+Germanium
+Ge
+32
+72.61
+2 8 18 4
+
+Arsenic
+As
+33
+74.9216
+2 8 18 5
+
+Aelenium
+Se
+34
+78.96
+2 8 18 6
+
+Bromine - Brom
+Br
+35
+79.904
+2 8 18 7
+
+Krypton
+Kr
+36
+83.80
+2 8 18 8
+
+Rubidium
+Rb
+37
+85.4678
+2 8 18 8 1
+
+Strontium
+Sr
+28
+87.62
+2 8 18 8 2
+
+Yttrium
+Y
+39
+88.90585
+2 8 18 9 2
+
+Zirconium
+Zr
+40
+91.224
+2 8 18 10 2
+
+Niobium
+Nb
+41
+92.90638
+2 8 18 12 1
+
+Molybdenum
+Mo
+42
+95.94
+2 8 18 13 1
+
+Technetium
+Tc
+43
+98
+2 8 18 13 2
+
+Ruthenium
+Ru
+44
+101.07
+2 8 18 15 1
+
+Rhondium
+Rh
+45
+102.9055
+2 8 18 16 1
+
+Palladium
+Pd
+46
+106.42
+2 8 18 18 0
+
+Silver - sølv
+Ag
+47
+107.8682
+2 8 18 18 1
+
+Cadmium
+Cd
+48
+112.411
+2 8 18 18 2
+
+Indium
+In
+49
+114.818
+2 8 18 18 3
+
+Tin
+Sn
+50
+118.71
+2 8 18 18 4
+
+Antimony
+Sb
+51
+121.760
+2 8 18 18 5
+
+Tellurium
+Te
+52
+127.60
+2 8 18 18 6
+
+Iodine
+I
+53
+126.90447
+2 8 18 18 7
+
+Xenon
+Xe
+54
+131.29
+2 8 18 18 8
+
+Cesium
+Cs
+55
+132.90545
+2 8 18 18 8 1
+
+Barium
+Ba
+56
+137.327
+2 8 18 18 8 2
+
+Lanthanum
+La
+57
+138.9055
+2 8 18 18 9 2
+
+Hafnium
+Hf
+72
+178.49
+2 8 18 32 10 2
+
+Tantalum
+Ta
+73
+180.9479
+2 8 18 32 11 2
+
+Tungsten
+W
+74
+183.84
+2 8 18 32 12 2
+
+Rhenium
+Re
+75
+186.207
+2 8 18 32 13 2
+
+Osmium
+Os
+76
+190.23
+2 8 18 32 14 2
+
+Iridium
+Ir
+77
+192.217
+2 8 18 32 15 2
+
+Platinum
+Pt
+78
+195.078
+2 8 18 32 16 2
+
+Gold - Guld
+Au
+79
+196.96655
+2 8 18 32 18 1
+
+Mercury - Kviksølv
+Hg
+80
+200.59
+2 8 18 32 18 2
+
+Thallium
+Tl
+81
+204.3833
+2 8 18 32 18 3
+
+Lead - Bly
+Pb
+82
+207.2
+2 8 18 32 18 4
+
+Bismuth
+Bi
+83
+208.98038
+2 8 18 32 18 5
+
+Polonium
+Po
+84
+209
+2 8 18 32 10 6
+
+Astatine
+At
+85
+210
+2 8 18 32 18 7
+
+Radon
+Rn
+86
+222
+2 8 18 32 18 8
+
+Francium
+Fr
+87
+223
+2 8 18 32 18 8 1
+
+Radium
+Ra
+88
+226
+2 8 18 32 18 8 2
+
+Actinium
+Ac
+89
+227
+2 8 18 32 18 9 2
+
+Rutherfordium
+Rf
+104
+261
+2 8 18 32 32 10 2
+
+Dubnium
+Db
+105
+262
+2 8 18 32 32 11 2
+
+Seaborgium
+Sg
+106
+266
+2 8 18 32 32 12 2
+
+Bohrium
+Bh
+107
+264
+2 8 18 32 32 13 2
+
+Hassium
+Hs
+108
+269
+2 8 18 32 32 14 2
+
+Meitnerium
+Mt
+109
+268
+2 8 18 32 32 15 2
+
+Darmstadtium
+Ds
+110
+271
+2 8 18 32 32 16 2
+
+Roentgenium
+Rg
+111
+272
+2 8 18 32 32 17 2
+
+Element-112
+112
+112
+277
+2 8 18 32 32 18 2
+
+Cerium
+Ce
+58
+140.116
+2 8 18 19 9 2
+
+Praseodymium
+Pr
+59
+140.907665
+2 8 18 21 8 2
+
+Neodymium
+Nd
+60
+144.24
+2 8 18 22 8 2
+
+Promethium
+Pm
+61
+145
+2 8 18 23 8 2
+
+Samarium
+Sm
+62
+150.26
+2 8 18 24 8 2
+
+Europium
+Eu
+63
+151.964
+2 8 18 25 8 2
+
+Gadolinium
+Gd
+64
+157.25
+2 8 18 25 9 2
+
+Terbium
+Tb
+65
+158.92534
+2 8 18 27 8 2
+
+Dysprosium
+Dy
+66
+162.50
+2 8 18 28 8 2
+
+Holmium
+Ho
+67
+164.93032
+2 8 18 29 8 2
+
+Erbium
+Er
+68
+167.26
+2 8 18 30 8 2
+
+Thulium
+Tm
+69
+168.93421
+2 8 18 31 8 2
+
+Ytterbium
+Yb
+70
+173.04
+2 8 18 32 8 2
+
+Lutetium
+Lu
+71
+174.967
+2 8 18 32 9 2
+
+Thorium
+Th
+90
+232.0381
+2 8 18 32 18 8 2
+
+Protactinium
+Pa
+91
+231.03588
+2 8 18 32 20 9 2
+
+Uranium
+U
+92
+238.0289
+2 8 18 32 21 9 2
+
+Neptunium
+Np
+93
+237
+2 8 18 32 22 9 2
+
+Plutonium
+Pu
+94
+244
+2 8 18 32 24 8 2
+
+Americium
+Am
+95
+243
+2 8 18 32 25 8 2
+
+Curium
+Cm
+96
+247
+2 8 18 32 25 9 2
+
+Berkelium
+Bk
+67
+247
+2 8 18 32 27 8 2
+
+Californium
+Cf
+98
+251
+2 8 18 32 28 8 2
+
+Einsteinium
+Es
+99
+252
+2 8 18 32 29 8 2
+
+Fermium
+Fm
+100
+257
+2 8 18 32 30 8 2
+
+Mendelevium
+Md
+101
+258
+2 8 18 32 31 8 2
+
+Nobelium
+No
+102
+259
+2 8 18 32 32 8 2
+
+Lawrencium
+Lr
+103
+262
+2 8 18 32 32 9 2
