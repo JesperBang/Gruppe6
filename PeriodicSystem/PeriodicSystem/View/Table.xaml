@@ -5,17 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PeriodicSystem.View"
         mc:Ignorable="d"
-        d:DesignHeight="300" d:DesignWidth="500"
-             Canvas.Top ="115">
-        <Expander ExpandDirection="Left" Header="Sidebar" Background="LightGray" Margin="0,0,0,0">
-        <StackPanel Width="460" Background="Gray"> 
-            <GroupBox Header="Element Table" BorderBrush="LightGray">
-                <StackPanel>
+        d:DesignHeight="300" 
+        d:DesignWidth="500" 
+        Canvas.Top ="115">
 
-                    <Rectangle Fill="Pink" Height="100" Width="100"/>
+        <Expander ExpandDirection="Down" Header=" Element table  " Background="SlateGray" Margin="0,0,0,0" VerticalAlignment="Center">
+            <StackPanel Width="495"  Background="DimGray">
+                <GroupBox Header="Element Table" BorderBrush="LightGray">
+                    <StackPanel>
 
-                </StackPanel>
-            </GroupBox>
-        </StackPanel>
-    </Expander>
+                        <Rectangle Fill="Pink" Height="100" Width="100"/>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </Expander>
 </UserControl>
