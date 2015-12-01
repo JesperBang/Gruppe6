@@ -27,52 +27,51 @@
     </Window.InputBindings>
 
     <DockPanel>
-         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_File" Background="Transparent">
-                <MenuItem Header="_New" Command="{Binding NewDrawingCommand}"/>
-                <MenuItem Header="_Open" Command="{Binding LoadFromXMLCommand}"/>
-                <MenuItem Header="Save as" Command="{Binding SaveToXMLCommand}">
-                </MenuItem>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New" InputGestureText="Ctrl+N" Command="{Binding NewDrawingCommand}"/>
+                <MenuItem Header="_Open" InputGestureText="Ctrl+O" Command="{Binding LoadFromXMLCommand}"/>
+                <MenuItem Header="Save as" InputGestureText="Ctrl+S" Command="{Binding SaveToXMLCommand}"/>
                 <MenuItem Header="_Save" Command="{Binding SaveToXMLCommand}"/>
                 <MenuItem Header="Export Image" Command="{Binding SaveDrawingCommand}"/>
                 <Separator/>
-                <MenuItem Header="Exit"/>
+                <MenuItem Header="Exit" InputGestureText="Alt+F4"/>
             </MenuItem>
             <MenuItem Header="_Edit">
-                <MenuItem Header="_Undo" Command="{Binding UndoCommand}"/>
+                <MenuItem Header="_Undo" InputGestureText="Ctrl+Z" Command="{Binding UndoCommand}"/>
                 <MenuItem Header="_Redo" Command="{Binding RedoCommand}"/>
                 <Separator/>
-                <MenuItem Header="Copy"/>
-                <MenuItem Header="Cut"/>
-                <MenuItem Header="Paste"/>
+                <MenuItem Header="Copy" InputGestureText="Ctrl+C"/>
+                <MenuItem Header="Cut" InputGestureText="Ctrl+X"/>
+                <MenuItem Header="Paste" InputGestureText="Ctrl+V"/>
                 <Separator/>
-                <MenuItem Header="Delete" Command="{Binding RemoveModelCommand}"/>
-                <MenuItem Header="Select All" Command="{Binding SelectAllCommand}"/>
+                <MenuItem Header="Delete" InputGestureText="Del" Command="{Binding RemoveModelCommand}"/>
+                <MenuItem Header="Select All" InputGestureText="Ctrl+A" Command="{Binding SelectAllCommand}"/>
             </MenuItem>
         </Menu>
 
         <Canvas>
-        <StackPanel Orientation="Horizontal">
-            <View:SidePanelUserControl/>
-            
+            <StackPanel Orientation="Horizontal">
+                <View:SidePanelUserControl/>
+
                 <Canvas
                  Height="720" Width="960"
                 >
-                <!--"Empty" content ensures that the mouseclick is always registered... -->
-                <Canvas.Background>
-                    <SolidColorBrush Color="LightGray"/>
-                </Canvas.Background>
-                
-                <Canvas.InputBindings>
-                    <MouseBinding MouseAction="LeftClick" Command="{Binding ClearSelectionCommand}"/>
-                </Canvas.InputBindings> 
-                    
-                <Grid>
-                    <ItemsControl ItemsSource="{Binding Bindings}" />
-                    <ItemsControl ItemsSource="{Binding Atoms}" />
-                </Grid>
-            </Canvas>
-         </StackPanel>
+                    <!--"Empty" content ensures that the mouseclick is always registered... -->
+                    <Canvas.Background>
+                        <SolidColorBrush Color="LightGray"/>
+                    </Canvas.Background>
+
+                    <Canvas.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding ClearSelectionCommand}"/>
+                    </Canvas.InputBindings>
+
+                    <Grid>
+                        <ItemsControl ItemsSource="{Binding Bindings}" />
+                        <ItemsControl ItemsSource="{Binding Atoms}" />
+                    </Grid>
+                </Canvas>
+            </StackPanel>
             <View:Table/>
         </Canvas>
     </DockPanel>
