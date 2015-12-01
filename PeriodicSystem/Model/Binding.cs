@@ -23,7 +23,7 @@ namespace Model
         [XmlIgnore]
         public bool IsSelected { get { return isSelected; } set { isSelected = value; NotifyPropertyChanged(); NotifyPropertyChanged(() => SelectedColor); } }
 
-        public Brush SelectedColor => isSelected ? Brushes.SeaGreen : Brushes.Blue;
+        public Brush SelectedColor => isSelected ? Brushes.CornflowerBlue : Brushes.Blue;
 
         //styrer tykkelsen på bindingen, så der kan repræsenteres enkelt dobelt og tripel
         private int enbinding = 10;
