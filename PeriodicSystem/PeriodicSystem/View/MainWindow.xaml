@@ -60,10 +60,10 @@
                     <SolidColorBrush Color="LightGray"/>
                 </Canvas.Background>
                 
-                <!-- buggy click handling
+                <!-- buggy click handling -->
                 <Canvas.InputBindings>
                     <MouseBinding MouseAction="LeftClick" Command="{Binding ClearSelectionCommand}"/>
-                </Canvas.InputBindings> -->
+                </Canvas.InputBindings> 
                 <Grid>
                     <ItemsControl ItemsSource="{Binding Bindings}" />
                     <ItemsControl ItemsSource="{Binding Atoms}" />

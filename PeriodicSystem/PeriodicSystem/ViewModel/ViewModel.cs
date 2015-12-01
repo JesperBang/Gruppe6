@@ -123,11 +123,11 @@ namespace PeriodicSystem.ViewModel
         private void clearSelections()
         {
             //workaround for multiple leftclick bindings triggering
-            //if (clickHandled)
-            //{
-            //    clickHandled = false;
-            //    return;
-            //}
+            if (clickHandled)
+            {
+                clickHandled = false;
+                return;
+            }
 
             if (selectedAtoms != null) {
                 foreach (Atom a in selectedAtoms)
@@ -205,11 +205,12 @@ namespace PeriodicSystem.ViewModel
                 initialAtomPosition = new Point(atom.X, atom.Y);
 
                 //clear selection unless ctrl is pressed
+                clickHandled = false;
                 if (!(Keyboard.IsKeyDown(Key.RightCtrl) || Keyboard.IsKeyDown(Key.LeftCtrl)))
                 {
                     clearSelections();
+                    clickHandled = true;
                 }
-                //clickHandled = true;
                 selectedAtoms.Add(atom);
                 atom.IsSelected = true;
 
@@ -285,11 +286,12 @@ namespace PeriodicSystem.ViewModel
             Binding binding = TargetBinding(e);
 
             //clear selection unless ctrl is pressed
+            clickHandled = false;
             if (!(Keyboard.IsKeyDown(Key.RightCtrl) || Keyboard.IsKeyDown(Key.LeftCtrl)))
             {
                 clearSelections();
+                clickHandled = true;
             }
-            //clickHandled = true;
             selectedBindings.Add(binding);
             binding.IsSelected = true;
         }
