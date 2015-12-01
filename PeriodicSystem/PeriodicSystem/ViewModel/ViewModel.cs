@@ -362,21 +362,6 @@ namespace PeriodicSystem.ViewModel
                     Bindings.Add(new Binding(bp1, bp2, b.BindingState));
                 }
             }
-
-            
-            /*
-            Console.WriteLine("Loading Atoms from XML");
-
-            XDocument xmlDoc = XDocument.Load("C:\\Test\\Atoms.xml");
-            Atoms = new ObservableCollection<Atom>(xmlDoc.Descendants("Atom")
-                                       .Select(x => new Atom
-                                       {
-                                           Protons = Int32.Parse(x.Element("Protons").Value),
-                                           X = Double.Parse(x.Element("X").Value),
-                                           Y = Double.Parse(x.Element("Y").Value)
-                                       })
-                                       .ToList());
-                                       */
         }
 
         private void addBinding()
@@ -402,8 +387,9 @@ namespace PeriodicSystem.ViewModel
 
         private void exportBitmap()
         {
-
+            
         }
+
 
         private void addMolecule()
         {

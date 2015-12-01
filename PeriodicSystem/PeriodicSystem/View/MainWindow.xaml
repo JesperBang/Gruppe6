@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="{Binding WindowTitle}"
         Height="720" Width="1280"
-        ResizeMode="canMinimize">
+        ResizeMode="canMinimize" Icon="/Icon.ico">
 
     <Window.DataContext>
         <ViewModel:ViewModel />
@@ -72,8 +72,7 @@
                     <ItemsControl ItemsSource="{Binding Atoms}" />
                 </Grid>
             </Canvas>
-        </StackPanel>
-
+         </StackPanel>
             <View:Table/>
         </Canvas>
     </DockPanel>
