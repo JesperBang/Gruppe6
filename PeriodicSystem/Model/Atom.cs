@@ -58,7 +58,7 @@ namespace Model
         [XmlIgnore]
         public bool IsSelected { get { return isSelected; } set { isSelected = value; NotifyPropertyChanged(); NotifyPropertyChanged(() => SelectedColor); } }
 
-        public Brush SelectedColor => isSelected ? Brushes.SeaGreen : Brushes.Red;
+        public Brush SelectedColor => isSelected ? Brushes.CornflowerBlue : Brushes.Red;
 
         public Atom()
         {
