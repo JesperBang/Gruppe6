@@ -415,7 +415,11 @@ namespace PeriodicSystem.ViewModel
             MessageBoxResult result = (Atoms.Count == 0) ? MessageBoxResult.No : MessageBox.Show("Would you like to save changes before proceeding?", "New Drawing", MessageBoxButton.YesNoCancel);
             switch (result)
             {
+                case MessageBoxResult.No:
+                    WindowTitle = "New Diagram";
+                    break;
                 case MessageBoxResult.Yes:
+                    WindowTitle = "New Diagram";
                     //TODO add file saved confirmation
                     saveToXML();
                     break;
@@ -427,7 +431,6 @@ namespace PeriodicSystem.ViewModel
             Bindings.Clear();
             undoRedoController.clearStacks();
             initStateVariables();
-            WindowTitle = "New Diagram";
         }
     }
 }
