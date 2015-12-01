@@ -24,6 +24,7 @@ namespace PeriodicSystem.ViewModel
     {
         public ObservableCollection<Atom> Atoms{ get; set; }
         public ObservableCollection<Binding> Bindings { get; set; }
+        public string WindowTitle { get { return windowTitle; } set { windowTitle = value +" - pTable v0.1.0"; RaisePropertyChanged(); } }
 
         private Point initialMousePosition;
         private Point initialAtomPosition;
@@ -66,12 +67,13 @@ namespace PeriodicSystem.ViewModel
         public ICommand ChangeBindingCommand { get; }
 
         private UndoRedoController undoRedoController;
-        
+        private string windowTitle;
 
         public ViewModel()
         {
             Atoms = new ObservableCollection<Atom>();
             Bindings = new ObservableCollection<Binding>();
+            WindowTitle = "New Diagram";
 
             undoRedoController = new UndoRedoController();
 
@@ -330,6 +332,7 @@ namespace PeriodicSystem.ViewModel
             if (saveXMLDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 serializer.save(diagram, saveXMLDialog.FileName);
+                WindowTitle = saveXMLDialog.FileName;
             }
         }
         
@@ -342,6 +345,7 @@ namespace PeriodicSystem.ViewModel
             if (openXMLDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 Task<Diagram> result = serializer.load(openXMLDialog.FileName);
+                WindowTitle = openXMLDialog.FileName;
                 newDrawing();
                 List<Atom> tempAtoms = result.Result.Atoms;
                 List<Binding> tempBindings = result.Result.Bindings;
