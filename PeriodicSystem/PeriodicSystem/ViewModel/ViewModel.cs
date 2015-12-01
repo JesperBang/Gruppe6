@@ -43,11 +43,12 @@ namespace PeriodicSystem.ViewModel
         // This method uses an expression-bodied member (http://www.informit.com/articles/article.aspx?p=2414582) to simplify a method that only returns a value;
         public double ModeOpacity => isAddingLine ? 0.4 : 1.0;
 
-        public PSystem system { get; set; }
-        PSystem ps = PSystem.createFromFile("");
+        public PSystem system { get; set; } = PSystem.createFromFile("periodic_table.txt");
+        public ObservableCollection<PElement> elements { get; set; }
+		public ObservableCollection<Grid> elementGrid { get; set; }
 
 
-        public ObservableCollection<Atom> Atoms { get; set; }
+		public ObservableCollection<Atom> Atoms { get; set; }
             public ObservableCollection<Binding> Bindings { get; set; }
 
             public ICommand addAtomCommand { get; }
@@ -69,10 +70,16 @@ namespace PeriodicSystem.ViewModel
             {
                 Atoms = new ObservableCollection<Atom>();
                 Bindings = new ObservableCollection<Binding>();
+				elementGrid = system.elementGrid;
+
+			Atoms.Add(new Atom() { X=50, Y=50, Width=50, Height=50 ,Symbol="H"});
+			Atoms.Add(new Atom() { X = 100, Y = 100, Width = 100, Height = 100, Symbol="O"});
 
 
-                Atoms.Add(new Atom());
-            }
+				Atoms.Add(new Atom());
+            elements = system.currentSelection;
+            //elements.Add(system.currentSelection);
+			}
 
             private void addAtom()
             {

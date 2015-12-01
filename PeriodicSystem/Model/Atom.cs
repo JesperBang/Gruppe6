@@ -21,9 +21,6 @@ namespace Model
         [XmlIgnore]
         public double Height { get; set; }
 
-        [XmlIgnore]
-        public String Abbrevation { get { return (Protons > 0 && Protons < abbrevations.Length) ? abbrevations[Protons] : "XX"; } }
-
         private double x = 0;
         private double y = 0;
 
@@ -65,161 +62,16 @@ namespace Model
 
         public Brush SelectedColor => isSelected ? Brushes.SeaGreen : Brushes.Red;
 
+		public String Name { get; set; }
+		public String Symbol { get; set; }
+		public int Number { get; set; }
+		public double Weight { get; set; }
+		public int[] Shells { get; set; }
+
         public Atom()
         {
+			++counter;
         }
-
-        public Atom(int protons)
-        {
-            Width = 100;
-            Height = 100;
-            X = (Id * 50) % 800;
-            Y = (Id * 25) % 550;
-            Protons = protons;
-        }
-
-        public Atom(int id, int protons, double x, double y)
-        {
-            this.Id = id;
-
-            if (counter < id)
-            {
-                counter = id;
-            }
-
-            Width = 100;
-            Height = 100;
-            X = x;
-            Y = y;
-            Protons = protons;
-        }
-
-        public static void resetIds()
-        {
-            counter = 0;
-        }
-
-        static private String[] abbrevations =
-        {
-            "Undefined",
-            "H",
-            "He",
-            "Li",
-            "Be",
-            "B",
-            "C",
-            "N",
-            "O",
-            "F",
-            "Ne",
-            "Na",
-            "Mg",
-            "Al",
-            "Si",
-            "P",
-            "S",
-            "Cl",
-            "Ar",
-            "K",
-            "Ca",
-            "Sc",
-            "Ti",
-            "V",
-            "Cr",
-            "Mn",
-            "Fe",
-            "Co",
-            "Ni",
-            "Cu",
-            "Zn",
-            "Ga",
-            "Ge",
-            "As",
-            "Se",
-            "Br",
-            "Kr",
-            "Rb",
-            "Sr",
-            "Y",
-            "Zr",
-            "Nb",
-            "Mo",
-            "Tc",
-            "Ru",
-            "Rh",
-            "Pd",
-            "Ag",
-            "Cd",
-            "In",
-            "Sn",
-            "Sb",
-            "Te",
-            "I",
-            "Xe",
-            "Cs",
-            "Ba",
-            "La",
-            "Ce",
-            "Pr",
-            "Nd",
-            "Pm",
-            "Sm",
-            "Eu",
-            "Gd",
-            "Tb",
-            "Dy",
-            "Ho",
-            "Er",
-            "Tm",
-            "Yb",
-            "Lu",
-            "Hf",
-            "Ta",
-            "W",
-            "Re",
-            "Os",
-            "Ir",
-            "Pt",
-            "Au",
-            "Hg",
-            "Tl",
-            "Pb",
-            "Bi",
-            "Po",
-            "At",
-            "Rn",
-            "Fr",
-            "Ra",
-            "Ac",
-            "Th",
-            "Pa",
-            "U",
-            "Np",
-            "Pu",
-            "Am",
-            "Cm",
-            "Bk",
-            "Cf",
-            "Es",
-            "Fm",
-            "Md",
-            "No",
-            "Lr",
-            "Rf",
-            "Db",
-            "Sg",
-            "Bh",
-            "Hs",
-            "Mt",
-            "Ds",
-            "Rg",
-            "Cn",
-            "Uut",
-            "Fl",
-            "Uup",
-            "Lv",
-            "Uus",
-            "Uuo"
-        };
+        
     }
 }

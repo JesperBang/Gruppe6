@@ -15,6 +15,11 @@
                 <View:PElementUserControl/>
             </Canvas>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type Model:Atom}">
+            <Canvas>
+                <View:AtomUserControl/>
+            </Canvas>
+        </DataTemplate>
 
     </Application.Resources>
 </Application>

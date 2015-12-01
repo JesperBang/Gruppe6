@@ -99,12 +99,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="View\AtomUserControl.xaml.cs">
+      <DependentUpon>AtomUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PElementUserControl.xaml.cs">
       <DependentUpon>PElementUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PSystemUserControl.xaml.cs">
       <DependentUpon>PSystemUserControl.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AtomUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
