@@ -5,16 +5,66 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PeriodicSystem.View"
         mc:Ignorable="d"
-        d:DesignHeight="459" 
+        d:DesignHeight="500" 
         d:DesignWidth="703" 
         Canvas.Top ="115">
 
-    <Expander ExpandDirection="Down"  Header=" Element table                                                                  " Background="SlateGray" Margin="0,0,0,0" VerticalAlignment="Center">
+    <Expander ExpandDirection="Down"  Header=" Element table                                                                  " 
+              Margin="0,0,0,0" VerticalAlignment="Center" Background="SlateGray" BorderThickness="1" >
+
         <StackPanel  Background="DimGray">
-            <GroupBox Header="Element Table" BorderBrush="LightGray">
+            <GroupBox Header="  Element Table  " BorderBrush="LightGray">
                 <StackPanel x:Name="ElementTableP">
-                    <Image x:Name="pTable"  Source="/PeriodicSystem;component/Images/pTable.png" Stretch="Fill"/>
-                    
+                    <Grid Height="430" Width="676">
+
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/PeriodicSystem;component/Images/pTable.png"/>
+                        </Grid.Background>
+
+                        <Grid.ColumnDefinitions>
+
+                            <ColumnDefinition Width="17*"/>
+                            <ColumnDefinition Width="33*"/>
+                            <ColumnDefinition Width="36*"/>
+                            <ColumnDefinition Width="37*"/>
+                            <ColumnDefinition Width="37*"/>
+                            <ColumnDefinition Width="39*"/>
+                            <ColumnDefinition Width="37*"/>
+                            <ColumnDefinition Width="38*"/>
+                            <ColumnDefinition Width="38*"/>
+                            <ColumnDefinition Width="38*"/>
+                            <ColumnDefinition Width="39*"/>
+                            <ColumnDefinition Width="38*"/>
+                            <ColumnDefinition Width="37*"/>
+                            <ColumnDefinition Width="34*"/>
+                            <ColumnDefinition Width="34*"/>
+                            <ColumnDefinition Width="34*"/>
+                            <ColumnDefinition Width="34*"/>
+                            <ColumnDefinition Width="34*"/>
+                            <ColumnDefinition Width="35*"/>
+                            <ColumnDefinition Width="7*"/>
+
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="22*"/>
+                            <RowDefinition Height="39*"/>
+                            <RowDefinition Height="40*"/>
+                            <RowDefinition Height="40*"/>
+                            <RowDefinition Height="40*"/>
+                            <RowDefinition Height="42*"/>
+                            <RowDefinition Height="39*"/>
+                            <RowDefinition Height="39*"/>
+                            <RowDefinition Height="46*"/>
+                            <RowDefinition Height="41*"/>
+                            <RowDefinition Height="40*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+
+
+
+
+                    </Grid>
                 </StackPanel>
             </GroupBox>
         </StackPanel>

@@ -28,7 +28,7 @@
 
     <DockPanel>
          <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_File">
+            <MenuItem Header="_File" Background="Transparent">
                 <MenuItem Header="_New" Command="{Binding NewDrawingCommand}"/>
                 <MenuItem Header="_Open" Command="{Binding LoadFromXMLCommand}"/>
                 <MenuItem Header="Save as" Command="{Binding SaveToXMLCommand}">

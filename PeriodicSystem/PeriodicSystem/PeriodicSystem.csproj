@@ -86,7 +86,6 @@
     <Compile Include="View\AtomUserControl.xaml.cs">
       <DependentUpon>AtomUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\pTableMap.cs" />
     <Compile Include="View\SidePanelUserControl.xaml.cs">
       <DependentUpon>SidePanelUserControl.xaml</DependentUpon>
     </Compile>
@@ -176,6 +175,8 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\ElementTable.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Images\pTable.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
