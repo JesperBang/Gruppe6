@@ -8,7 +8,8 @@
         xmlns:View="clr-namespace:PeriodicSystem.View"
         mc:Ignorable="d"
         Title="{Binding WindowTitle}"
-        Height="720" Width="1280">
+        Height="720" Width="1280"
+        ResizeMode="canMinimize">
 
     <Window.DataContext>
         <ViewModel:ViewModel />
@@ -49,9 +50,7 @@
                 <MenuItem Header="Select All" Command="{Binding SelectAllCommand}"/>
             </MenuItem>
         </Menu>
-        
         <StackPanel Orientation="Horizontal">
-            
             <View:SidePanelUserControl/>
             
                 <Canvas
@@ -64,8 +63,8 @@
                 
                 <Canvas.InputBindings>
                     <MouseBinding MouseAction="LeftClick" Command="{Binding ClearSelectionCommand}"/>
-                </Canvas.InputBindings> 
-                    
+                </Canvas.InputBindings>
+
                 <Grid>
                     <ItemsControl ItemsSource="{Binding Bindings}" />
                     <ItemsControl ItemsSource="{Binding Atoms}" />
