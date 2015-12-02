@@ -15,6 +15,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
@@ -69,6 +70,13 @@ namespace PeriodicSystem.ViewModel
         private UndoRedoController undoRedoController;
         private string windowTitle;
 
+        // Commands til GridView
+        public ICommand KnapFraGrid { get; }
+
+        // Canvas test
+        // Canvas myCanvas = (Canvas) this.FindName("DrawingCanvas");
+
+
         public ViewModel()
         {
             Atoms = new ObservableCollection<Atom>();
@@ -101,8 +109,20 @@ namespace PeriodicSystem.ViewModel
             MouseDownBindingCommand = new RelayCommand<MouseEventArgs>(mouseDownBinding);
             ChangeBindingCommand = new RelayCommand<int>(changeBinding);
 
+            // Relay Commands for Grid
+            KnapFraGrid = new RelayCommand<String>(clickGrid);
+            
+
             initStateVariables();
+            
         }
+
+        private void clickGrid(String button)
+        {
+            int protonNum = Int32.Parse(button);
+            addAtom(protonNum);          
+        }
+
 
         private void initStateVariables()
         {
@@ -282,7 +302,7 @@ namespace PeriodicSystem.ViewModel
             // From the shapes visual element, the Shape object which is the DataContext is retrieved.
             return (Binding)shapeVisualElement.DataContext;
         }
-        
+
         private void mouseDownBinding(MouseEventArgs e)
         {
             Binding binding = TargetBinding(e);
@@ -297,6 +317,9 @@ namespace PeriodicSystem.ViewModel
             selectedBindings.Add(binding);
             binding.IsSelected = true;
         }
+
+        
+
 
         private void addAtom(int protons)
         {
@@ -387,7 +410,16 @@ namespace PeriodicSystem.ViewModel
 
         private void exportBitmap()
         {
-            
+            //var rtb = new rendertargetbitmap(
+            //    (int)960, //width 
+            //    (int)720, //height 
+            //    300, //dpi x 
+            //    300, //dpi y 
+            //    pixelformats.pbgra32 // pixelformat 
+            //    );
+            //rtb.render(drawingcanvas);
+
+            //savertbaspng(rtb, filename); 
         }
 
 

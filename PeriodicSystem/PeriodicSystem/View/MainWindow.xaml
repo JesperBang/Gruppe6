@@ -55,8 +55,7 @@
                 <View:SidePanelUserControl/>
 
                 <Canvas
-                 Height="720" Width="960"
-                >
+                 Height="720" Width="960" x:Name="DrawingCanvas">
                     <!--"Empty" content ensures that the mouseclick is always registered... -->
                     <Canvas.Background>
                         <SolidColorBrush Color="LightGray"/>
