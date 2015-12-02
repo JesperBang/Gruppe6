@@ -15,7 +15,7 @@
     
     <Grid>
         <Line Stroke="{Binding SelectedColor}" X1="{Binding BindingPoint1.CenterX}" Y1="{Binding BindingPoint1.CenterY}" X2="{Binding BindingPoint2.CenterX}" Y2="{Binding BindingPoint2.CenterY}" StrokeThickness="{Binding Trebinding}"/>
-        <Line Stroke="White" X1="{Binding BindingPoint1.CenterX}" Y1="{Binding BindingPoint1.CenterY}" X2="{Binding BindingPoint2.CenterX}" Y2="{Binding BindingPoint2.CenterY}" StrokeThickness="{Binding Tobinding}"/>
+        <Line Stroke="LightGray" X1="{Binding BindingPoint1.CenterX}" Y1="{Binding BindingPoint1.CenterY}" X2="{Binding BindingPoint2.CenterX}" Y2="{Binding BindingPoint2.CenterY}" StrokeThickness="{Binding Tobinding}"/>
         <Line Stroke="{Binding SelectedColor}" X1="{Binding BindingPoint1.CenterX}" Y1="{Binding BindingPoint1.CenterY}" X2="{Binding BindingPoint2.CenterX}" Y2="{Binding BindingPoint2.CenterY}" StrokeThickness="{Binding Enbinding}"/>
     </Grid>
 
