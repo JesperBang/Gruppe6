@@ -182,6 +182,35 @@
   <ItemGroup>
     <Resource Include="Images\Save.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\new_doc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\fileopen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Exit_Plain_Blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\picture-save-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\redo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\undo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\copy.png" />
+    <Resource Include="Images\cut.png" />
+    <Resource Include="Images\paste.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\trash_canfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\trash_can_delete.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

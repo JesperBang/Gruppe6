@@ -358,7 +358,8 @@ namespace PeriodicSystem.ViewModel
                 WindowTitle = saveXMLDialog.FileName;
             }
         }
-        
+
+        public string temp;
         private void loadFromXML()
         {
             SerializeXML serializer = SerializeXML.Instance;
@@ -369,6 +370,7 @@ namespace PeriodicSystem.ViewModel
             {
                 Task<Diagram> result = serializer.load(openXMLDialog.FileName);
                 WindowTitle = openXMLDialog.FileName;
+                temp = openXMLDialog.FileName;
                 newDrawing();
                 List<Atom> tempAtoms = result.Result.Atoms;
                 List<Binding> tempBindings = result.Result.Bindings;
@@ -430,11 +432,14 @@ namespace PeriodicSystem.ViewModel
 
         private void newDrawing()
         {
-            MessageBoxResult result = (Atoms.Count == 0) ? MessageBoxResult.No : MessageBox.Show("Would you like to save changes before proceeding?", "New Drawing", MessageBoxButton.YesNoCancel);
+            MessageBoxResult result = (Atoms.Count == 0) ? MessageBoxResult.No : MessageBox.Show("Would you like to save changes before proceeding?", "Other Drawing", MessageBoxButton.YesNoCancel);
             switch (result)
             {
                 case MessageBoxResult.No:
-                    WindowTitle = "New Diagram";
+                    if (WindowTitle.Equals(temp))
+                    {
+                        WindowTitle = "New Diagram";
+                    }
                     break;
                 case MessageBoxResult.Yes:
                     WindowTitle = "New Diagram";

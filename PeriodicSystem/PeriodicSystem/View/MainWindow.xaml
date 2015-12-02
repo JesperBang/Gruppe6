@@ -29,24 +29,69 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
-                <MenuItem Header="_New" InputGestureText="Ctrl+N" Command="{Binding NewDrawingCommand}"/>
-                <MenuItem Header="_Open" InputGestureText="Ctrl+O" Command="{Binding LoadFromXMLCommand}"/>
-                <MenuItem Header="Save as" InputGestureText="Ctrl+S" Command="{Binding SaveToXMLCommand}"/>
-                <MenuItem Header="_Save" Command="{Binding SaveToXMLCommand}"/>
-                <MenuItem Header="Export Image" Command="{Binding SaveDrawingCommand}"/>
-                <Separator/>
-                <MenuItem Header="Exit" InputGestureText="Alt+F4"/>
+                <MenuItem Header="_New" InputGestureText="Ctrl+N" Command="{Binding NewDrawingCommand}">
+                    <MenuItem.Icon>
+                        <Image Width="16" Height="16" Source="/PeriodicSystem;component/Images/new_doc.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Open" InputGestureText="Ctrl+O" Command="{Binding LoadFromXMLCommand}">
+                <MenuItem.Icon>
+                    <Image Width="16" Height="16" Source="/PeriodicSystem;component/Images/fileopen.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Save as" InputGestureText="Ctrl+S" Command="{Binding SaveToXMLCommand}">
+                <MenuItem.Icon>
+                    <Image Width="16" Height="16" Source="/PeriodicSystem;component/Images/Save.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="_Save" Command="{Binding SaveToXMLCommand}"/>
+                <MenuItem Header="Export Image" Command="{Binding SaveDrawingCommand}">
+                <MenuItem.Icon>
+                    <Image Width="16" Height="16" Source="/PeriodicSystem;component/Images/picture-save-icon.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator/>
+                <MenuItem Header="Exit" InputGestureText="Alt+F4">
+                    <MenuItem.Icon>
+                        <Image Width="16" Height="16" Source="/PeriodicSystem;component/Images/Exit_Plain_Blue.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="_Edit">
-                <MenuItem Header="_Undo" InputGestureText="Ctrl+Z" Command="{Binding UndoCommand}"/>
-                <MenuItem Header="_Redo" Command="{Binding RedoCommand}"/>
+                <MenuItem Header="_Undo" InputGestureText="Ctrl+Z" Command="{Binding UndoCommand}">
+                <MenuItem.Icon>
+                    <Image Width="16" Height="16" Source="/PeriodicSystem;component/Images/undo.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="_Redo" Command="{Binding RedoCommand}">
+                <MenuItem.Icon>
+                    <Image Width="16" Height="16" Source="/PeriodicSystem;component/Images/redo.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator/>
+                <MenuItem Header="Copy" InputGestureText="Ctrl+C">
+                <MenuItem.Icon>
+                    <Image Width="16" Height="16" Source="/PeriodicSystem;component/Images/copy.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Cut" InputGestureText="Ctrl+X">
+                <MenuItem.Icon>
+                    <Image Width="16" Height="16" Source="/PeriodicSystem;component/Images/cut.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Paste" InputGestureText="Ctrl+V">
+                    <MenuItem.Icon>
+                        <Image Width="16" Height="16" Source="/PeriodicSystem;component/Images/paste.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
                 <Separator/>
-                <MenuItem Header="Copy" InputGestureText="Ctrl+C"/>
-                <MenuItem Header="Cut" InputGestureText="Ctrl+X"/>
-                <MenuItem Header="Paste" InputGestureText="Ctrl+V"/>
-                <Separator/>
-                <MenuItem Header="Delete" InputGestureText="Del" Command="{Binding RemoveModelCommand}"/>
-                <MenuItem Header="Select All" InputGestureText="Ctrl+A" Command="{Binding SelectAllCommand}"/>
+                <MenuItem Header="Delete" InputGestureText="Del" Command="{Binding RemoveModelCommand}">
+                <MenuItem.Icon>
+                    <Image Width="16" Height="16" Source="/PeriodicSystem;component/Images/trash_can_delete.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Select All" InputGestureText="Ctrl+A" Command="{Binding SelectAllCommand}">
+            </MenuItem>
             </MenuItem>
         </Menu>
 
