@@ -73,6 +73,9 @@ namespace PeriodicSystem.ViewModel
         // Commands til GridView
         public ICommand KnapFraGrid { get; }
 
+        // Command til ExitApp
+        public ICommand ExitApp { get; }
+
         // Canvas test
         // Canvas myCanvas = (Canvas) this.FindName("DrawingCanvas");
 
@@ -111,9 +114,18 @@ namespace PeriodicSystem.ViewModel
 
             // Relay Commands for Grid
             KnapFraGrid = new RelayCommand<String>(clickGrid);
-            
+
+            // Relay Command for ExitApp
+            ExitApp = new RelayCommand(CloseApp);
+
 
             initStateVariables();
+            
+        }
+
+
+        private void CloseApp()
+        {
             
         }
 
