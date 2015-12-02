@@ -26,7 +26,9 @@ namespace PeriodicSystem.ViewModel
         public ObservableCollection<Atom> Atoms{ get; set; }
         public ObservableCollection<Binding> Bindings { get; set; }
         public string WindowTitle { get { return windowTitle; } set { windowTitle = value +" - pTable v0.1.0"; RaisePropertyChanged(); } }
-        
+
+        public string temp;
+
         private Point initialMousePosition;
         private Point initialAtomPosition;
 
@@ -100,7 +102,7 @@ namespace PeriodicSystem.ViewModel
             MoveMoleculeCommand = new RelayCommand(moveMolecule);
             UndoCommand = new RelayCommand(undo, undoRedoController.canUndo);
             RedoCommand = new RelayCommand(redo, undoRedoController.canRedo);
-            ExportBitmapCommand = new RelayCommand(exportBitmap);
+            ExportBitmapCommand = new RelayCommand<Grid>(exportBitmap);
             AddMoleculeCommand = new RelayCommand(addMolecule);
             NewDrawingCommand = new RelayCommand(newDrawing);
 
@@ -371,7 +373,6 @@ namespace PeriodicSystem.ViewModel
             }
         }
 
-        public string temp;
         private void loadFromXML()
         {
             SerializeXML serializer = SerializeXML.Instance;
@@ -422,19 +423,22 @@ namespace PeriodicSystem.ViewModel
             undoRedoController.redo();
         }
 
-        private void exportBitmap()
+        private void exportBitmap(Grid mapMe)
         {
-            //var rtb = new rendertargetbitmap(
-            //    (int)960, //width 
-            //    (int)720, //height 
-            //    300, //dpi x 
-            //    300, //dpi y 
-            //    pixelformats.pbgra32 // pixelformat 
-            //    );
-            //rtb.render(drawingcanvas);
+            RenderTargetBitmap rtb = new RenderTargetBitmap((int)960,
+            (int)720, 96d, 96d, System.Windows.Media.PixelFormats.Default);
+            rtb.Render(mapMe);
 
-            //savertbaspng(rtb, filename); 
-        }
+            var crop = new CroppedBitmap(rtb, new Int32Rect(50, 50, 250, 250));
+
+            BitmapEncoder pngEncoder = new PngBitmapEncoder();
+            pngEncoder.Frames.Add(BitmapFrame.Create(crop));
+
+            using (var fs = System.IO.File.OpenWrite("logo.png"))
+            {
+                pngEncoder.Save(fs);
+            }
+       }
 
 
         private void addMolecule()

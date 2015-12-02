@@ -25,6 +25,7 @@
         <KeyBinding Command="{Binding SelectAllCommand}" Gesture="CTRL+A"/>
         <KeyBinding Command="{Binding ClearBindingStateCommand}" Gesture="Esc"/>
         <KeyBinding Command="{Binding AddBindingCommand}" Gesture="CTRL+B"/>
+        <KeyBinding Command="{Binding ExportBitmapCommand}" Gesture="CTRL+P"/>
     </Window.InputBindings>
 
     <DockPanel>
@@ -111,7 +112,7 @@
                         <MouseBinding MouseAction="LeftClick" Command="{Binding ClearSelectionCommand}"/>
                     </Canvas.InputBindings>
 
-                    <Grid>
+                    <Grid x:Name="mapMe">
                         <ItemsControl ItemsSource="{Binding Bindings}" />
                         <ItemsControl ItemsSource="{Binding Atoms}" />
                     </Grid>
