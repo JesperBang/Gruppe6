@@ -8,17 +8,16 @@ namespace PeriodicSystem.Commands
 {
     public class UndoRedoController
     {
-        public static Commands.UndoRedoController Instance { get; internal set; }
+		public static UndoRedoController Instance { get; } = new UndoRedoController();
+		// Keeps track of the Undo/Redo commands.
+		// This is a Singleton, which ensures there will only ever be one instance of the class.
+		// There should never be more than one, otherwise problems could arise.
 
-        // Keeps track of the Undo/Redo commands.
-        // This is a Singleton, which ensures there will only ever be one instance of the class.
-        // There should never be more than one, otherwise problems could arise.
+		// Regions can be used to make code foldable (minus/plus sign to the left).
+		#region Fields
 
-            // Regions can be used to make code foldable (minus/plus sign to the left).
-            #region Fields
-
-            // The Undo stack, holding the Undo/Redo commands that have been executed.
-            private readonly Stack<IUndoRedoCommand> undoStack = new Stack<IUndoRedoCommand>();
+		// The Undo stack, holding the Undo/Redo commands that have been executed.
+		private readonly Stack<IUndoRedoCommand> undoStack = new Stack<IUndoRedoCommand>();
             // The Redo stack, holding the Undo/Redo commands that have been executed and then unexecuted (undone).
             private readonly Stack<IUndoRedoCommand> redoStack = new Stack<IUndoRedoCommand>();
 

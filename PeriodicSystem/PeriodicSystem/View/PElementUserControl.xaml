@@ -4,11 +4,13 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 xmlns:local="clr-namespace:PeriodicSystem.View"
-			 xmlns:System="clr-namespace:Model;assembly=Model" 
+			 xmlns:System="clr-namespace:Model;assembly=Model"
+			 xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+			 xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
 			 mc:Ignorable="d" 
 			 d:DesignHeight="200" d:DesignWidth="200">
 
-    <StackPanel Background="LightSteelBlue" Orientation="Horizontal" Width="200" Height="200">
+    <StackPanel Name="elementSelection"  Background="{Binding SelectedColor}" Orientation="Horizontal" Width="200" Height="200">
 		
         <StackPanel Width="50" Height="auto" VerticalAlignment="Center">
             <TextBlock x:Name="shell1" Text="{Binding shells[0]}" HorizontalAlignment="Center" VerticalAlignment="Top" Height="auto" Width="auto"/>
@@ -28,4 +30,11 @@
         </StackPanel>
 		
 	</StackPanel>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="MouseDown">
+            <cmd:EventToCommand Command="{Binding DataContext.mouseDownAddAtomCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" PassEventArgsToCommand="True"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
 </UserControl>

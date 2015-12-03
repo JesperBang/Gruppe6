@@ -6,36 +6,26 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Input;
+using Figures;
 
 namespace Model
 {
-    public class PSystem : UserControl
+    public class PSystem : NotifyBase
     {
         public ObservableCollection<PElement> elements { get; set; } = new ObservableCollection<PElement>();
 		public ObservableCollection<Label> elementSymbols { get; set; } = new ObservableCollection<Label>();
 		public ObservableCollection<Grid> elementGrid { get; set; } = new ObservableCollection<Grid>();
 
 		public ObservableCollection<PElement> currentSelection { get; set; } = new ObservableCollection<PElement>();
+		public delegate void MouseButtonEventHandler(object sender, MouseButtonEventArgs e);
 
-        public PSystem()
+		public PSystem()
         {
-			for (int i=1; i<104; i++)
-            {
-				PElement temp = new PElement();
-                elements.Add(temp);
-				Label lab = new Label();
-				lab.Content = temp.symbol;
-				elementSymbols.Add(lab);
 
-            }
-			setupGrid();
+			PElement[] initElements = createFromFile("periodic_table.txt");
 
-            //int[] shells = { 1, 0, 0, 0, 0, 0, 0 };
-            currentSelection.Add(new PElement("Hydrogen", "H", 1, 1, new int[]{ 1, 0, 0, 0, 0, 0, 0 }));
-        }
-        public PSystem(PElement[] initElements)
-        {
-            if(initElements != null)
+			if (initElements != null)
             {
 
 				//PElement testE = initElements[0];
@@ -47,7 +37,7 @@ namespace Model
 					lab.Content = initElements[i].symbol;
 					lab.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
 					lab.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Left;
-					elementSymbols.Add(lab);
+                    elementSymbols.Add(lab);
 				}
 
 			setupGrid();
@@ -57,7 +47,19 @@ namespace Model
 			{
 				//throw new NullPointerException();
 			}
+        }
+        public PSystem(PElement[] initElements)
+        {
+            
 
+		}
+
+		private void elementSelected(Object sender, MouseButtonEventArgs e)
+		{
+
+			//currentSelection = new ObservableCollection<PElement>();
+			//currentSelection.Add(elements[69]);
+			currentSelection[0] = elements[69];
 		}
 
 		private void setupGrid()
@@ -142,7 +144,7 @@ namespace Model
 
 		}
 
-        public static PSystem createFromFile(String filePath)
+        private PElement[] createFromFile(String filePath)
         {
             System.IO.StreamReader file;
             try {
@@ -223,7 +225,7 @@ namespace Model
 
 				}
 
-				return new PSystem(elements);
+				return elements;
             }
             return null;
         }

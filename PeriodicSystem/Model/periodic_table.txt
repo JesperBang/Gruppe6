@@ -64,7 +64,7 @@ Ne
 20.1797
 2 8
 
-Sodium - Natrium
+Sodium
 Na
 11
 22.98977
@@ -76,31 +76,31 @@ Mg
 24.3050
 2 8 2
 
-Aluminum - Aluminium
+Aluminum
 Al
 13
 26.981538
 2 8 3
 
-Silicon - Silicium
+Silicon
 Si
 14
 28.0855
 2 8 4
 
-Phosphorus - fosfor
+Phosphorus
 P
 15
 30.973761
 2 8 5
 
-Sulfur - Svovl
+Sulfur
 S
 16
 32.066
 2 8 6
 
-Chlorine - Clor
+Chlorine
 Cl
 17
 35.4527
@@ -112,7 +112,7 @@ Ar
 39.948
 2 8 8
 
-Potassium - Kalium
+Potassium
 K
 19
 39.0983
@@ -154,7 +154,7 @@ Mn
 54.938049
 2 8 13 2
 
-Iron - Jern
+Iron
 Fe
 26
 55.845
@@ -172,7 +172,7 @@ Ni
 58.6934
 2 8 16 2
 
-Copper - Kopper
+Copper
 Cu
 29
 63.546
@@ -208,7 +208,7 @@ Se
 78.96
 2 8 18 6
 
-Bromine - Brom
+Bromine
 Br
 35
 79.904
@@ -280,7 +280,7 @@ Pd
 106.42
 2 8 18 18 0
 
-Silver - sølv
+Silver
 Ag
 47
 107.8682
@@ -388,13 +388,13 @@ Pt
 195.078
 2 8 18 32 16 2
 
-Gold - Guld
+Gold
 Au
 79
 196.96655
 2 8 18 32 18 1
 
-Mercury - Kviksølv
+Mercury
 Hg
 80
 200.59
@@ -406,7 +406,7 @@ Tl
 204.3833
 2 8 18 32 18 3
 
-Lead - Bly
+Lead
 Pb
 82
 207.2

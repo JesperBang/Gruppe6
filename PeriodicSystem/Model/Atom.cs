@@ -16,10 +16,12 @@ namespace Model
 
         public int Id { get; set; } = ++counter;
 
-        [XmlIgnore]
-        public double Width { get; set; }
-        [XmlIgnore]
-        public double Height { get; set; }
+		//[XmlIgnore]
+		//public double Width { get; set; }
+		//[XmlIgnore]
+		//public double Height { get; set; }
+		private double size;
+		public double Size { get { return size; } set { size = value; NotifyPropertyChanged(); } }
 
         private double x = 0;
         private double y = 0;
@@ -30,7 +32,7 @@ namespace Model
             set
             {
                 x = (value < 0) ? 0 : value;
-                CenterX = x + (Width / 2);
+                CenterX = x - (size / 2);
                 NotifyPropertyChanged();
             }
         }
@@ -41,7 +43,7 @@ namespace Model
             set
             {
                 y = (value < 0) ? 0 : value;
-                CenterY = y + (Height / 2);
+                CenterY = y - (size / 2);
                 NotifyPropertyChanged();
             }
         }
@@ -53,8 +55,6 @@ namespace Model
         public double CenterX { get { return centerX; } private set { centerX = value; NotifyPropertyChanged(); } }
         [XmlIgnore]
         public double CenterY { get { return centerY; } private set { centerY = value; NotifyPropertyChanged(); } }
-
-        public int Protons { get; set; }
 
         private bool isSelected = false;
         [XmlIgnore]

@@ -121,7 +121,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Commands\AddNewLineCommand.cs" />
-    <Compile Include="Commands\AddShapeCommand.cs" />
+    <Compile Include="Commands\AddAtomCommand.cs" />
     <Compile Include="Commands\IUndoRedoCommand.cs" />
     <Compile Include="Commands\MoveShapeCommand.cs" />
     <Compile Include="Commands\RemoveLineCommand.cs" />

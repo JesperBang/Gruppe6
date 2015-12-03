@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Shapes;
+using Model;
 
 namespace PeriodicSystem.Commands
 {
 		// Undo/Redo command for adding a Shape.
-		public class AddShapeCommand : IUndoRedoCommand
+		public class AddAtomCommand : IUndoRedoCommand
 		{
 			// Regions can be used to make code foldable (minus/plus sign to the left).
 			#region Fields
@@ -19,20 +20,20 @@ namespace PeriodicSystem.Commands
 			//  therefore when this collection is changed in a object of this class, 
 			//  it also changes the collection that the MainViewModel uses.
 			// For a description of an ObservableCollection see the MainViewModel class.
-			private ObservableCollection<Shape> shapes;
+			private ObservableCollection<Atom> atoms;
 			// The 'shape' field holds a new shape, that is added to the 'shapes' collection, 
 			//  and if undone, it is removed from the collection.
-			private Shape shape;
+			private Atom atom;
 
 			#endregion
 
 			#region Constructor
 
 			// For changing the current state of the diagram.
-			public AddShapeCommand(ObservableCollection<Shape> _shapes, Shape _shape)
+			public AddAtomCommand(ObservableCollection<Atom> _atoms, Atom _atom)
 			{
-				shapes = _shapes;
-				shape = _shape;
+				atoms = _atoms;
+				atom = _atom;
 			}
 
 			#endregion
@@ -42,13 +43,13 @@ namespace PeriodicSystem.Commands
 			// For doing and redoing the command.
 			public void Execute()
 			{
-				shapes.Add(shape);
+				atoms.Add(atom);
 			}
 
 			// For undoing the command.
 			public void UnExecute()
 			{
-				shapes.Remove(shape);
+				atoms.Remove(atom);
 			}
 
 			#endregion

@@ -20,6 +20,11 @@
                 <View:AtomUserControl/>
             </Canvas>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type Model:PSystem}">
+            <Canvas>
+                <View:PSystemUserControl/>
+            </Canvas>
+        </DataTemplate>
 
     </Application.Resources>
 </Application>

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PeriodicSystem.View"
              mc:Ignorable="d"
-			 Canvas.Left="{Binding X}" Canvas.Top="{Binding Y}" Width="{Binding Width}" Height="{Binding Height}"
+			 Canvas.Left="{Binding CenterX}" Canvas.Top="{Binding CenterY}" Width="{Binding Size}" Height="{Binding Size}"
              d:DesignHeight="100" d:DesignWidth="100">
 			 
     <Grid>

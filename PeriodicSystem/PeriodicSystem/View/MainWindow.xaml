@@ -7,6 +7,8 @@
         xmlns:ViewModel="clr-namespace:PeriodicSystem.ViewModel"
 		xmlns:View="clr-namespace:PeriodicSystem.View"
 		xmlns:Model="clr-namespace:PeriodicSystem.ViewModel"
+		xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+		xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280">
 
@@ -14,7 +16,18 @@
         <ViewModel:ViewModel/>
     </Window.DataContext>
 
+    <Window.InputBindings>
+		<KeyBinding Key="Z" Modifiers="Ctrl" Command="{Binding undoCommand}"/>
+        <KeyBinding Key="Y" Modifiers="Ctrl" Command="{Binding redoCommand}"/>
+    </Window.InputBindings>
+
     <Grid Background="AntiqueWhite">
+
+        <!--<i:Interaction.Triggers>
+            <i:EventTrigger EventName="MouseUp">
+                <cmd:EventToCommand Command="{Binding DataContext.mouseUpCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" PassEventArgsToCommand="True"/>
+            </i:EventTrigger>
+        </i:Interaction.Triggers>-->
 
         <DockPanel Grid.Column="1">
             <Menu DockPanel.Dock="Top">
@@ -24,11 +37,10 @@
                     <MenuItem Header="_Save" Command="ApplicationCommands.Save"/>
                 </MenuItem>
                 <MenuItem Header="_Tools">
-                    <MenuItem Header="_Undo" Command="ApplicationCommands.Undo"/>
-                    <MenuItem Header="Redo" Command="ApplicationCommands.Redo"/>
+                    <MenuItem Header="_Undo" Command="{Binding undoCommand}" InputGestureText="Ctrl+Z"/>
+                    <MenuItem Header="_Redo" Command="{Binding redoCommand}" InputGestureText="Ctrl+Y"/>
                 </MenuItem>
             </Menu>
-            <TextBox AcceptsReturn="True" />
 
             <!--<StackPanel HorizontalAlignment="Left" Height="600" Margin="10,10,0,0" VerticalAlignment="Top" Width="450">-->
                 <Grid>
@@ -36,15 +48,20 @@
 						<RowDefinition/>
 						<RowDefinition/>
 					</Grid.RowDefinitions>
-                    <ItemsControl ItemsSource="{Binding elementGrid}" Grid.Row="1" Width="auto" Height="300" VerticalAlignment="Center"/>
-					<ItemsControl ItemsSource="{Binding elements}" Grid.Row="0" Width="200" Height="200" VerticalAlignment="Bottom" />
+					<ItemsControl ItemsSource="{Binding system}" Grid.Row="1" Width="490" Height="300" VerticalAlignment="Center"/>
+                    <ItemsControl ItemsSource="{Binding selectedElement}" Grid.Row="0" Width="200" Height="200" VerticalAlignment="Bottom" />
 
                 </Grid>
             <!--</StackPanel> -->
 
             <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Width="750" Height="650">
-                <Canvas HorizontalAlignment="Left" Height="1000" VerticalAlignment="Top" Width="1000" Background="BurlyWood">
-					<ItemsControl ItemsSource="{Binding Atoms}"/>
+                <Canvas Name="canvas"  HorizontalAlignment="Left" Height="1000" VerticalAlignment="Top" Width="1000" Background="BurlyWood">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseUp">
+                            <cmd:EventToCommand Command="{Binding DataContext.mouseUpCanvasCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" PassEventArgsToCommand="True"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ItemsControl ItemsSource="{Binding Atoms}"/>
                 </Canvas>
             </ScrollViewer>
 
