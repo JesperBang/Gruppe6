@@ -128,7 +128,7 @@ namespace PeriodicSystem.ViewModel
 
         private void CloseApp()
         {
-            
+            Application.Current.Shutdown();
         }
 
         private void clickGrid(String button)
@@ -382,9 +382,9 @@ namespace PeriodicSystem.ViewModel
             if (openXMLDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 Task<Diagram> result = serializer.load(openXMLDialog.FileName);
-                WindowTitle = openXMLDialog.FileName;
                 temp = openXMLDialog.FileName;
                 newDrawing();
+                WindowTitle = openXMLDialog.FileName;
                 List<Atom> tempAtoms = result.Result.Atoms;
                 List<Binding> tempBindings = result.Result.Bindings;
 
@@ -449,23 +449,13 @@ namespace PeriodicSystem.ViewModel
         private void newDrawing()
         {
             MessageBoxResult result = (Atoms.Count == 0) ? MessageBoxResult.No : MessageBox.Show("Would you like to save changes before proceeding?", "Other Drawing", MessageBoxButton.YesNoCancel);
-            switch (result)
+
+            if (result.Equals(MessageBoxResult.Yes))
             {
-                case MessageBoxResult.No:
-                    if (WindowTitle.Equals(temp))
-                    {
-                        WindowTitle = "New Diagram";
-                    }
-                    break;
-                case MessageBoxResult.Yes:
-                    WindowTitle = "New Diagram";
-                    //TODO add file saved confirmation
-                    saveToXML();
-                    break;
-                case MessageBoxResult.Cancel:
-                    return;
+                saveToXML();
             }
 
+            WindowTitle = "New Diagram";
             Atoms.Clear();
             Bindings.Clear();
             undoRedoController.clearStacks();
