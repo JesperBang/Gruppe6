@@ -28,7 +28,6 @@
                     <MenuItem Header="Redo" Command="ApplicationCommands.Redo"/>
                 </MenuItem>
             </Menu>
-            <TextBox AcceptsReturn="True" />
 
             <!--<StackPanel HorizontalAlignment="Left" Height="600" Margin="10,10,0,0" VerticalAlignment="Top" Width="450">-->
                 <Grid>
@@ -36,7 +35,7 @@
 						<RowDefinition/>
 						<RowDefinition/>
 					</Grid.RowDefinitions>
-                    <ItemsControl ItemsSource="{Binding elementGrid}" Grid.Row="1" Width="auto" Height="300" VerticalAlignment="Center"/>
+                    <ItemsControl x:Name="elementGrid" ItemsSource="{Binding elementGrid}" Grid.Row="1" Width="auto" Height="300" VerticalAlignment="Center"/>
 					<ItemsControl ItemsSource="{Binding elements}" Grid.Row="0" Width="200" Height="200" VerticalAlignment="Bottom" />
 
                 </Grid>
