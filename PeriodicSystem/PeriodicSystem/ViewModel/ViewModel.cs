@@ -67,7 +67,7 @@ namespace PeriodicSystem.ViewModel
         public ICommand MouseDownAtomCommand { get; }
         public ICommand MouseMoveAtomCommand { get; }
         public ICommand MouseUpAtomCommand { get; }
-
+        
         public ICommand MouseDownBindingCommand { get; }
         public ICommand ChangeBindingCommand { get; }
 
@@ -99,7 +99,7 @@ namespace PeriodicSystem.ViewModel
             SelectAllCommand = new RelayCommand(selectAll);
             RemoveModelCommand = new RelayCommand(removeModel, canRemoveModel);
             LoadFromXMLCommand = new RelayCommand(loadFromXML);
-            SaveToXMLCommand = new RelayCommand(saveToXML);
+            SaveToXMLCommand = new RelayCommand(saveToXML); 
             AddAtomCommand = new RelayCommand<int>(addAtom);
             AddAtomsCommand = new RelayCommand(addAtoms);
             AddBindingCommand = new RelayCommand(addBinding);
@@ -126,19 +126,19 @@ namespace PeriodicSystem.ViewModel
 
 
             initStateVariables();
-
+            
         }
 
 
         private void CloseApp()
         {
-
+            Application.Current.Shutdown();
         }
 
         private void clickGrid(String button)
         {
             int protonNum = Int32.Parse(button);
-            addAtom(protonNum);
+            addAtom(protonNum);          
         }
 
 
@@ -210,7 +210,7 @@ namespace PeriodicSystem.ViewModel
         {
             undoRedoController.addAndExecute(new ChangeBindingCommand(Bindings.Where(x => x.Id == id).First()));
         }
-
+        
         private Atom TargetAtom(MouseEventArgs e)
         {
             // Here the visual element that the mouse is captured by is retrieved.
@@ -269,7 +269,7 @@ namespace PeriodicSystem.ViewModel
             {
                 var shape = TargetAtom(e);
                 var mousePosition = RelativeMousePosition(e);
-
+                
                 shape.X = initialAtomPosition.X + (mousePosition.X - initialMousePosition.X);
                 shape.Y = initialAtomPosition.Y + (mousePosition.Y - initialMousePosition.Y);
             }
@@ -341,7 +341,7 @@ namespace PeriodicSystem.ViewModel
             binding.IsSelected = true;
         }
 
-
+        
 
 
         private void addAtom(int protons)
@@ -351,7 +351,7 @@ namespace PeriodicSystem.ViewModel
 
         private void addAtoms()
         {
-
+            
         }
 
         public bool canRemoveModel()
@@ -391,9 +391,9 @@ namespace PeriodicSystem.ViewModel
             if (openXMLDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 Task<Diagram> result = serializer.load(openXMLDialog.FileName);
-                WindowTitle = openXMLDialog.FileName;
                 temp = openXMLDialog.FileName;
                 newDrawing();
+                WindowTitle = openXMLDialog.FileName;
                 List<Atom> tempAtoms = result.Result.Atoms;
                 List<Binding> tempBindings = result.Result.Bindings;
 
@@ -421,7 +421,7 @@ namespace PeriodicSystem.ViewModel
         {
 
         }
-
+        
         private void undo()
         {
             undoRedoController.undo();
@@ -447,7 +447,7 @@ namespace PeriodicSystem.ViewModel
             {
                 pngEncoder.Save(fs);
             }
-        }
+       }
 
 
 
@@ -459,23 +459,13 @@ namespace PeriodicSystem.ViewModel
         private void newDrawing()
         {
             MessageBoxResult result = (Atoms.Count == 0) ? MessageBoxResult.No : MessageBox.Show("Would you like to save changes before proceeding?", "Other Drawing", MessageBoxButton.YesNoCancel);
-            switch (result)
+
+            if (result.Equals(MessageBoxResult.Yes))
             {
-                case MessageBoxResult.No:
-                    if (WindowTitle.Equals(temp))
-                    {
-                        WindowTitle = "New Diagram";
-                    }
-                    break;
-                case MessageBoxResult.Yes:
-                    WindowTitle = "New Diagram";
-                    //TODO add file saved confirmation
                     saveToXML();
-                    break;
-                case MessageBoxResult.Cancel:
-                    return;
             }
 
+            WindowTitle = "New Diagram";
             Atoms.Clear();
             Bindings.Clear();
             undoRedoController.clearStacks();
