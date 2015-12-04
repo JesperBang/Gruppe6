@@ -43,6 +43,8 @@ namespace PeriodicSystem.ViewModel
 
         public ICommand CopyCommand { get; }
         public ICommand PasteCommand { get; }
+        public ICommand CutCommand { get; }
+
         public ICommand ClearBindingStateCommand { get; }
         public ICommand ClearSelectionCommand { get; }
         public ICommand SelectAllCommand { get; }
@@ -94,6 +96,7 @@ namespace PeriodicSystem.ViewModel
 
             CopyCommand = new RelayCommand(Copy);
             PasteCommand = new RelayCommand(Paste);
+            CutCommand = new RelayCommand(Cut);
             ClearBindingStateCommand = new RelayCommand(clearBindingState, () => isAddingBindings);
             ClearSelectionCommand = new RelayCommand(clearSelections);
             SelectAllCommand = new RelayCommand(selectAll);
@@ -474,12 +477,27 @@ namespace PeriodicSystem.ViewModel
 
         private async void Copy()
         {
-            var Atom = selectedAtoms.Where(x => x.IsSelected).ToList();
-            var Binding = selectedBindings.Where(x => x.BindingPoint1.IsSelected && x.BindingPoint2.IsSelected).ToList();
-
-            Diagram diagram = new Diagram() { Atom = selectedAtoms.ToList(), Binding = selectedBindings.Where(x => x.BindingPoint1.IsSelected && x.BindingPoint2.IsSelected).ToList() };
+            Diagram diagram = new Diagram() { Atoms = selectedAtoms.ToList(), Bindings = selectedBindings.Where(x => x.BindingPoint1.IsSelected && x.BindingPoint2.IsSelected).ToList() };
 
             var xml = await SerializeXML.Instance.AsyncSerializeToString(diagram);
+
+            Clipboard.SetText(xml);
+        }
+
+        private async void Cut()
+        {
+            Diagram diagram = new Diagram() { Atoms = selectedAtoms.ToList(), Bindings = selectedBindings.Where(x => x.BindingPoint1.IsSelected && x.BindingPoint2.IsSelected).ToList() };
+
+            var xml = await SerializeXML.Instance.AsyncSerializeToString(diagram);
+
+            foreach (Binding b in selectedBindings) {
+                Bindings.Remove(b);
+            }
+
+            foreach(Atom a in selectedAtoms)
+            {
+                Atoms.Remove(a);
+            }
 
             Clipboard.SetText(xml);
         }
@@ -488,31 +506,34 @@ namespace PeriodicSystem.ViewModel
         {
             var xml = Clipboard.GetText();
 
-            var diagram = await SerializeXML.Instance.AsyncDeserializeFromString(xml);
+            try {
+                Diagram diagram = await SerializeXML.Instance.AsyncDeserializeFromString(xml);
+                
+                var map = new Dictionary<int, Atom>();
+                
+                foreach (var a in diagram.Atoms)
+                {
+                    Atom atom = new Atom(a.Protons);
+                    Atoms.Add(atom);
+                    map.Add(a.Id, atom);
+                }
 
-            var Atom = diagram.Atom;
-            var Binding = diagram.Binding;
-            var map = new Dictionary<int, Atom>();
-
-            foreach (var a in Atoms)
-                a.IsSelected = false;
-
-            foreach (var b in Bindings)
-                b.IsSelected = false;
-
-            foreach (var a in Atom)
+                foreach (var b in diagram.Bindings)
+                {
+                    Atom bind1;
+                    Atom bind2;
+                    map.TryGetValue(b.BPID1, out bind1);
+                    map.TryGetValue(b.BPID2, out bind2);
+                    Bindings.Add(new Binding(bind1, bind2, b.BindingState));
+                }
+            }
+            catch (Exception e)
             {
-                Atom temps = new Atom(a.Protons);
-                Atoms.Add(temps);
-                map[a.Id] = temps;
+                //non valid input
+                return;
             }
 
-            foreach (var b in Binding)
-            {
-                Atom bind1 = map[b.BindingPoint1.Id];
-                Atom bind2 = map[b.BindingPoint2.Id];
-                Bindings.Add(new Binding(bind1, bind2));
-            }
+            
         }
     }
 }

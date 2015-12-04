@@ -71,8 +71,16 @@ namespace PeriodicSystem.Serialize
         {
             using (TextReader stream = new StringReader(xml))
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(Diagram));
-                Diagram diagram = serializer.Deserialize(stream) as Diagram;
+                Diagram diagram;
+
+                try {
+                    XmlSerializer serializer = new XmlSerializer(typeof(Diagram));
+                    diagram = serializer.Deserialize(stream) as Diagram;
+                }
+                catch (Exception e)
+                {
+                    return new Diagram();
+                }
 
                 return diagram;
             }

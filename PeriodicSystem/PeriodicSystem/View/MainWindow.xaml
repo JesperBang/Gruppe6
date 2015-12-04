@@ -28,6 +28,7 @@
         <KeyBinding Command="{Binding ExportBitmapCommand}" Gesture="CTRL+P"/>
         <KeyBinding Command="{Binding CopyCommand}" Gesture="CTRL+C"/>
         <KeyBinding Command="{Binding PasteCommand}" Gesture="CTRL+V"/>
+        <KeyBinding Command="{Binding CutCommand}" Gesture="CTRL+X" />
     </Window.InputBindings>
 
     <DockPanel>
@@ -73,17 +74,17 @@
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>
-                <MenuItem Header="Copy" InputGestureText="Ctrl+C">
+                <MenuItem Header="Copy" Command="{Binding CopyCommand}" InputGestureText="Ctrl+C">
                 <MenuItem.Icon>
                     <Image Width="16" Height="16" Source="/PeriodicSystem;component/Images/copy.png"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Cut" InputGestureText="Ctrl+X">
+                <MenuItem Header="Cut" Command="{Binding CutCommand}" InputGestureText="Ctrl+X">
                 <MenuItem.Icon>
                     <Image Width="16" Height="16" Source="/PeriodicSystem;component/Images/cut.png"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Paste" InputGestureText="Ctrl+V">
+                <MenuItem Header="Paste" Command="{Binding PasteCommand}" InputGestureText="Ctrl+V">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/PeriodicSystem;component/Images/paste.png"/>
                     </MenuItem.Icon>
