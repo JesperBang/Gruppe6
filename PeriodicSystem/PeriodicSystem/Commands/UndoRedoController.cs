@@ -19,6 +19,7 @@ namespace PeriodicSystem.Commands
 
         public void addAndExecute(IUndoRedoCommand command)
         {
+            redoStack.Clear();
             undoStack.Push(command);
             command.execute();
         }
