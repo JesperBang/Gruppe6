@@ -21,6 +21,9 @@ namespace Model
 			counter = 0;
 		}
 
+		private bool hitTestVisible=true;
+		public bool HitTestVisible { get { return hitTestVisible; } set { hitTestVisible = value; NotifyPropertyChanged(); } }
+
 		//[XmlIgnore]
 		//public double Width { get; set; }
 		//[XmlIgnore]

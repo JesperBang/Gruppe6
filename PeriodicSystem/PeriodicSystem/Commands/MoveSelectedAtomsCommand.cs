@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Shapes;
+using Model;
+using System.Collections.ObjectModel;
 
 namespace PeriodicSystem.Commands
 {
 
 		// Undo/Redo command for moving a Shape.
-		public class MoveShapeCommand : IUndoRedoCommand
+		public class MoveSelectedAtomsCommand : IUndoRedoCommand
 		{
         // Regions can be used to make code foldable (minus/plus sign to the left).
         #region Fields
@@ -19,7 +20,7 @@ namespace PeriodicSystem.Commands
 			//  as one of the objects in the MainViewModels 'Shapes' ObservableCollection.
 			// This shape is moved by changing its coordinates (X and Y), 
 			//  and if undone the coordinates are changed back to the original coordinates.
-			private Shape shape;
+			private ObservableCollection<Atom> atoms;
 
 			// The 'offsetX' field holds the offset (difference) between the original and final X coordinate.
 			private double offsetX;
@@ -31,9 +32,9 @@ namespace PeriodicSystem.Commands
 			#region Constructor
 
 			// For changing the current state of the diagram.
-			public MoveShapeCommand(Shape _shape, double _offsetX, double _offsetY)
+			public MoveSelectedAtomsCommand(ObservableCollection<Atom> _atoms, double _offsetX, double _offsetY)
 			{
-				shape = _shape;
+				atoms = _atoms;
 				offsetX = _offsetX;
 				offsetY = _offsetY;
 			}
@@ -43,16 +44,30 @@ namespace PeriodicSystem.Commands
 			#region Methods
 
 			// For doing and redoing the command.
-			public void Execute()
+		public void Execute()
+		{
+			foreach(Atom a in atoms)
 			{
-				
+
+				a.X += offsetX;
+				a.Y += offsetY;
+
 			}
+		}
 
 			// For undoing the command.
-			public void UnExecute()
+		public void UnExecute()
+		{
+
+			foreach (Atom a in atoms)
 			{
-				
+
+				a.X -= offsetX;
+				a.Y -= offsetY;
+
 			}
+
+		}
 
 			#endregion
 		}

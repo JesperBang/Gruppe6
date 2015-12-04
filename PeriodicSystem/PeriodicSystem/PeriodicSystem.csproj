@@ -123,9 +123,9 @@
     <Compile Include="Commands\AddNewLineCommand.cs" />
     <Compile Include="Commands\AddAtomCommand.cs" />
     <Compile Include="Commands\IUndoRedoCommand.cs" />
-    <Compile Include="Commands\MoveShapeCommand.cs" />
+    <Compile Include="Commands\MoveSelectedAtomsCommand.cs" />
     <Compile Include="Commands\RemoveLineCommand.cs" />
-    <Compile Include="Commands\RemoveShapeCommand.cs" />
+    <Compile Include="Commands\RemoveAtomsCommand.cs" />
     <Compile Include="Commands\UndoRedoController.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
     <Compile Include="View\MainWindow.xaml.cs">

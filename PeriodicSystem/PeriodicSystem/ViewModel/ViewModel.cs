@@ -1,29 +1,16 @@
 ﻿using Model;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
 using PeriodicSystem.Commands;
-using System.Windows.Shapes;
 using System.Windows.Data;
 using GalaSoft.MvvmLight;
-using Model;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace PeriodicSystem.ViewModel
 {
@@ -42,7 +29,7 @@ namespace PeriodicSystem.ViewModel
 		// Saves the initial point that the mouse has during a move operation.
 		private Point initialMousePosition;
 		// Saves the initial point that the shape has during a move operation.
-		private Point initialAtomPosition;
+		private ObservableCollection<Point> initialAtomPositions = new ObservableCollection<Point>();
 		// Used for making the shapes transparent when a new line is being added.
 		// This method uses an expression-bodied member (http://www.informit.com/articles/article.aspx?p=2414582) to simplify a method that only returns a value;
 		public double ModeOpacity => isAddingLine ? 0.4 : 1.0;
@@ -53,13 +40,18 @@ namespace PeriodicSystem.ViewModel
 
 
 		public ObservableCollection<Atom> Atoms { get; set; }
+		public ObservableCollection<Atom> selectedAtoms { get; set; } = new ObservableCollection<Atom>();
 		public ObservableCollection<Binding> Bindings { get; set; }
 
+		public ICommand selectAllAtomsCommand { get; }
 		public ICommand mouseUpCanvasCommand { get; }
+		public ICommand moveSelectedAtomsCommand { get; }
+		public ICommand mouseUpAtomCommand { get; }
 		public ICommand addAtomCommand { get; }
 		public ICommand mouseDownAddAtomCommand { get; }
+		public ICommand mouseDownAtomCommand { get; }
 		public ICommand addAtomsCommand { get; }
-		public ICommand removeAtomCommand { get; }
+		public ICommand removeAtomsCommand { get; }
 		public ICommand addBindingCommand { get; }
 		public ICommand removeBindingCommand { get; }
 		public ICommand moveAtomsCommand { get; }
@@ -87,9 +79,14 @@ namespace PeriodicSystem.ViewModel
 			addAtomCommand = new RelayCommand<Atom>(addAtom);
 			mouseDownAddAtomCommand = new RelayCommand<MouseButtonEventArgs>(mouseDownAddAtom);
 			mouseUpCanvasCommand = new RelayCommand<MouseButtonEventArgs>(mouseUpCanvas);
+			mouseDownAtomCommand = new RelayCommand<MouseButtonEventArgs>(mouseDownAtom);
+			moveSelectedAtomsCommand = new RelayCommand<MouseEventArgs>(moveSelectedAtoms);
+			mouseUpAtomCommand = new RelayCommand<MouseButtonEventArgs>(mouseUpAtom);
 			saveDrawingCommand = new RelayCommand(saveDrawing);
 			loadDrawingCommand = new RelayCommand(loadDrawing);
 			newDrawingCommand = new RelayCommand(newDrawing);
+			removeAtomsCommand = new RelayCommand(removeAtoms);
+			selectAllAtomsCommand = new RelayCommand(selectAllAtoms);
 
 			undoCommand = new RelayCommand(undo);
 			redoCommand = new RelayCommand(redo);
@@ -109,6 +106,19 @@ namespace PeriodicSystem.ViewModel
 			}
 		}
 
+		private Atom TargetAtom(MouseEventArgs e)
+		{
+			var sve = (FrameworkElement)e.Device.Target;
+			return (Atom)sve.DataContext;
+		}
+
+		private Point RelativeMousePosition(MouseEventArgs e)
+		{
+			var sve = (FrameworkElement) e.MouseDevice.Target;
+			var canvas = (Canvas) FindParentOfName(sve, "canvas");
+			return Mouse.GetPosition(canvas);
+		}
+
 		private static FrameworkElement FindParentOfName(FrameworkElement o, String name)
 		{
 			try
@@ -117,11 +127,20 @@ namespace PeriodicSystem.ViewModel
 
 				dynamic parent = VisualTreeHelper.GetParent(o);
 
-				return parent.name.equals(name) ? parent : FindParentOfName(parent,name);
+				return parent.name!=null && parent.name.equals(name) ? parent : FindParentOfName(parent,name);
 			}
 			catch (Exception e)
 			{
 				return null;
+			}
+		}
+
+		private void selectAllAtoms()
+		{
+			foreach(Atom a in Atoms)
+			{
+				selectedAtoms.Add(a);
+				a.IsSelected = true;
 			}
 		}
 
@@ -136,7 +155,8 @@ namespace PeriodicSystem.ViewModel
 						Shells=selectedElement[0].shells,
 						Size = 30 +selectedElement[0].weight/2,
 						X=e.GetPosition(FindParentOfName((FrameworkElement)e.Device.Target,"canvas")).X,
-						Y=e.GetPosition(FindParentOfName((FrameworkElement)e.Device.Target,"canvas")).Y});
+						Y=e.GetPosition(FindParentOfName((FrameworkElement)e.Device.Target,"canvas")).Y,
+						HitTestVisible=!isAddingAtom});
 
 			} 
 		}
@@ -147,12 +167,62 @@ namespace PeriodicSystem.ViewModel
 			{
 				isAddingAtom = false;
 				selectedElement[0].IsSelected = false;
+				foreach (Atom a in Atoms)
+					a.HitTestVisible = true;
 			}
 			else
 			{
 				isAddingAtom = true;
 				selectedElement[0].IsSelected = true;
+				foreach (Atom a in Atoms)
+					a.HitTestVisible = false;
 			}
+		}
+
+		private void mouseDownAtom(MouseButtonEventArgs e)
+			{
+			if (selectedAtoms.Count > 0 && Keyboard.IsKeyDown(Key.LeftShift))
+			{
+				var targetAtom = TargetAtom(e);
+				if (targetAtom.IsSelected)
+				{
+					var mousePos = RelativeMousePosition(e);
+					initialMousePosition = mousePos;
+					foreach (Atom a in selectedAtoms)
+					{
+						initialAtomPositions.Add(new Point(a.X, a.Y));
+					}
+					e.MouseDevice.Target.CaptureMouse();
+				}
+			}
+			else
+			{
+				if (selectedAtoms.Count > 0 && !Keyboard.IsKeyDown(Key.LeftCtrl))
+				{
+					foreach (Atom a in selectedAtoms)
+					{
+						a.IsSelected = false;
+					}
+					selectedAtoms.Clear();
+				}
+
+				var sve = (FrameworkElement)e.Device.Target;
+				var atom = (Atom)sve.DataContext;
+
+				if (atom.IsSelected)
+				{
+					atom.IsSelected = false; //atom.IsSelected = atom.IsSelected? false :true; <-- could be used for a toggle.
+					selectedAtoms.Remove(atom);
+				}
+				else
+				{
+					atom.IsSelected = true;
+					selectedAtoms.Add(atom);
+				}
+
+			}
+			
+
 		}
 
 		private void elementSelected(MouseButtonEventArgs e)
@@ -177,14 +247,60 @@ namespace PeriodicSystem.ViewModel
 
 		}
 
+		private void moveSelectedAtoms(MouseEventArgs e)
+		{
+
+			if(Mouse.Captured != null)
+			{
+				var targetAtom = TargetAtom(e);
+				var mousePos = RelativeMousePosition(e);
+
+				foreach(Atom a in selectedAtoms)
+				{
+					a.X = initialAtomPositions[selectedAtoms.IndexOf(a)].X + (mousePos.X - initialMousePosition.X);
+					a.Y = initialAtomPositions[selectedAtoms.IndexOf(a)].Y + (mousePos.Y - initialMousePosition.Y);
+				}
+			}
+
+		}
+
+		private void mouseUpAtom(MouseButtonEventArgs e)
+		{
+			if(Mouse.Captured != null)
+			{
+				var targetAtom = TargetAtom(e);
+				var mousePos = RelativeMousePosition(e);
+
+				foreach(Atom a in selectedAtoms)
+				{
+					a.X = initialAtomPositions[selectedAtoms.IndexOf(a)].X;
+					a.Y = initialAtomPositions[selectedAtoms.IndexOf(a)].Y;
+				}
+				initialAtomPositions.Clear();
+				undoRedoController.AddAndExecute(new MoveSelectedAtomsCommand(selectedAtoms, (mousePos.X - initialMousePosition.X), (mousePos.Y - initialMousePosition.Y)));
+				e.MouseDevice.Target.ReleaseMouseCapture();
+
+			}
+		}
+
 		private void addAtoms()
 		{
 
 		}
 
-		private void removeAtom()
+		private void removeAtoms()
 		{
-
+			List<Atom> tempAtoms = new List<Atom>();
+			foreach (Atom a in selectedAtoms)
+			{
+				tempAtoms.Add(a);
+			}
+			foreach (Atom a in tempAtoms)
+			{
+				a.IsSelected = false;
+				selectedAtoms.Remove(a);
+			}
+			undoRedoController.AddAndExecute(new RemoveAtomsCommand(Atoms, tempAtoms));
 		}
 
 		private void addBinding()

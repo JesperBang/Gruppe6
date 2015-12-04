@@ -22,6 +22,8 @@
         <KeyBinding Key="S" Modifiers="Ctrl" Command="{Binding saveDrawingCommand}"/>
 		<KeyBinding Key="L" Modifiers="Ctrl" Command="{Binding loadDrawingCommand}"/>
 		<KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding newDrawingCommand}"/>
+		<KeyBinding Key="Delete" Command="{Binding removeAtomsCommand}"/>
+		<KeyBinding Key="A" Modifiers="Ctrl" Command="{Binding selectAllAtomsCommand}"/>
     </Window.InputBindings>
 
     <Grid Background="AntiqueWhite">
