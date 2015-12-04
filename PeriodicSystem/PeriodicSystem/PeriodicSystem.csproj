@@ -98,6 +98,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\duplicateSelectedCommand.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\AtomUserControl.xaml.cs">
       <DependentUpon>AtomUserControl.xaml</DependentUpon>

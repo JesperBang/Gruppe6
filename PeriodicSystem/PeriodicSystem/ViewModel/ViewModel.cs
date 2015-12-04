@@ -44,7 +44,8 @@ namespace PeriodicSystem.ViewModel
 		public ObservableCollection<Binding> Bindings { get; set; }
 
 		public ICommand selectAllAtomsCommand { get; }
-		public ICommand mouseUpCanvasCommand { get; }
+		public ICommand duplicateSelectedCommand { get; }
+        public ICommand mouseUpCanvasCommand { get; }
 		public ICommand moveSelectedAtomsCommand { get; }
 		public ICommand mouseUpAtomCommand { get; }
 		public ICommand addAtomCommand { get; }
@@ -87,6 +88,7 @@ namespace PeriodicSystem.ViewModel
 			newDrawingCommand = new RelayCommand(newDrawing);
 			removeAtomsCommand = new RelayCommand(removeAtoms);
 			selectAllAtomsCommand = new RelayCommand(selectAllAtoms);
+			duplicateSelectedCommand = new RelayCommand(duplicateSelected);
 
 			undoCommand = new RelayCommand(undo);
 			redoCommand = new RelayCommand(redo);
@@ -137,10 +139,22 @@ namespace PeriodicSystem.ViewModel
 
 		private void selectAllAtoms()
 		{
-			foreach(Atom a in Atoms)
+
+			if (selectedAtoms.Count>1)
 			{
-				selectedAtoms.Add(a);
-				a.IsSelected = true;
+				foreach (Atom a in selectedAtoms)
+				{
+					a.IsSelected = false;
+				}
+				selectedAtoms.Clear();
+			}
+			else
+			{
+				foreach(Atom a in Atoms)
+				{
+					selectedAtoms.Add(a);
+					a.IsSelected = true;
+				}
 			}
 		}
 
@@ -301,6 +315,18 @@ namespace PeriodicSystem.ViewModel
 				selectedAtoms.Remove(a);
 			}
 			undoRedoController.AddAndExecute(new RemoveAtomsCommand(Atoms, tempAtoms));
+		}
+
+		private void duplicateSelected()
+		{
+			List<Atom> temp = new List<Atom>();
+
+			foreach(Atom a in selectedAtoms)
+			{
+				temp.Add(a);
+			}
+
+			undoRedoController.AddAndExecute(new duplicateSelectedCommand(Atoms, temp));
 		}
 
 		private void addBinding()
