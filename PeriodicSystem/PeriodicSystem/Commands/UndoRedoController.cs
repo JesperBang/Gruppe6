@@ -98,6 +98,12 @@ namespace PeriodicSystem.Commands
                 command.Execute();
             }
 
+		public void clear()
+		{
+			undoStack.Clear();
+			redoStack.Clear();
+		}
+
             #endregion
         }
     

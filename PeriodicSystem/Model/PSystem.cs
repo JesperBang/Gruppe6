@@ -62,6 +62,15 @@ namespace Model
 			currentSelection[0] = elements[69];
 		}
 
+		public PElement findElement(int number)
+		{
+			foreach(PElement e in elements)
+			{
+				if (e.number == number) return e;
+			}
+			return elements[0];
+		}
+
 		private void setupGrid()
 		{
 

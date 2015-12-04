@@ -9,7 +9,7 @@
              d:DesignHeight="100" d:DesignWidth="100">
 			 
     <Grid>
-		<Ellipse Fill="{Binding SelectedColor}"/>
+		<Ellipse Fill="{Binding SelectedColor}" Stroke="Black" StrokeThickness="2"/>
         <TextBlock Text="{Binding Symbol}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30"/>
     </Grid>
 </UserControl>

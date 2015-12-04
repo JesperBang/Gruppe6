@@ -19,6 +19,9 @@
     <Window.InputBindings>
 		<KeyBinding Key="Z" Modifiers="Ctrl" Command="{Binding undoCommand}"/>
         <KeyBinding Key="Y" Modifiers="Ctrl" Command="{Binding redoCommand}"/>
+        <KeyBinding Key="S" Modifiers="Ctrl" Command="{Binding saveDrawingCommand}"/>
+		<KeyBinding Key="L" Modifiers="Ctrl" Command="{Binding loadDrawingCommand}"/>
+		<KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding newDrawingCommand}"/>
     </Window.InputBindings>
 
     <Grid Background="AntiqueWhite">
@@ -32,9 +35,9 @@
         <DockPanel Grid.Column="1">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
-                    <MenuItem Header="_New" Command="ApplicationCommands.New"/>
-                    <MenuItem Header="_Open" Command="ApplicationCommands.Open"/>
-                    <MenuItem Header="_Save" Command="ApplicationCommands.Save"/>
+                    <MenuItem Header="_New" Command="{Binding newDrawingCommand}" InputGestureText="Ctrl+N"/>
+                    <MenuItem Header="_Load" Command="{Binding loadDrawingCommand}" InputGestureText="Ctrl+L"/>
+                    <MenuItem Header="_Save" Command="{Binding saveDrawingCommand}" InputGestureText="Ctrl+S"/>
                 </MenuItem>
                 <MenuItem Header="_Tools">
                     <MenuItem Header="_Undo" Command="{Binding undoCommand}" InputGestureText="Ctrl+Z"/>

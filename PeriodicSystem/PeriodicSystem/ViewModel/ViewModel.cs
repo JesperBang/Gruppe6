@@ -23,6 +23,7 @@ using System.Windows.Data;
 using GalaSoft.MvvmLight;
 using Model;
 using GalaSoft.MvvmLight.CommandWpf;
+using System.Text.RegularExpressions;
 
 namespace PeriodicSystem.ViewModel
 {
@@ -86,11 +87,13 @@ namespace PeriodicSystem.ViewModel
 			addAtomCommand = new RelayCommand<Atom>(addAtom);
 			mouseDownAddAtomCommand = new RelayCommand<MouseButtonEventArgs>(mouseDownAddAtom);
 			mouseUpCanvasCommand = new RelayCommand<MouseButtonEventArgs>(mouseUpCanvas);
+			saveDrawingCommand = new RelayCommand(saveDrawing);
+			loadDrawingCommand = new RelayCommand(loadDrawing);
+			newDrawingCommand = new RelayCommand(newDrawing);
 
 			undoCommand = new RelayCommand(undo);
 			redoCommand = new RelayCommand(redo);
 
-			Atoms.Add(new Atom());
 			selectedElement = system[0].currentSelection;
 			//elements.Add(system.currentSelection);
 		}
@@ -126,15 +129,14 @@ namespace PeriodicSystem.ViewModel
 		{
 			if (selectedElement[0].IsSelected == true)
 			{
-
 				addAtom(new Atom() {Name=selectedElement[0].name,
 						Symbol=selectedElement[0].symbol,
 						Number=selectedElement[0].number,
 						Weight=selectedElement[0].weight,
 						Shells=selectedElement[0].shells,
 						Size = 30 +selectedElement[0].weight/2,
-						X=e.GetPosition(e.Device.Target).X,
-						Y=e.GetPosition(e.Device.Target).Y});
+						X=e.GetPosition(FindParentOfName((FrameworkElement)e.Device.Target,"canvas")).X,
+						Y=e.GetPosition(FindParentOfName((FrameworkElement)e.Device.Target,"canvas")).Y});
 
 			} 
 		}
@@ -223,11 +225,63 @@ namespace PeriodicSystem.ViewModel
 
 		private void saveDrawing()
 		{
+			String filepath = "save.txt";
+            System.IO.StreamWriter file;
+			String savefile = "";
+			String n = "\r\n";
+
+			//foreach (Atom a in Atoms){
+			//	savefile += a.X + n + a.Y + n + a.Size + n + a.Number + n;
+			//}
+			for(int i = 0; i < Atoms.Count; i++)
+			{
+				savefile += Atoms[i].X + n + Atoms[i].Y + n + Atoms[i].Size + n + Atoms[i].Number + n;
+			}
+
+			try
+			{
+				file = new System.IO.StreamWriter(filepath);
+				file.Write(savefile);
+				file.Close();
+			}
+			catch
+			{
+				return;
+			}
 
 		}
 
 		private void loadDrawing()
 		{
+			String filepath = "save.txt";
+			System.IO.StreamReader file;
+			String[] text;
+
+			try
+			{
+				file = new System.IO.StreamReader(filepath);
+				text = Regex.Split(file.ReadToEnd(), "\r\n");
+				Atoms.Clear();
+				undoRedoController.clear();
+				Atom.resetCounter();
+
+				for (int i = 0; i < text.Length; i += 4)
+				{
+					double x = double.Parse(text[0 + i]);
+					double y = double.Parse(text[1 + i]);
+					double s = double.Parse(text[2 + i]);
+					int num = Int32.Parse(text[3 + i]);
+					PElement e = system[0].findElement(num);
+
+					addAtom(new Atom() { Size = s, X = x, Y = y, Name = e.name, Number = num, Symbol = e.symbol, Weight = e.weight, Shells = e.shells });
+
+				}
+
+			}
+			catch
+			{
+				return;
+			}
 
 		}
 
@@ -243,7 +297,9 @@ namespace PeriodicSystem.ViewModel
 
 		private void newDrawing()
 		{
-
+			Atoms.Clear();
+			undoRedoController.clear();
+			Atom.resetCounter();
 		}
 	}
 }

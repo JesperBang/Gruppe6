@@ -16,6 +16,11 @@ namespace Model
 
         public int Id { get; set; } = ++counter;
 
+		public static void resetCounter()
+		{
+			counter = 0;
+		}
+
 		//[XmlIgnore]
 		//public double Width { get; set; }
 		//[XmlIgnore]
