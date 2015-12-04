@@ -26,6 +26,8 @@
         <KeyBinding Command="{Binding ClearBindingStateCommand}" Gesture="Esc"/>
         <KeyBinding Command="{Binding AddBindingCommand}" Gesture="CTRL+B"/>
         <KeyBinding Command="{Binding ExportBitmapCommand}" Gesture="CTRL+P"/>
+        <KeyBinding Command="{Binding CopyCommand}" Gesture="CTRL+C"/>
+        <KeyBinding Command="{Binding PasteCommand}" Gesture="CTRL+V"/>
     </Window.InputBindings>
 
     <DockPanel>

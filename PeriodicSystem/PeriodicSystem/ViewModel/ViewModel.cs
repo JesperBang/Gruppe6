@@ -23,9 +23,9 @@ namespace PeriodicSystem.ViewModel
 {
     public class ViewModel : ViewModelBase
     {
-        public ObservableCollection<Atom> Atoms{ get; set; }
+        public ObservableCollection<Atom> Atoms { get; set; }
         public ObservableCollection<Binding> Bindings { get; set; }
-        public string WindowTitle { get { return windowTitle; } set { windowTitle = value +" - pTable v0.1.0"; RaisePropertyChanged(); } }
+        public string WindowTitle { get { return windowTitle; } set { windowTitle = value + " - pTable v0.1.0"; RaisePropertyChanged(); } }
 
         public string temp;
 
@@ -41,6 +41,8 @@ namespace PeriodicSystem.ViewModel
         private List<Atom> selectedAtoms;
         private List<Binding> selectedBindings;
 
+        public ICommand CopyCommand { get; }
+        public ICommand PasteCommand { get; }
         public ICommand ClearBindingStateCommand { get; }
         public ICommand ClearSelectionCommand { get; }
         public ICommand SelectAllCommand { get; }
@@ -48,7 +50,7 @@ namespace PeriodicSystem.ViewModel
         public ICommand LoadFromXMLCommand { get; }
         public ICommand SaveToXMLCommand { get; }
         public ICommand AddAtomCommand { get; }
-        public ICommand AddAtomsCommand{ get; }
+        public ICommand AddAtomsCommand { get; }
         public ICommand RemoveAtomCommand { get; }
         public ICommand AddBindingCommand { get; }
         public ICommand RemoveBindingCommand { get; }
@@ -65,8 +67,8 @@ namespace PeriodicSystem.ViewModel
         public ICommand MouseDownAtomCommand { get; }
         public ICommand MouseMoveAtomCommand { get; }
         public ICommand MouseUpAtomCommand { get; }
-        
-        public ICommand MouseDownBindingCommand {get;}
+
+        public ICommand MouseDownBindingCommand { get; }
         public ICommand ChangeBindingCommand { get; }
 
         private UndoRedoController undoRedoController;
@@ -90,12 +92,14 @@ namespace PeriodicSystem.ViewModel
 
             undoRedoController = new UndoRedoController();
 
+            CopyCommand = new RelayCommand(Copy);
+            PasteCommand = new RelayCommand(Paste);
             ClearBindingStateCommand = new RelayCommand(clearBindingState, () => isAddingBindings);
             ClearSelectionCommand = new RelayCommand(clearSelections);
             SelectAllCommand = new RelayCommand(selectAll);
             RemoveModelCommand = new RelayCommand(removeModel, canRemoveModel);
             LoadFromXMLCommand = new RelayCommand(loadFromXML);
-            SaveToXMLCommand = new RelayCommand(saveToXML); 
+            SaveToXMLCommand = new RelayCommand(saveToXML);
             AddAtomCommand = new RelayCommand<int>(addAtom);
             AddAtomsCommand = new RelayCommand(addAtoms);
             AddBindingCommand = new RelayCommand(addBinding);
@@ -122,19 +126,19 @@ namespace PeriodicSystem.ViewModel
 
 
             initStateVariables();
-            
+
         }
 
 
         private void CloseApp()
         {
-            
+
         }
 
         private void clickGrid(String button)
         {
             int protonNum = Int32.Parse(button);
-            addAtom(protonNum);          
+            addAtom(protonNum);
         }
 
 
@@ -165,14 +169,16 @@ namespace PeriodicSystem.ViewModel
                 return;
             }
 
-            if (selectedAtoms != null) {
+            if (selectedAtoms != null)
+            {
                 foreach (Atom a in selectedAtoms)
                 {
                     a.IsSelected = false;
                 }
             }
 
-            if (selectedBindings != null) {
+            if (selectedBindings != null)
+            {
                 foreach (Binding b in selectedBindings)
                 {
                     b.IsSelected = false;
@@ -204,7 +210,7 @@ namespace PeriodicSystem.ViewModel
         {
             undoRedoController.addAndExecute(new ChangeBindingCommand(Bindings.Where(x => x.Id == id).First()));
         }
-        
+
         private Atom TargetAtom(MouseEventArgs e)
         {
             // Here the visual element that the mouse is captured by is retrieved.
@@ -232,7 +238,8 @@ namespace PeriodicSystem.ViewModel
 
         private void mouseDownAtom(MouseEventArgs e)
         {
-            if (!isAddingBindings) { 
+            if (!isAddingBindings)
+            {
                 //moving atom
                 var atom = TargetAtom(e);
                 var mousePosition = RelativeMousePosition(e);
@@ -262,7 +269,7 @@ namespace PeriodicSystem.ViewModel
             {
                 var shape = TargetAtom(e);
                 var mousePosition = RelativeMousePosition(e);
-                
+
                 shape.X = initialAtomPosition.X + (mousePosition.X - initialMousePosition.X);
                 shape.Y = initialAtomPosition.Y + (mousePosition.Y - initialMousePosition.Y);
             }
@@ -291,13 +298,15 @@ namespace PeriodicSystem.ViewModel
                     }
                 }
             }
-            else {
+            else
+            {
                 //moving atom
                 var atom = TargetAtom(e);
                 var mousePosition = RelativeMousePosition(e);
 
                 //only move if change is significant
-                if (atom.X != initialAtomPosition.X && atom.Y != initialAtomPosition.Y) {
+                if (atom.X != initialAtomPosition.X && atom.Y != initialAtomPosition.Y)
+                {
 
                     atom.X = initialAtomPosition.X;
                     atom.Y = initialAtomPosition.Y;
@@ -332,7 +341,7 @@ namespace PeriodicSystem.ViewModel
             binding.IsSelected = true;
         }
 
-        
+
 
 
         private void addAtom(int protons)
@@ -342,7 +351,7 @@ namespace PeriodicSystem.ViewModel
 
         private void addAtoms()
         {
-            
+
         }
 
         public bool canRemoveModel()
@@ -388,7 +397,7 @@ namespace PeriodicSystem.ViewModel
                 List<Atom> tempAtoms = result.Result.Atoms;
                 List<Binding> tempBindings = result.Result.Bindings;
 
-                foreach(Atom a in tempAtoms)
+                foreach (Atom a in tempAtoms)
                 {
                     Atoms.Add(new Atom(a.Id, a.Protons, a.X, a.Y));
                 }
@@ -412,7 +421,7 @@ namespace PeriodicSystem.ViewModel
         {
 
         }
-        
+
         private void undo()
         {
             undoRedoController.undo();
@@ -438,7 +447,8 @@ namespace PeriodicSystem.ViewModel
             {
                 pngEncoder.Save(fs);
             }
-       }
+        }
+
 
 
         private void addMolecule()
@@ -470,6 +480,49 @@ namespace PeriodicSystem.ViewModel
             Bindings.Clear();
             undoRedoController.clearStacks();
             initStateVariables();
+        }
+
+        private async void Copy()
+        {
+            var Atom = selectedAtoms.Where(x => x.IsSelected).ToList();
+            var Binding = selectedBindings.Where(x => x.BindingPoint1.IsSelected && x.BindingPoint2.IsSelected).ToList();
+
+            Diagram diagram = new Diagram() { Atom = selectedAtoms.ToList(), Binding = selectedBindings.Where(x => x.BindingPoint1.IsSelected && x.BindingPoint2.IsSelected).ToList() };
+
+            var xml = await SerializeXML.Instance.AsyncSerializeToString(diagram);
+
+            Clipboard.SetText(xml);
+        }
+
+        private async void Paste()
+        {
+            var xml = Clipboard.GetText();
+
+            var diagram = await SerializeXML.Instance.AsyncDeserializeFromString(xml);
+
+            var Atom = diagram.Atom;
+            var Binding = diagram.Binding;
+            var map = new Dictionary<int, Atom>();
+
+            foreach (var a in Atoms)
+                a.IsSelected = false;
+
+            foreach (var b in Bindings)
+                b.IsSelected = false;
+
+            foreach (var a in Atom)
+            {
+                Atom temps = new Atom(a.Protons);
+                Atoms.Add(temps);
+                map[a.Id] = temps;
+            }
+
+            foreach (var b in Binding)
+            {
+                Atom bind1 = map[b.BindingPoint1.Id];
+                Atom bind2 = map[b.BindingPoint2.Id];
+                Bindings.Add(new Binding(bind1, bind2));
+            }
         }
     }
 }
