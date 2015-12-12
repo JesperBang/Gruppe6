@@ -444,19 +444,20 @@ namespace PeriodicSystem.ViewModel
 
         private void exportBitmap(Grid mapMe)
         {
-            RenderTargetBitmap rtb = new RenderTargetBitmap((int)960,
-            (int)720, 96d, 96d, System.Windows.Media.PixelFormats.Default);
-            rtb.Render(mapMe);
 
-            var crop = new CroppedBitmap(rtb, new Int32Rect(50, 50, 250, 250));
+         //   RenderTargetBitmap rtb = new RenderTargetBitmap((int)960,
+         //   (int)720, 96d, 96d, System.Windows.Media.PixelFormats.Default);
+         //   rtb.Render(mapMe);
 
-            BitmapEncoder pngEncoder = new PngBitmapEncoder();
-            pngEncoder.Frames.Add(BitmapFrame.Create(crop));
+         //  var crop = new CroppedBitmap(rtb, new Int32Rect(50, 50, 250, 250));
 
-            using (var fs = System.IO.File.OpenWrite("logo.png"))
-            {
-                pngEncoder.Save(fs);
-            }
+         //   BitmapEncoder pngEncoder = new PngBitmapEncoder();
+         //   pngEncoder.Frames.Add(BitmapFrame.Create(crop));
+
+         //  using (var fs = System.IO.File.OpenWrite("logo.png"))
+         //   {
+         //       pngEncoder.Save(fs);
+         //   }
        }
 
 
