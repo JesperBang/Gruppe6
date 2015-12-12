@@ -394,6 +394,13 @@ namespace PeriodicSystem.ViewModel
             if (openXMLDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 Task<Diagram> result = serializer.load(openXMLDialog.FileName);
+
+                if(result.Result == null)
+                {
+                    System.Windows.Forms.MessageBox.Show("Programmet kan ikke indlæse den valgte fil", "Fejl ved indlæsning", System.Windows.Forms.MessageBoxButtons.OK);
+                    return;
+                }
+
                 temp = openXMLDialog.FileName;
                 newDrawing();
                 WindowTitle = openXMLDialog.FileName;

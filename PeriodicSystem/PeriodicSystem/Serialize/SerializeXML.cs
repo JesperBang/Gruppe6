@@ -35,12 +35,19 @@ namespace PeriodicSystem.Serialize
 
         private Diagram DeserializeFromFile(String path)
         {
-            using (FileStream stream = File.OpenRead(path))
+            try
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(Diagram));
-                Diagram diagram = serializer.Deserialize(stream) as Diagram;
+                using (FileStream stream = File.OpenRead(path))
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(Diagram));
+                    Diagram diagram = serializer.Deserialize(stream) as Diagram;
 
-                return diagram;
+                    return diagram;
+                }
+            }
+            catch
+            {
+                return null;
             }
         }
 
