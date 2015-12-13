@@ -23,10 +23,8 @@ namespace Model
 
 		private bool hitTestVisible=true;
 		public bool HitTestVisible { get { return hitTestVisible; } set { hitTestVisible = value; NotifyPropertyChanged(); } }
-
-		//[XmlIgnore]
+		
 		//public double Width { get; set; }
-		//[XmlIgnore]
 		//public double Height { get; set; }
 		private double size;
 		public double Size { get { return size; } set { size = value; NotifyPropertyChanged(); } }
@@ -58,14 +56,11 @@ namespace Model
 
         private double centerX;
         private double centerY;
-
-        [XmlIgnore]
+		
         public double CenterX { get { return centerX; } private set { centerX = value; NotifyPropertyChanged(); } }
-        [XmlIgnore]
         public double CenterY { get { return centerY; } private set { centerY = value; NotifyPropertyChanged(); } }
 
         private bool isSelected = false;
-        [XmlIgnore]
         public bool IsSelected { get { return isSelected; } set { isSelected = value; NotifyPropertyChanged(); NotifyPropertyChanged(() => SelectedColor); } }
 
 		private Brush currColor = Brushes.Red;

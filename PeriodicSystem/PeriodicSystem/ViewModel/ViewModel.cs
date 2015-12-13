@@ -23,19 +23,11 @@ namespace PeriodicSystem.ViewModel
 		private bool isAddingAtom;
 
 		private int selectedGroup;
-
-		// Keeps track of the state, depending on whether a line is being added or not.
-		private bool isAddingLine;
-		// Used for saving the shape that a line is drawn from, while it is being drawn.
-		private Atom addingLineFrom;
+		
 		// Saves the initial point that the mouse has during a move operation.
 		private Point initialMousePosition;
 		// Saves the initial point that the shape has during a move operation.
 		private ObservableCollection<Point> initialAtomPositions = new ObservableCollection<Point>();
-		// Used for making the shapes transparent when a new line is being added.
-		// This method uses an expression-bodied member (http://www.informit.com/articles/article.aspx?p=2414582) to simplify a method that only returns a value;
-		public double ModeOpacity => isAddingLine ? 0.4 : 1.0;
-
 		public ObservableCollection<PSystem> system { get; set; } = new ObservableCollection<PSystem>();
 		public ObservableCollection<PElement> selectedElement { get; set; }
 		public ObservableCollection<Grid> elementGrid { get; set; }
@@ -300,7 +292,7 @@ namespace PeriodicSystem.ViewModel
 				if (isAddingAtom) system[0].currentSelection[0].IsSelected = true;
 				
 				//selectedElement = system[0].currentSelection;
-			}catch(Exception excep) { }
+			}catch { }
 			
 			//system[0].currentSelection[0] = system[0].elements[69];
 		}
@@ -461,28 +453,26 @@ namespace PeriodicSystem.ViewModel
 		{
 			String filepath = "save.txt";
 			System.IO.StreamReader file;
-			String[] text;
 
-			//try
-			//{
+			try
+			{
 				file = new System.IO.StreamReader(filepath);
 				String[] sections = Regex.Split(file.ReadToEnd(), "groups\r\n");
-				String atomSection = sections[0];
-                text = Regex.Split(atomSection, "\r\n");
+				String[] atomSection = Regex.Split(sections[0], "\r\n");
 				String[] groupSection = Regex.Split(sections[1], "\r\n");
 				Atoms.Clear();
 				undoRedoController.clear();
 				Atom.resetCounter();
 
-				for (int i = 0; i < text.Length-1; i += 4)
+				for (int i = 0; i < atomSection.Length-1; i += 4)
 				{
-					double x = double.Parse(text[0 + i]);
-					double y = double.Parse(text[1 + i]);
-					double s = double.Parse(text[2 + i]);
-					int num = Int32.Parse(text[3 + i]);
+					double x = double.Parse(atomSection[0 + i]);
+					double y = double.Parse(atomSection[1 + i]);
+					double s = double.Parse(atomSection[2 + i]);
+					int num = Int32.Parse(atomSection[3 + i]);
 					PElement e = system[0].findElement(num);
 
-					addAtom(new Atom() { Size = s, X = x, Y = y, Name = e.name, Number = num, Symbol = e.symbol, Weight = e.weight, Shells = e.shells });
+					Atoms.Add(new Atom() { Size = s, X = x, Y = y, Name = e.name, Number = num, Symbol = e.symbol, Weight = e.weight, Shells = e.shells });
 
 				}
 
@@ -499,11 +489,11 @@ namespace PeriodicSystem.ViewModel
 					groups.Add(tempGroup);
 				}
 
-			//}
-			//catch
-			//{
-			//	return;
-			//}
+			}
+			catch
+			{
+				return;
+			}
 
 		}
 

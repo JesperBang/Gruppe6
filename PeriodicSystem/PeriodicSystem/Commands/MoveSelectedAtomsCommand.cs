@@ -8,42 +8,34 @@ using System.Collections.ObjectModel;
 
 namespace PeriodicSystem.Commands
 {
+	public class MoveSelectedAtomsCommand : IUndoRedoCommand
+	{
+		#region Fields
+		
+		private ObservableCollection<Atom> atoms;
 
-		// Undo/Redo command for moving a Shape.
-		public class MoveSelectedAtomsCommand : IUndoRedoCommand
+		// The 'offsetX' field holds the offset (difference) between the original and final X coordinate.
+		private double offsetX;
+		// The 'offsetY' field holds the offset (difference) between the original and final Y coordinate.
+		private double offsetY;
+
+		#endregion
+
+		#region Constructor
+
+		// For changing the current state of the diagram.
+		public MoveSelectedAtomsCommand(ObservableCollection<Atom> _atoms, double _offsetX, double _offsetY)
 		{
-        // Regions can be used to make code foldable (minus/plus sign to the left).
-        #region Fields
+			atoms = _atoms;
+			offsetX = _offsetX;
+			offsetY = _offsetY;
+		}
 
-        // The 'shape' field holds an existing shape, 
-        //and the reference points to the same object, 
-			//  as one of the objects in the MainViewModels 'Shapes' ObservableCollection.
-			// This shape is moved by changing its coordinates (X and Y), 
-			//  and if undone the coordinates are changed back to the original coordinates.
-			private ObservableCollection<Atom> atoms;
+		#endregion
 
-			// The 'offsetX' field holds the offset (difference) between the original and final X coordinate.
-			private double offsetX;
-			// The 'offsetY' field holds the offset (difference) between the original and final Y coordinate.
-			private double offsetY;
+		#region Methods
 
-			#endregion
-
-			#region Constructor
-
-			// For changing the current state of the diagram.
-			public MoveSelectedAtomsCommand(ObservableCollection<Atom> _atoms, double _offsetX, double _offsetY)
-			{
-				atoms = _atoms;
-				offsetX = _offsetX;
-				offsetY = _offsetY;
-			}
-
-			#endregion
-
-			#region Methods
-
-			// For doing and redoing the command.
+		// For doing and redoing the command.
 		public void Execute()
 		{
 			foreach(Atom a in atoms)
@@ -55,7 +47,7 @@ namespace PeriodicSystem.Commands
 			}
 		}
 
-			// For undoing the command.
+		// For undoing the command.
 		public void UnExecute()
 		{
 
@@ -70,6 +62,6 @@ namespace PeriodicSystem.Commands
 		}
 
 			#endregion
-		}
+	}
 	
 }
