@@ -25,6 +25,7 @@
 		<KeyBinding Key="Delete" Command="{Binding removeAtomsCommand}"/>
 		<KeyBinding Key="A" Modifiers="Ctrl" Command="{Binding selectAllAtomsCommand}"/>
 		<KeyBinding Key="D" Modifiers="Ctrl" Command="{Binding duplicateSelectedCommand}"/>
+		<KeyBinding Key="G" Modifiers="Ctrl" Command="{Binding addGroupCommand}"/>
     </Window.InputBindings>
 
     <Grid Background="AntiqueWhite">

@@ -38,6 +38,7 @@ namespace PeriodicSystem.ViewModel
 		public ObservableCollection<PElement> selectedElement { get; set; }
 		public ObservableCollection<Grid> elementGrid { get; set; }
 
+		public List<List<Atom>> groups = new List<List<Atom>>();
 
 		public ObservableCollection<Atom> Atoms { get; set; }
 		public ObservableCollection<Atom> selectedAtoms { get; set; } = new ObservableCollection<Atom>();
@@ -53,16 +54,15 @@ namespace PeriodicSystem.ViewModel
 		public ICommand mouseDownAtomCommand { get; }
 		public ICommand addAtomsCommand { get; }
 		public ICommand removeAtomsCommand { get; }
-		public ICommand addBindingCommand { get; }
-		public ICommand removeBindingCommand { get; }
+		public ICommand addGroupCommand { get; }
+		public ICommand removeGroupCommand { get; }
 		public ICommand moveAtomsCommand { get; }
-		public ICommand moveMoleculeCommand { get; }
+		public ICommand moveGroupCommand { get; }
 		public ICommand undoCommand { get; }
 		public ICommand redoCommand { get; }
 		public ICommand saveDrawingCommand { get; }
 		public ICommand loadDrawingCommand { get; }
 		public ICommand exportBitmapCommand { get; }
-		public ICommand addMoleculeCommand { get; }
 		public ICommand newDrawingCommand { get; }
 		public ICommand elementSelectedCommand { get; }
 
@@ -89,6 +89,7 @@ namespace PeriodicSystem.ViewModel
 			removeAtomsCommand = new RelayCommand(removeAtoms);
 			selectAllAtomsCommand = new RelayCommand(selectAllAtoms);
 			duplicateSelectedCommand = new RelayCommand(duplicateSelected);
+			addGroupCommand = new RelayCommand(addGroup);
 
 			undoCommand = new RelayCommand(undo);
 			redoCommand = new RelayCommand(redo);
@@ -156,6 +157,12 @@ namespace PeriodicSystem.ViewModel
 					a.IsSelected = true;
 				}
 			}
+		}
+
+		private void addGroup()
+		{
+			undoRedoController.AddAndExecute(new AddGroupCommand(groups, selectedAtoms));
+
 		}
 
 		private void mouseUpCanvas(MouseButtonEventArgs e)
@@ -232,6 +239,17 @@ namespace PeriodicSystem.ViewModel
 				{
 					atom.IsSelected = true;
 					selectedAtoms.Add(atom);
+					foreach(List<Atom> g in groups)
+					{
+						if (g.Contains(atom))
+						{
+							foreach(Atom a in g)
+							{
+								selectedAtoms.Add(a);
+								a.IsSelected = true;
+							}
+						}
+					}
 				}
 
 			}
