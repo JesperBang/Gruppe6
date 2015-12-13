@@ -22,6 +22,8 @@ namespace PeriodicSystem.ViewModel
 
 		private bool isAddingAtom;
 
+		private int selectedGroup;
+
 		// Keeps track of the state, depending on whether a line is being added or not.
 		private bool isAddingLine;
 		// Used for saving the shape that a line is drawn from, while it is being drawn.
@@ -44,7 +46,8 @@ namespace PeriodicSystem.ViewModel
 		public ObservableCollection<Atom> selectedAtoms { get; set; } = new ObservableCollection<Atom>();
 		public ObservableCollection<Binding> Bindings { get; set; }
 
-		public ICommand selectAllAtomsCommand { get; }
+		public ICommand cycleSelectionCommand { get; }
+        public ICommand selectAllAtomsCommand { get; }
 		public ICommand duplicateSelectedCommand { get; }
         public ICommand mouseUpCanvasCommand { get; }
 		public ICommand moveSelectedAtomsCommand { get; }
@@ -90,6 +93,8 @@ namespace PeriodicSystem.ViewModel
 			selectAllAtomsCommand = new RelayCommand(selectAllAtoms);
 			duplicateSelectedCommand = new RelayCommand(duplicateSelected);
 			addGroupCommand = new RelayCommand(addGroup);
+			removeGroupCommand = new RelayCommand(removeGroup);
+			cycleSelectionCommand = new RelayCommand(cycleSelection);
 
 			undoCommand = new RelayCommand(undo);
 			redoCommand = new RelayCommand(redo);
@@ -138,6 +143,30 @@ namespace PeriodicSystem.ViewModel
 			}
 		}
 
+		private void cycleSelection()
+		{
+			if (groups.Count > 0)
+			{
+				if (selectedGroup >= groups.Count)
+				{
+					selectedGroup = 0;
+				}
+
+				foreach (Atom a in selectedAtoms)
+				{
+					a.IsSelected = false;
+				}
+				selectedAtoms.Clear();
+
+				foreach (Atom a in groups[selectedGroup])
+				{
+					selectedAtoms.Add(a);
+					a.IsSelected = true;
+				}
+				selectedGroup++;
+				
+			}
+		}
 		private void selectAllAtoms()
 		{
 
@@ -163,6 +192,10 @@ namespace PeriodicSystem.ViewModel
 		{
 			undoRedoController.AddAndExecute(new AddGroupCommand(groups, selectedAtoms));
 
+		}
+		private void removeGroup()
+		{
+			undoRedoController.AddAndExecute(new RemoveGroupCommand(groups, selectedAtoms, ref selectedGroup));
 		}
 
 		private void mouseUpCanvas(MouseButtonEventArgs e)
@@ -391,14 +424,25 @@ namespace PeriodicSystem.ViewModel
             System.IO.StreamWriter file;
 			String savefile = "";
 			String n = "\r\n";
+			
 
-			//foreach (Atom a in Atoms){
-			//	savefile += a.X + n + a.Y + n + a.Size + n + a.Number + n;
-			//}
 			for(int i = 0; i < Atoms.Count; i++)
 			{
 				savefile += Atoms[i].X + n + Atoms[i].Y + n + Atoms[i].Size + n + Atoms[i].Number + n;
 			}
+			savefile += "groups" + n;
+			if(groups.Count>0)
+				foreach (List<Atom> g in groups)
+				{
+					if (g.Count > 0)
+					{
+						foreach(Atom a in g)
+						{
+							savefile += Atoms.IndexOf(a) + ",";
+						}
+						savefile += n;
+					}
+				}
 
 			try
 			{
@@ -419,15 +463,18 @@ namespace PeriodicSystem.ViewModel
 			System.IO.StreamReader file;
 			String[] text;
 
-			try
-			{
+			//try
+			//{
 				file = new System.IO.StreamReader(filepath);
-				text = Regex.Split(file.ReadToEnd(), "\r\n");
+				String[] sections = Regex.Split(file.ReadToEnd(), "groups\r\n");
+				String atomSection = sections[0];
+                text = Regex.Split(atomSection, "\r\n");
+				String[] groupSection = Regex.Split(sections[1], "\r\n");
 				Atoms.Clear();
 				undoRedoController.clear();
 				Atom.resetCounter();
 
-				for (int i = 0; i < text.Length; i += 4)
+				for (int i = 0; i < text.Length-1; i += 4)
 				{
 					double x = double.Parse(text[0 + i]);
 					double y = double.Parse(text[1 + i]);
@@ -439,11 +486,24 @@ namespace PeriodicSystem.ViewModel
 
 				}
 
-			}
-			catch
-			{
-				return;
-			}
+				foreach(String s in groupSection)
+				{
+					String[] groupElements = Regex.Split(s, ",");
+					List<Atom> tempGroup = new List<Atom>();
+
+					foreach(String e in groupElements)
+					{
+						if (e.Equals("")) break;
+						tempGroup.Add(Atoms[Int32.Parse(e)]);
+					}
+					groups.Add(tempGroup);
+				}
+
+			//}
+			//catch
+			//{
+			//	return;
+			//}
 
 		}
 

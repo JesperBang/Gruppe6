@@ -98,6 +98,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\RemoveGroupCommand.cs" />
     <Compile Include="Commands\AddGroupCommand.cs" />
     <Compile Include="Commands\duplicateSelectedCommand.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

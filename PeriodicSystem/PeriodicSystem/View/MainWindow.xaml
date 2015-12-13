@@ -26,6 +26,8 @@
 		<KeyBinding Key="A" Modifiers="Ctrl" Command="{Binding selectAllAtomsCommand}"/>
 		<KeyBinding Key="D" Modifiers="Ctrl" Command="{Binding duplicateSelectedCommand}"/>
 		<KeyBinding Key="G" Modifiers="Ctrl" Command="{Binding addGroupCommand}"/>
+        <KeyBinding Key="G" Modifiers="Ctrl+Shift" Command="{Binding removeGroupCommand}"/>
+        <KeyBinding Key="Tab" Command="{Binding cycleSelectionCommand}"/>
     </Window.InputBindings>
 
     <Grid Background="AntiqueWhite">
