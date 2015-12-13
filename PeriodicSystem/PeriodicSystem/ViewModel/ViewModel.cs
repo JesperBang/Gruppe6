@@ -302,14 +302,16 @@ namespace PeriodicSystem.ViewModel
 			{
 				var targetAtom = TargetAtom(e);
 				var mousePos = RelativeMousePosition(e);
+				ObservableCollection<Atom> temp = new ObservableCollection<Atom>();
 
-				foreach(Atom a in selectedAtoms)
+				foreach (Atom a in selectedAtoms)
 				{
 					a.X = initialAtomPositions[selectedAtoms.IndexOf(a)].X;
 					a.Y = initialAtomPositions[selectedAtoms.IndexOf(a)].Y;
+					temp.Add(a);
 				}
 				initialAtomPositions.Clear();
-				undoRedoController.AddAndExecute(new MoveSelectedAtomsCommand(selectedAtoms, (mousePos.X - initialMousePosition.X), (mousePos.Y - initialMousePosition.Y)));
+				undoRedoController.AddAndExecute(new MoveSelectedAtomsCommand(temp, (mousePos.X - initialMousePosition.X), (mousePos.Y - initialMousePosition.Y)));
 				e.MouseDevice.Target.ReleaseMouseCapture();
 
 			}
